@@ -4,6 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
+import {ApiProvider} from "../providers/api/api";
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +17,7 @@ export class MyApp {
   listPage: any = ListContactsPage;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public api: ApiProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
