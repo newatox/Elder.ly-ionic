@@ -1,0 +1,7 @@
+organization=oldmojito
+projectKey=fr.oldmojito.elderly
+serverUrl=https://sonarcloud.io
+serverVersion=6.7.0.33301
+dashboardUrl=https://sonarcloud.io/dashboard/index/fr.oldmojito.elderly
+ceTaskId=AWArgzqQoETz9fUAFLlx
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWArgzqQoETz9fUAFLlx

@@ -2,16 +2,35 @@
 
 # <img src="https://raw.githubusercontent.com/Cocatrix/Elder.ly/master/Elder.ly/Assets.xcassets/elder.ly-logotype.imageset/elderly-logotype.png" alt="Elder.ly logo" height="70" />
 
-Our final project in Cordova/Ionic
+Our final project in Cordova Ionic.
 
 ## Screenshots
-
-## Features
-
+<!--
+<img src="./Screenshots/screenshot-list.png" alt="Elder.ly screenshot list" height="400" /> &nbsp;
+<img src="./Screenshots/screenshot-details.png" alt="Elder.ly screenshot details" height="400" /> &nbsp;
+<img src="./Screenshots/screenshot-menu.png" alt="Elder.ly screenshot menu" height="400" />
+-->
+Coming soon
+## Features to come
+- Manage phone contacts (add, edit, delete)
+- Interact in-app (calls, texts, emails)
+- Authenticate with a Web Service
+- Add favorite contacts
+- See most frequent contacts
+- Synchronize contacts with a Web Service
+- Access contacts offline
+- Search within contacts
+- Display Gravatars
 
 ## Environment / Techs
-- Cordova
-- Ionic
+- <img src="https://cdn.svgporn.com/logos/ionic.svg" alt="Ionic logo" width="30" > &nbsp;
+[Ionic](https://ionicframework.com/)
+
+- <img src="https://cdn.svgporn.com/logos/cordova.svg" alt="Cordova logo" width="30" > &nbsp;
+[Cordova](https://cordova.apache.org/)
+
+- <img src="https://cdn.svgporn.com/logos/angular-icon.svg" alt="Cordova logo" width="30" > &nbsp;
+[Angular](https://angular.io/)
 
 ## DTA Ingénierie, a unique IT Consulting company in France
 
@@ -33,4 +52,5 @@ Done in a team of 4 developers :
 
 | *Instructors :* | | |
 | :-- | -- | --: |
+| Nicolas HODICQ | <a href="https://github.com/nartawak"><img src="https://camo.githubusercontent.com/d0518022b7a02d405ad5112a0c8aa455cbfe952e/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667" alt="Elder.ly logo" height="28" /></a> | <a href="https://www.linkedin.com/in/nicolas-hodicq-707bb14b/"><img src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/linkedin.svg?sanitize=true" alt="Elder.ly logo" height="28" /></a> |
 | Vincent LEROUX | <a href="https://github.com/DrRoux"><img src="https://camo.githubusercontent.com/d0518022b7a02d405ad5112a0c8aa455cbfe952e/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6769746875622e737667" alt="Elder.ly logo" height="28" /></a> | <a href="https://www.linkedin.com/in/lerouxvincentlink/"><img src="https://raw.githubusercontent.com/edent/SuperTinyIcons/master/images/svg/linkedin.svg?sanitize=true" alt="Elder.ly logo" height="28" /></a> |
