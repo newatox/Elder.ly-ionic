@@ -7,10 +7,10 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {ListContactsPage} from "../pages/list-contacts/list-contacts";
-import {DetailsContactPage} from "../pages/details-contact/details-contact";
-import {AddEditContactPage} from "../pages/add-edit-contact/add-edit-contact";
-import {SignUpPage} from "../pages/sign-up/sign-up";
+import { ListContactsPage } from '../pages/list-contacts/list-contacts';
+import { DetailsContactPage } from '../pages/details-contact/details-contact';
+import { AddEditContactPage } from '../pages/add-edit-contact/add-edit-contact';
+import { SignUpPage } from '../pages/sign-up/sign-up';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import {SignUpPage} from "../pages/sign-up/sign-up";
     DetailsContactPage,
     AddEditContactPage,
     SignUpPage,
-    LoginPage
+    LoginPage,
   ],
   imports: [
     BrowserModule,
@@ -33,12 +33,12 @@ import {SignUpPage} from "../pages/sign-up/sign-up";
     DetailsContactPage,
     AddEditContactPage,
     SignUpPage,
-    LoginPage
+    LoginPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+  ],
 })
 export class AppModule {}
