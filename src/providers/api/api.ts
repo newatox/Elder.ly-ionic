@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -20,7 +20,6 @@ export class ApiProvider {
   constructor(public http: HttpClient) {
     console.log('Hello ApiProvider Provider');
   }
-
 
   // Authentications HTTP Requests
 
