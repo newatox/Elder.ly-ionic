@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {SignUpPage} from "../sign-up/sign-up";
 
 /**
  * Generated class for the LoginPage page.
@@ -18,7 +19,7 @@ export class LoginPage {
   password: 'test';
 
 
-  constructor(public viewCtrl: ViewController, public navParams: NavParams) {
+  constructor(public viewCtrl: ViewController, public navParams: NavParams, public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {
@@ -26,7 +27,11 @@ export class LoginPage {
   }
 
   doLogin() {
-    this.viewCtrl.dismiss().then()
+    this.viewCtrl.dismiss().then();
+  }
+
+  openSignUpPage() {
+    this.navCtrl.push(SignUpPage).then();
   }
 
 }

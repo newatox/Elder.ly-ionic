@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {ListContactsPage} from "../pages/list-contacts/list-contacts";
 import {DetailsContactPage} from "../pages/details-contact/details-contact";
 import {AddEditContactPage} from "../pages/add-edit-contact/add-edit-contact";
+import {SignUpPage} from "../pages/sign-up/sign-up";
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {AddEditContactPage} from "../pages/add-edit-contact/add-edit-contact";
     ListContactsPage,
     DetailsContactPage,
     AddEditContactPage,
+    SignUpPage,
     LoginPage
   ],
   imports: [
@@ -33,6 +35,7 @@ import {AddEditContactPage} from "../pages/add-edit-contact/add-edit-contact";
     ListContactsPage,
     DetailsContactPage,
     AddEditContactPage,
+    SignUpPage,
     LoginPage
   ],
   providers: [

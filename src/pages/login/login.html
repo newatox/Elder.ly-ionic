@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
   <form (submit)="doLogin()">
     <ion-list>
 
@@ -30,10 +30,13 @@
         <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
 
-      <div padding>
+      <div>
         <button ion-button color="primary" block>{{ 'Confirm' }}</button>
       </div>
 
     </ion-list>
   </form>
+
+  <button ion-button (click)="openSignUpPage()">{{ 'SignUp' }}</button>
+
 </ion-content>

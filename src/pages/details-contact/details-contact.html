@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>DetailsContact</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="present()">
+        <ion-icon name="keypad"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -19,6 +24,4 @@
   <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
   </div>
-
-  <button ion-button block (click)="present()">Basic Action Sheet</button>
 </ion-content>
