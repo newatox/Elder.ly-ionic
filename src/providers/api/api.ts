@@ -18,6 +18,7 @@ const FORGOTTEN_PASSWORD = "public/forgot-password";
 
 // PRIVATE
 const CURRENT_AUTH = "secured/users/current";
+const CONTACTS = "secured/users/contacts/";
 
 @Injectable()
 export class ApiProvider {
@@ -42,36 +43,93 @@ export class ApiProvider {
     "profile": String // SENIOR, FAMILLE, MEDECIN
   }) {
     console.log('API-PROVIDER', 'signup');
-    return this.http.post(`${BASE_URL}${SIGNUP}`, body);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(`${BASE_URL}${SIGNUP}`, body,{headers: headers});
   }
 
   getProfiles() {
     console.log('API-PROVIDER', 'profiles');
-    return this.http.get(`${BASE_URL}${PROFILES}`);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(`${BASE_URL}${PROFILES}`, {headers: headers});
   }
 
   forgottenPassword(body: {phone: String}) {
     console.log('API-PROVIDER', 'forgottenPassword');
-    return this.http.post(`${BASE_URL}${FORGOTTEN_PASSWORD}`, body);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(`${BASE_URL}${FORGOTTEN_PASSWORD}`, body,{headers: headers});
   }
 
-  // Current User
+  // Current User HTTP Requests
   currentAuth(token: String) {
     console.log('API-PROVIDER', 'currentAuth');
-    console.log('token', token);
     let headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
       .set('Content-Type', 'application/json');
-    console.log('Authorization', headers.get('Authorization'));
-    console.log('Content-Type', headers.get('Content-Type'));
-    console.log('URL', `${BASE_URL}${CURRENT_AUTH}`);
-    this.http.get(`${BASE_URL}${CURRENT_AUTH}`,
+    this.http.get(`${BASE_URL}${CURRENT_AUTH}`, {headers: headers} );
+  }
+
+  // Contacts HTTP Requests
+  contacts(token: String) {
+    console.log('API-PROVIDER', 'contacts');
+    let headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+      .set('Content-Type', 'application/json');
+    return this.http.get (`${BASE_URL}${CONTACTS}`,
       {headers: headers}
-      ).subscribe(data => {
-      console.log('data', data);
-    }, error => {
-      console.log('error', error);
-    });
+    );
+  }
+
+  createContact(contact: {
+    "phone": String,
+    "firstName": String,
+    "lastName": String,
+    "email": String,
+    "profile": String,
+    "gravatar" : String,
+    "isFamilinkUser" : Boolean,
+    "isEmergencyUser": Boolean
+  }, token: String) {
+    console.log('API-PROVIDER', 'create contact');
+    let headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+      .set('Content-Type', 'application/json');
+    return this.http.post (
+      `${BASE_URL}${CONTACTS}`,
+      contact,
+      {headers: headers}
+    );
+  }
+
+  updateContact(id: String, contact: {
+    "phone": String,
+    "firstName": String,
+    "lastName": String,
+    "email": String,
+    "profile": String,
+    "gravatar" : String,
+    "isFamilinkUser" : Boolean,
+    "isEmergencyUser": Boolean
+  }, token: String) {
+    console.log('API-PROVIDER', 'update contact');
+    let headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+      .set('Content-Type', 'application/json');
+    return this.http.put (
+      `${BASE_URL}${CONTACTS}${id}`,
+      contact,
+      {headers: headers}
+    );
+  }
+
+  deleteContact(id: String, token: String) {
+    console.log('API-PROVIDER', 'delete contact');
+    let headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+      .set('Content-Type', 'application/json');
+    return this.http.delete (
+      `${BASE_URL}${CONTACTS}${id}`,
+      {headers: headers}
+    );
   }
 
 }
