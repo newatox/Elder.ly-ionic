@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import {ModalController, NavController, NavParams} from 'ionic-angular';
-import {LoginPage} from "../login/login";
+import {LoginPage} from '../login/login';
+import {DetailsContactPage} from '../details-contact/details-contact';
+import {AddEditContactPage} from '../add-edit-contact/add-edit-contact';
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list-contacts.html'
 })
 export class ListContactsPage {
-  selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
   isLogged: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
     // Let's populate this page with some filler content for funzies
     this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
       'american-football', 'boat', 'bluetooth', 'build'];
@@ -38,9 +36,10 @@ export class ListContactsPage {
   }
 
   itemTapped(event, item) {
-    // // That's right, we're pushing to ourselves!
-    // this.navCtrl.push(ListPage, {
-    //   item: item
-    // });
+    this.navCtrl.push(DetailsContactPage,  {item: item}).then();
+  }
+
+  openAddEdit() {
+    this.navCtrl.push(AddEditContactPage).then();
   }
 }

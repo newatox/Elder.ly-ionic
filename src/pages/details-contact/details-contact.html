@@ -16,5 +16,9 @@
 <ion-content padding>
 
   Detailed contact
+  <div *ngIf="selectedItem" padding>
+    You navigated here from <b>{{selectedItem.title}}</b>
+  </div>
 
+  <button ion-button block (click)="present()">Basic Action Sheet</button>
 </ion-content>

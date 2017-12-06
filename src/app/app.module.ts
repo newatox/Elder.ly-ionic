@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ListContactsPage} from "../pages/list-contacts/list-contacts";
 import {DetailsContactPage} from "../pages/details-contact/details-contact";
+import {AddEditContactPage} from "../pages/add-edit-contact/add-edit-contact";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {DetailsContactPage} from "../pages/details-contact/details-contact";
     HomePage,
     ListContactsPage,
     DetailsContactPage,
+    AddEditContactPage,
     LoginPage
   ],
   imports: [
@@ -30,6 +32,7 @@ import {DetailsContactPage} from "../pages/details-contact/details-contact";
     HomePage,
     ListContactsPage,
     DetailsContactPage,
+    AddEditContactPage,
     LoginPage
   ],
   providers: [
