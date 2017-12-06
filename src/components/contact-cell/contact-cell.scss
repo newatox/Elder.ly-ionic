@@ -1,3 +1,17 @@
 contact-cell {
 
 }
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 2%;
+  justify-content: space-between;
+  padding-right: 1%;
+  margin-bottom: 5px;
+}
+
+.image {
+  max-width: 50px;
+}
