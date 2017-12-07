@@ -84,8 +84,22 @@ export class AuthProvider {
     });
   }
 
+  getProfiles() {
+    return new Promise((resolve, reject) => {
+      let profiles = Array<String>();
+      this.api.getProfiles()
+        .subscribe((result: any) => {
+          profiles = result;
+        },         (error) => {
+          reject(error);
+        },         () => {
+          resolve(profiles);
+        });
+    });
+  }
+
   getToken() {
-    return this.storage.get('token');
+    return this.storage.get('token'); // Promise
   }
 
   saveToken(token: String) {
