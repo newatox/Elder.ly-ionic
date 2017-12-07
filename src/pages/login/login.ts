@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
-import {SignUpPage} from "../sign-up/sign-up";
+import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { SignUpPage } from '../sign-up/sign-up';
 
 /**
  * Generated class for the LoginPage page.
@@ -15,11 +15,11 @@ import {SignUpPage} from "../sign-up/sign-up";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  email: 'test@example.com';
-  password: 'test';
+  phone: '0600000042';
+  password: '0000';
 
 
-  constructor(public viewCtrl: ViewController, public navParams: NavParams, public navCtrl: NavController) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {

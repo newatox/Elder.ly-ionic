@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
 /**
  * Generated class for the AddEditContactPage page.
@@ -15,11 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddEditContactPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddEditContactPage');
+  constructor(public navCtrl: NavController) {
   }
 
   confirm() {

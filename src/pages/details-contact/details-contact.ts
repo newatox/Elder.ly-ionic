@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {ActionSheetController, IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
-import {AddEditContactPage} from "../add-edit-contact/add-edit-contact";
+import { ActionSheetController, IonicPage,
+  NavController, NavParams, Platform } from 'ionic-angular';
+import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -17,12 +18,13 @@ import {AddEditContactPage} from "../add-edit-contact/add-edit-contact";
 export class DetailsContactPage {
   selectedItem: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: ActionSheetController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public alertCtrl: ActionSheetController, public platform: Platform) {
     this.selectedItem = navParams.get('item');
   }
 
   present() {
-    let actionSheet = this.alertCtrl.create({
+    const actionSheet = this.alertCtrl.create({
       title: 'Albums',
       buttons: [
         {
@@ -31,14 +33,14 @@ export class DetailsContactPage {
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             console.log('Delete clicked');
-          }
+          },
         },
         {
           text: 'Edit',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
             this.navCtrl.push(AddEditContactPage).then();
-          }
+          },
         },
         {
           text: 'Cancel',
@@ -46,9 +48,9 @@ export class DetailsContactPage {
           icon: !this.platform.is('ios') ? 'close' : null,
           handler: () => {
             console.log('Cancel clicked');
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     actionSheet.present().then();

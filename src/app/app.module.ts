@@ -7,15 +7,17 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {ListContactsPage} from "../pages/list-contacts/list-contacts";
-import {DetailsContactPage} from "../pages/details-contact/details-contact";
-import {AddEditContactPage} from "../pages/add-edit-contact/add-edit-contact";
-import {SignUpPage} from "../pages/sign-up/sign-up";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ListContactsPage } from '../pages/list-contacts/list-contacts';
+import { DetailsContactPage } from '../pages/details-contact/details-contact';
+import { AddEditContactPage } from '../pages/add-edit-contact/add-edit-contact';
+import { SignUpPage } from '../pages/sign-up/sign-up';
+import { ContactCellComponent } from '../components/contact-cell/contact-cell';
 import { ApiProvider } from '../providers/api/api';
 import { ContactsProvider } from '../providers/contacts/contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { ErrorProvider } from '../providers/error/error';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import {HttpClientModule} from "@angular/common/http";
     DetailsContactPage,
     AddEditContactPage,
     SignUpPage,
-    LoginPage
+    LoginPage,
+    ContactCellComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,16 +42,18 @@ import {HttpClientModule} from "@angular/common/http";
     DetailsContactPage,
     AddEditContactPage,
     SignUpPage,
-    LoginPage
+    LoginPage,
+    ContactCellComponent,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ScreenOrientation,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     ApiProvider,
     ContactsProvider,
     AuthProvider,
-    ErrorProvider
-  ]
+    ErrorProvider,
+  ],
 })
 export class AppModule {}
