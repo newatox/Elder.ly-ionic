@@ -28,6 +28,19 @@ export class LoginPage {
 
   doLogin() {
     this.viewCtrl.dismiss().then();
+
+    // Sample code for auth provider
+    /*this.auth.login('0600000042', '0000')
+      .then((result) => {
+        console.log('TOKEN', result);
+        return this.auth.getCurrentUser(result);
+      })
+      .then((result) => {
+        console.log('USER', result);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
+      });*/
   }
 
   openSignUpPage() {
