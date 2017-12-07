@@ -19,6 +19,7 @@ import { ContactsProvider } from '../providers/contacts/contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { ErrorProvider } from '../providers/error/error';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

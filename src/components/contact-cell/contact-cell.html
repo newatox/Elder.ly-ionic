@@ -1,7 +1,7 @@
-<div class="card" (click)="navigateToDetails(movie)">
-  <img class="image" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y&s=200">
+<div class="card">
+  <img class="image" src="http://www.ac-grenoble.fr/ecoles/gm/local/cache-vignettes/L500xH500/chaton_1-33648.png" (click)="navigateToDetails()">
   <div>
-    <h2 class="contactName">Jean-Patrick Dupont</h2>
+    <h2 class="contactName" (click)="navigateToDetails()">{{contact.firstName + ' ' + contact.lastName}}</h2>
   </div>
-  <button ion-button round outline small class="button">Appeler</button>
+  <button ion-button round outline small class="button" (click)="callContact()">Appeler</button>
 </div>

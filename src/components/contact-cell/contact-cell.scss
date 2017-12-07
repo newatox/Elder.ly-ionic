@@ -12,20 +12,19 @@ contact-cell {
   }
 
   .image {
-    max-width: 50px;
     border-radius: 50%;
-    width: 25%;
+    max-width: 23%;
   }
 
   .button {
     border-color: $color-orange;
     color: $color-orange;
-    width: 25%;
+    max-width: 20%;
     font-size: 80%;
   }
 
   .contactName {
-    font-size: 70%;
+    font-size: 85%;
   }
 
 }

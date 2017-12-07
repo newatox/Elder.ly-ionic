@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { DetailsContactPage } from '../../pages/details-contact/details-contact';
+import Contact from '../../models/Contact';
 
 /**
  * Generated class for the ContactCellComponent component.
@@ -11,12 +14,19 @@ import { Component } from '@angular/core';
   templateUrl: 'contact-cell.html',
 })
 export class ContactCellComponent {
+  @Input()
+  contact: Contact;
 
-  text: string;
+  fullName: string;
 
-  constructor() {
-    console.log('Hello ContactCellComponent Component');
-    this.text = 'Hello World';
+  constructor(public navCtrl: NavController) {
   }
 
+  navigateToDetails() {
+    this.navCtrl.push(DetailsContactPage).then();
+  }
+
+  callContact() {
+    this.fullName = 'Appel du contact';
+  }
 }
