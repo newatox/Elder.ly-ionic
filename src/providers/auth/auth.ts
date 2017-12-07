@@ -99,11 +99,11 @@ export class AuthProvider {
     });
   }
 
-  getToken(): Promise<any> {
+  private getToken(): Promise<any> {
     return this.storage.get('token'); // Promise
   }
 
-  saveToken(token: String) {
+  private saveToken(token: String) {
     this.storage.set('token', token).then(() => console.log('Saved token localy'));
   }
 }

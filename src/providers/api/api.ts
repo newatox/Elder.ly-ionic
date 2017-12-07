@@ -69,14 +69,12 @@ export class ApiProvider {
   }
 
   // Contacts HTTP Requests
-  contacts(token: String) {
+  getAllContacts(token: String) {
     console.log('API-PROVIDER', 'contacts');
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
       .set('Content-Type', 'application/json');
-    return this.http.get (`${BASE_URL}${CONTACTS}`,
-                          { headers },
-    );
+    return this.http.get (`${BASE_URL}${CONTACTS}`,{ headers });
   }
 
   createContact(
