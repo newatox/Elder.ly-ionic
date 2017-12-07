@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
 import User from '../../models/User';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the AuthProvider provider.
@@ -15,7 +16,7 @@ export class AuthProvider {
   private auth: User;
   private token: any;
 
-  constructor(public http: HttpClient, public api: ApiProvider) {
+  constructor(public http: HttpClient, private api: ApiProvider, public storage: Storage) {
     console.log('Hello AuthProvider Provider');
   }
 
@@ -27,6 +28,7 @@ export class AuthProvider {
         },         (error) => {
           reject(error);
         },         () => {
+          this.saveToken(this.token);
           resolve(this.token);
         });
     });
@@ -60,7 +62,7 @@ export class AuthProvider {
   }
 
   logout() {
-
+    this.storage.remove('token').then(() => console.log('TOKEN REMOVED'));
   }
 
   getCurrentUser(token: String) {
@@ -82,4 +84,11 @@ export class AuthProvider {
     });
   }
 
+  getToken() {
+    return this.storage.get('token');
+  }
+
+  saveToken(token: String) {
+    this.storage.set('token', token).then(() => console.log('Saved token localy'));
+  }
 }
