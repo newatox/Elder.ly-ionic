@@ -31,11 +31,15 @@ export class LoginPage {
 
     // Sample code for auth provider
     /*this.auth.login('0600000042', '0000')
-      .then((token) => {
-        console.log('RESULT', token);
+      .then((result) => {
+        console.log('TOKEN', result);
+        return this.auth.getCurrentUser(result);
       })
-      .catch((httpErrorResponse) => {
-        console.log('ERROR', httpErrorResponse.error.message);
+      .then((result) => {
+        console.log('USER', result);
+      })
+      .catch((error) => {
+        console.log('ERROR', error);
       });*/
   }
 

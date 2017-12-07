@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
+import User from '../../models/User';
 
 /*
   Generated class for the AuthProvider provider.
@@ -11,7 +12,7 @@ import { ApiProvider } from '../api/api';
 @Injectable()
 export class AuthProvider {
 
-  private auth: any;
+  private auth: User;
   private token: any;
 
   constructor(public http: HttpClient, public api: ApiProvider) {
@@ -31,7 +32,7 @@ export class AuthProvider {
     });
   }
 
-  signup() {
+  signup(user: User) {
 
   }
 
@@ -39,8 +40,23 @@ export class AuthProvider {
 
   }
 
-  getAuth() {
-
+  getCurrentUser(token: String) {
+    return new Promise((resolve, reject) => {
+      this.api.currentAuth(token)
+        .subscribe((result: any) => {
+          this.auth = new User({
+            phone: result.phone,
+            firstName: result.firstName,
+            lastName: result.lastName,
+            email: result.email,
+            profile : result.profile,
+          });
+        },         (error) => {
+          reject(error);
+        },         () => {
+          resolve(this.auth);
+        });
+    });
   }
 
   getToken(): String {

@@ -66,7 +66,7 @@ export class ApiProvider {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
       .set('Content-Type', 'application/json');
-    this.http.get(`${BASE_URL}${CURRENT_AUTH}`, { headers });
+    return this.http.get(`${BASE_URL}${CURRENT_AUTH}`, { headers });
   }
 
   // Contacts HTTP Requests
