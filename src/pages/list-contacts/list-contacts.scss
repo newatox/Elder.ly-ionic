@@ -1,3 +1,17 @@
 page-list-contacts {
-  .ios { .tabs { .tabbar { margin-top:25px; padding-bottom: 0px; } } }
+  .ios { .tabs { .tabbar { margin-top:25px; padding-bottom: 0; } } }
+}
+
+ion-tabs {
+  margin-bottom: 0;
+}
+
+
+ion-tabs,
+ion-tabs .tabbar {
+  position: absolute;
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+  bottom: 0;
 }

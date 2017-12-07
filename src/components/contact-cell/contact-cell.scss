@@ -1,4 +1,4 @@
-@import '../../app/app.scss';
+@import '../../theme/variables.scss';
 
 contact-cell {
   .card {
@@ -17,8 +17,8 @@ contact-cell {
   }
 
   .button {
-    border-color: $color-orange;
-    color: $color-orange;
+    border-color: color($colors, myorange);
+    color: color($colors, myorange);
     max-width: 20%;
     font-size: 80%;
   }
