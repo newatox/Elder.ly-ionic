@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
+import {ApiProvider} from "../providers/api/api";
 
 @Component({
   templateUrl: 'app.html',
