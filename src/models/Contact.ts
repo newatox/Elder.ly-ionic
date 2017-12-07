@@ -1,5 +1,5 @@
 export default class Contact {
-  wsId: number|undefined;
+  wsId: string|undefined;
   phone: string;
   firstName: string;
   lastName: string;
@@ -11,7 +11,7 @@ export default class Contact {
   isFavourite: boolean;
   frequency: number;
 
-  constructor({ _id = null, phone, firstName, lastName, email, profile, gravatar = null,
+  constructor({ _id = undefined, phone, firstName, lastName, email, profile, gravatar = null,
                 isFamilinkUser = false, isEmergencyUser = false, isFavourite = false,
                 frequency = 0 }) {
     this.wsId = _id;
