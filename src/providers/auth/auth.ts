@@ -25,10 +25,10 @@ export class AuthProvider {
       this.api.login({ phone, password })
         .subscribe((result: any) => {
           this.token = result['token'];
+          this.saveToken(result['token']);
         },         (error) => {
           reject(error);
         },         () => {
-          this.saveToken(this.token);
           resolve(this.token);
         });
     });
@@ -41,7 +41,7 @@ export class AuthProvider {
     lastName: String,
     email: String,
     profile: String, // SENIOR, FAMILLE, MEDECIN
-  }) {
+  }): Promise<any> {
     return new Promise((resolve, reject) => {
       this.api.signup({
         phone: user.phone,
@@ -61,13 +61,14 @@ export class AuthProvider {
     });
   }
 
-  logout() {
+  logout(): void {
     this.storage.remove('token').then(() => console.log('TOKEN REMOVED'));
   }
 
-  getCurrentUser(token: String) {
+  getCurrentUser(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.api.currentAuth(token)
+      console.log('TOKEN', this.token);
+      this.api.currentAuth(this.token)
         .subscribe((result: any) => {
           this.auth = new User({
             phone: result.phone,
@@ -84,7 +85,7 @@ export class AuthProvider {
     });
   }
 
-  getProfiles() {
+  getProfiles(): Promise<any> {
     return new Promise((resolve, reject) => {
       let profiles = Array<String>();
       this.api.getProfiles()
@@ -98,7 +99,7 @@ export class AuthProvider {
     });
   }
 
-  getToken() {
+  getToken(): Promise<any> {
     return this.storage.get('token'); // Promise
   }
 
