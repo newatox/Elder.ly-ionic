@@ -9,7 +9,8 @@ export default class Contact {
   isFamilinkUser: boolean;
   isEmergencyUser: boolean;
 
-  constructor({ _id = null, phone, firstName, lastName, email, profile, gravatar = null, isFamilinkUser = false, isEmergencyUser = false }) {
+  constructor({ _id = null, phone, firstName, lastName, email, profile, gravatar = null,
+                isFamilinkUser = false, isEmergencyUser = false }) {
     this.wsId = _id;
     this.phone = phone;
     this.firstName = firstName;
