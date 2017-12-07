@@ -27,7 +27,6 @@ export class ApiProvider {
     console.log('Hello ApiProvider Provider');
   }
 
-
   // Authentications HTTP Requests
   login(body: {phone: String, password: String}) {
     console.log('API-PROVIDER', 'login');
