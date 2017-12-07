@@ -14,11 +14,18 @@ contact-cell {
   .image {
     max-width: 50px;
     border-radius: 50%;
+    width: 25%;
   }
 
   .button {
     border-color: $color-orange;
     color: $color-orange;
+    width: 25%;
+    font-size: 80%;
+  }
+
+  .contactName {
+    font-size: 100%;
   }
 
 }
