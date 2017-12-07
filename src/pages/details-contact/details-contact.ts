@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, IonicPage,
-  NavController, NavParams, Platform } from 'ionic-angular';
+  NavController, Platform } from 'ionic-angular';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 
 /**
@@ -16,11 +16,8 @@ import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
   templateUrl: 'details-contact.html',
 })
 export class DetailsContactPage {
-  selectedItem: any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController,
               public alertCtrl: ActionSheetController, public platform: Platform) {
-    this.selectedItem = navParams.get('item');
   }
 
   present() {
