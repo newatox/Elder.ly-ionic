@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'contact-cell',
-  templateUrl: 'contact-cell.html'
+  templateUrl: 'contact-cell.html',
 })
 export class ContactCellComponent {
 

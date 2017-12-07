@@ -12,7 +12,7 @@ import { ListContactsPage } from '../pages/list-contacts/list-contacts';
 import { DetailsContactPage } from '../pages/details-contact/details-contact';
 import { AddEditContactPage } from '../pages/add-edit-contact/add-edit-contact';
 import { SignUpPage } from '../pages/sign-up/sign-up';
-import {ContactCellComponent} from "../components/contact-cell/contact-cell";
+import { ContactCellComponent } from '../components/contact-cell/contact-cell';
 
 
 @NgModule({
