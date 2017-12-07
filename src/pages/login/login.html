@@ -8,30 +8,26 @@
 
 
 <ion-content padding>
-  <form (submit)="doLogin()">
+  <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
     <ion-list>
 
       <ion-item>
         <ion-label fixed>{{ 'Phone' }}</ion-label>
-        <ion-input type="tel" [(ngModel)]="phone" name="phone"></ion-input>
+        <ion-input type="tel" formControlName="phone"></ion-input>
       </ion-item>
 
-      <!--
-      Want to use a Username instead of an Email? Here you go:
-
       <ion-item>
-        <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
-        <ion-input type="fullName" [(ngModel)]="account.username" name="username"></ion-input>
+        <ion-label fixed>{{ 'Password' | translate }}</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
-      -->
 
       <ion-item>
-        <ion-label fixed>{{ 'Password' }}</ion-label>
-        <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+        <ion-checkbox ngControl="remember" name="remember"></ion-checkbox>
+        <ion-label>{{ 'Remember me' }}</ion-label>
       </ion-item>
 
       <div>
-        <button ion-button color="primary" block>{{ 'Confirm' }}</button>
+        <button ion-button type="submit" color="primary" block>{{ 'Confirm' }}</button>
       </div>
 
     </ion-list>

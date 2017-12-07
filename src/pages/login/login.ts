@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the LoginPage page.
@@ -15,11 +17,17 @@ import { SignUpPage } from '../sign-up/sign-up';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  phone: '0600000042';
-  password: '0000';
+  remember: boolean;
+  loginForm: FormGroup;
 
 
-  constructor(public viewCtrl: ViewController, public navCtrl: NavController) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
+              private formBuilder: FormBuilder, private auth: AuthProvider) {
+    this.loginForm = this.formBuilder.group({
+      phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
+      password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
+      remember: [false],
+    });
   }
 
   ionViewDidLoad() {
@@ -27,20 +35,20 @@ export class LoginPage {
   }
 
   doLogin() {
-    this.viewCtrl.dismiss().then();
+    console.log('Phone : ' + this.loginForm.value.phone);
+    console.log('Password : ' + this.loginForm.value.password);
 
-    // Sample code for auth provider
-    /*this.auth.login('0600000042', '0000')
-      .then((result) => {
-        console.log('TOKEN', result);
-        return this.auth.getCurrentUser(result);
-      })
-      .then((result) => {
-        console.log('USER', result);
-      })
-      .catch((error) => {
-        console.log('ERROR', error);
-      });*/
+    if (this.loginForm.valid) {
+      this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
+        .then((token) => {
+          console.log('RESULT', token);
+
+          this.viewCtrl.dismiss().then();
+        })
+        .catch((httpErrorResponse) => {
+          console.log('ERROR', httpErrorResponse.error.message);
+        });
+    }
   }
 
   openSignUpPage() {
