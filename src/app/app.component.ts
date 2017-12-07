@@ -36,6 +36,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    /*this.auth.login();*/
   }
 
   openPage(page) {

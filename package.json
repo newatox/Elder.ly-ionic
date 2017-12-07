@@ -9,6 +9,7 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
+    "ionic:lab": "ionic-app-scripts serve --lab -c",
     "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
