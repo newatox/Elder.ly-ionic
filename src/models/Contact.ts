@@ -9,7 +9,7 @@ export default class Contact {
   isFamilinkUser: boolean;
   isEmergencyUser: boolean;
   isFavourite: boolean;
-  frequency: number|undefined;
+  frequency: number;
 
   constructor({ _id = null, phone, firstName, lastName, email, profile, gravatar = null,
                 isFamilinkUser = false, isEmergencyUser = false, isFavourite = false,
