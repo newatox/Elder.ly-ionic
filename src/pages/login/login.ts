@@ -23,8 +23,9 @@ export class LoginPage {
   constructor(public viewCtrl: ViewController, public navCtrl: NavController,
               private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
-      phone: ['', Validators.compose([Validators.pattern('^/d{10}#'), Validators.required])],
-      password: ['', Validators.compose([Validators.pattern('^/d{4,}#'), Validators.required])],
+      phone: ['', Validators.compose([Validators.pattern('^[0-9]{10}$'), Validators.required])],
+      password: ['', Validators.compose([Validators.pattern('^[0-9]{4,}$'), Validators.required])],
+      remember: [false],
     });
   }
 
@@ -33,7 +34,14 @@ export class LoginPage {
   }
 
   doLogin() {
-    this.viewCtrl.dismiss().then();
+    console.log('Phone : ' + this.loginForm.value.phone
+      + (this.loginForm.value.phone.valid ? ' OK' : ' KO !'));
+    console.log('Password : ' + this.loginForm.value.password
+      + (this.loginForm.value.password.valid ? ' OK' : ' KO !'));
+
+    if (this.loginForm.valid) {
+      this.viewCtrl.dismiss().then();
+    } 
 
     // Sample code for auth provider
     /*this.auth.login('0600000042', '0000')
