@@ -23,7 +23,10 @@ export class MyApp {
       { title: 'List', component: ListContactsPage },
     ];
 
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
+      .catch((error) => {
+        console.log('Not a mobile device');
+      });
 
   }
 
