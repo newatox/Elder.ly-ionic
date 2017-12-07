@@ -1,3 +1,28 @@
 page-details-contact {
+  ion-col div {
+    background-color: #f0f5af;
+    border: 1px solid #e6e9ee;
+    border-radius: 2px;
+    padding: 5px;
+    text-align: center;
+  }
 
+  .contact-gravatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+  }
+
+  .contact-gravatar-col {
+    text-align: center;
+  }
+
+  .contact-name {
+    text-align: center;
+  }
+
+  .contact-segment {
+    color: dark;
+    border-color: #32db64;
+  }
 }

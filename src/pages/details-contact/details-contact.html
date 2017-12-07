@@ -19,7 +19,55 @@
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="contact-gravatar-col">
+        <img class="contact-gravatar" src={{contact.gravatar}} />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="contact-name">
+        {{contact.firstName + ' ' + contact.lastName}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-segment class="contact-segment" color="dark">
+        <ion-segment-button value="Texting">
+          <ion-icon name="text"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="Calling">
+          <ion-icon name="call"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="Emailing">
+          <ion-icon name="mail"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>Email</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>{{contact.email}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>N° Tél</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>{{contact.phone}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>Button add favourites</div>
+      </ion-col>
 
-  Detailed contact
-
+    </ion-row>
+  </ion-grid>
 </ion-content>
