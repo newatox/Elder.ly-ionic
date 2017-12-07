@@ -21,13 +21,18 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col class="contact-gravatar-col">
-        <img class="contact-gravatar" src={{contact.gravatar}} />
+      <ion-col class="contact-centered">
+        <!--<div class="contact-grav">-->
+          <ion-icon name="star" float-left></ion-icon>
+          <img class="contact-gravatar" src={{contact.gravatar}} />
+        <!--</div>-->
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col class="contact-name">
-        {{contact.firstName + ' ' + contact.lastName}}
+      <ion-col class="contact-centered">
+        <ion-title>
+          {{contact.firstName + ' ' + contact.lastName}}
+        </ion-title>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -64,8 +69,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <div>Button add favourites</div>
+      <ion-col class="contact-centered">
+        <button ion-button round>Ajouter aux favoris</button>
       </ion-col>
 
     </ion-row>

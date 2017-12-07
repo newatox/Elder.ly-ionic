@@ -21,6 +21,8 @@ export class DetailsContactPage {
 
   constructor(public navCtrl: NavController,
               public alertCtrl: ActionSheetController, public platform: Platform) {
+    // const gravURL = 'https://adriendeneu.files.wordpress.com/2008/10/panorama-vertical.jpg?w=267&h=1024';
+    const gravURL = 'https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';
     this.contact = new Contact(
       '0600000042',
       'Jean-Patrick',
@@ -32,7 +34,7 @@ export class DetailsContactPage {
       false,
       0,
       '',
-      'https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png',
+      '' + gravURL,
     );
   }
 
