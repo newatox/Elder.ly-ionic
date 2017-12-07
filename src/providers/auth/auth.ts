@@ -32,8 +32,31 @@ export class AuthProvider {
     });
   }
 
-  signup(user: User) {
-
+  signup(user: {
+    phone: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    profile: String, // SENIOR, FAMILLE, MEDECIN
+  }) {
+    return new Promise((resolve, reject) => {
+      this.api.signup({
+        phone: user.phone,
+        password: user.password,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profile: user.profile, // SENIOR, FAMILLE, MEDECIN
+      })
+        .subscribe((result: any) => {
+          this.auth = new User(result);
+        },         (error) => {
+          reject(error);
+        },         () => {
+          resolve(this.auth);
+        });
+    });
   }
 
   logout() {
@@ -57,10 +80,6 @@ export class AuthProvider {
           resolve(this.auth);
         });
     });
-  }
-
-  getToken(): String {
-    return this.token;
   }
 
 }
