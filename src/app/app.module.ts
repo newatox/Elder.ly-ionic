@@ -16,7 +16,7 @@ import { ApiProvider } from '../providers/api/api';
 import { ContactsProvider } from '../providers/contacts/contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { ErrorProvider } from '../providers/error/error';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import {HttpClientModule} from "@angular/common/http";
     ApiProvider,
     ContactsProvider,
     AuthProvider,
-    ErrorProvider
-  ]
+    ErrorProvider,
+  ],
 })
 export class AppModule {}
