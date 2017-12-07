@@ -42,12 +42,12 @@ export class LoginPage {
       this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
         .then((token) => {
           console.log('RESULT', token);
+
+          this.viewCtrl.dismiss().then();
         })
         .catch((httpErrorResponse) => {
           console.log('ERROR', httpErrorResponse.error.message);
         });
-
-      this.viewCtrl.dismiss().then();
     }
   }
 
