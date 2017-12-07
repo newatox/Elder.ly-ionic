@@ -15,10 +15,7 @@ export class ListContactsPage {
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
     this.contacts = [];
     for (let i = 1; i < 6; i = i + 1) this.contacts.push(new Contact(
-      {
-        phone: '0600000042', firstName: 'Jean-Patrick', lastName: 'Dupont',
-        email: 'aaa@aaa', profile: 'Senior',
-      },
+      '0600000042', 'Jean-Patrick', 'Dupont', 'SENIOR', 'aaaa@aaa.com',
     ));
   }
 

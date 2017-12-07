@@ -1,37 +1,17 @@
 export default class Contact {
-  wsId: string|undefined;
-  phone: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  profile: string;
-  gravatar: string|undefined;
-  isFamilinkUser: boolean;
-  isEmergencyUser: boolean;
-  isFavourite: boolean;
-  frequency: number;
+  constructor(public phone: string, public firstName: string,
+              public lastName: string, public email: string, public profile: string,
+              public isFamilinkuser: boolean = false,
+              public isEmergencyUser: boolean = false, public isFavorite: boolean = false,
+              public frequency: number = 0, public wsId?: string, public gravatar?: string) {
 
-  constructor({ _id = undefined, phone, firstName, lastName, email, profile, gravatar = null,
-                isFamilinkUser = false, isEmergencyUser = false, isFavourite = false,
-                frequency = 0 }) {
-    this.wsId = _id;
-    this.phone = phone;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.profile = profile;
-    this.gravatar = gravatar;
-    this.isFamilinkUser = isFamilinkUser;
-    this.isEmergencyUser = isEmergencyUser;
-    this.isFavourite = isFavourite;
-    this.frequency = frequency;
   }
 
   incrementFrequency(step: number = 1) {
     this.frequency += step;
   }
 
-  toggleFavourite() {
-    this.isFavourite = !this.isFavourite;
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
   }
 }
