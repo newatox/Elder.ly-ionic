@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>DetailsContact</ion-title>
+    <ion-title>Détails</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="present()">
         <ion-icon name="keypad"></ion-icon>
@@ -22,13 +22,13 @@
   <ion-grid>
     <ion-row>
       <ion-col class="contact-centered">
-        <!--<div class="contact-grav">-->
-          <ion-icon name="star" float-left></ion-icon>
+        <div class="contact-grav">
           <img class="contact-gravatar" src={{contact.gravatar}} />
-        <!--</div>-->
+          <img class="contact-star-icon" src="assets/imgs/star-fill.png" />
+        </div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row margin-bottom="500px">
       <ion-col class="contact-centered">
         <ion-title>
           {{contact.firstName + ' ' + contact.lastName}}
@@ -65,7 +65,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div>{{contact.phone}}</div>
+        <div>{{contact.phone | phone}}</div>
       </ion-col>
     </ion-row>
     <ion-row>

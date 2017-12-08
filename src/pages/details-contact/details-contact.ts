@@ -40,7 +40,7 @@ export class DetailsContactPage {
 
   present() {
     const actionSheet = this.alertCtrl.create({
-      title: 'Albums',
+      title: 'Options',
       buttons: [
         {
           text: 'Delete',
