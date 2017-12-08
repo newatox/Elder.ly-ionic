@@ -15,6 +15,12 @@ ion-tabs .tabbar {
   bottom: 0;
 }
 
-ion-tabs .tab-button[aria-selected=true] {
-  background: color($colors, myorange);
+.tabs-ios, .tabs-md {
+  .tab-button[aria-selected=true] {
+    color: color($colors, myorange);
+    .icon {
+      color: color($colors, myorange);
+    }
+  }
 }
+
