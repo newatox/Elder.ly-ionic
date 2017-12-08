@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import Contact from '../../models/Contact';
 
 /*
   Generated class for the ApiProvider provider.
@@ -53,10 +54,12 @@ export class ApiProvider {
     return this.http.get(`${BASE_URL}${PROFILES}`, { headers });
   }
 
-  forgottenPassword(body: {phone: String}) {
+  forgottenPassword(phone: String) {
     console.log('API-PROVIDER', 'forgottenPassword');
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(`${BASE_URL}${FORGOTTEN_PASSWORD}`, body,{ headers });
+    return this.http.post(`${BASE_URL}${FORGOTTEN_PASSWORD}`,
+                          { phone },
+                          { headers, observe: 'response' });
   }
 
   // Current User HTTP Requests
@@ -69,28 +72,15 @@ export class ApiProvider {
   }
 
   // Contacts HTTP Requests
-  contacts(token: String) {
+  getAllContacts(token: String) {
     console.log('API-PROVIDER', 'contacts');
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
       .set('Content-Type', 'application/json');
-    return this.http.get (`${BASE_URL}${CONTACTS}`,
-                          { headers },
-    );
+    return this.http.get (`${BASE_URL}${CONTACTS}`,{ headers });
   }
 
-  createContact(
-    contact: {
-      phone: String,
-      firstName: String,
-      lastName: String,
-      email: String,
-      profile: String,
-      gravatar : String,
-      isFamilinkUser : Boolean,
-      isEmergencyUser: Boolean,
-    },
-    token: String) {
+  createContact(contact: Contact, token: String) {
     console.log('API-PROVIDER', 'create contact');
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
@@ -102,19 +92,7 @@ export class ApiProvider {
     );
   }
 
-  updateContact(
-    id: String,
-    contact: {
-      phone: String,
-      firstName: String,
-      lastName: String,
-      email: String,
-      profile: String,
-      gravatar : String,
-      isFamilinkUser : Boolean,
-      isEmergencyUser: Boolean,
-    },
-    token: String) {
+  updateContact(id: String, contact: Contact, token: String) {
     console.log('API-PROVIDER', 'update contact');
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
@@ -122,7 +100,7 @@ export class ApiProvider {
     return this.http.put (
       `${BASE_URL}${CONTACTS}${id}`,
       contact,
-      { headers },
+      { headers, observe: 'response' },
     );
   }
 
@@ -133,7 +111,7 @@ export class ApiProvider {
       .set('Content-Type', 'application/json');
     return this.http.delete (
       `${BASE_URL}${CONTACTS}${id}`,
-      { headers },
+      { headers, observe: 'response' },
     );
   }
 

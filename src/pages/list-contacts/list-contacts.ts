@@ -3,6 +3,7 @@ import { ModalController, NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
+import { DetailsContactPage } from '../details-contact/details-contact';
 
 @Component({
   selector: 'page-list',
@@ -11,10 +12,11 @@ import Contact from '../../models/Contact';
 export class ListContactsPage {
   contacts: any;
   isLogged: boolean = false;
+  root = DetailsContactPage;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
     this.contacts = [];
-    for (let i = 1; i < 6; i = i + 1) this.contacts.push(new Contact(
+    for (let i = 1; i < 11; i = i + 1) this.contacts.push(new Contact(
       '0600000042', 'Jean-Patrick', 'Dupont', 'SENIOR', 'aaaa@aaa.com',
     ));
   }

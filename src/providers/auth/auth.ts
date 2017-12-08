@@ -99,11 +99,16 @@ export class AuthProvider {
     });
   }
 
-  getToken(): Promise<any> {
+  forgot(phoneNumber: String): Promise<any> {
+    return this.api.forgottenPassword(phoneNumber).toPromise()
+      .then((result) => { return result; });
+  }
+
+  private getToken(): Promise<any> {
     return this.storage.get('token'); // Promise
   }
 
-  saveToken(token: String) {
+  private saveToken(token: String) {
     this.storage.set('token', token).then(() => console.log('Saved token localy'));
   }
 }

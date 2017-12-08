@@ -19,7 +19,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginPage {
   remember: boolean;
   loginForm: FormGroup;
-
+  formSubmitted = false;
 
   constructor(public viewCtrl: ViewController, public navCtrl: NavController,
               private formBuilder: FormBuilder, private auth: AuthProvider) {
@@ -39,10 +39,16 @@ export class LoginPage {
     console.log('Phone : ' + this.loginForm.value.phone);
     console.log('Password : ' + this.loginForm.value.password);
 
+    this.formSubmitted = true;
+
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
         .then((token) => {
           console.log('RESULT', token);
+
+          if (this.loginForm.value.remember) {
+
+          }
 
           this.viewCtrl.dismiss().then();
         })
@@ -54,6 +60,24 @@ export class LoginPage {
 
   openSignUpPage() {
     this.navCtrl.push(SignUpPage).then();
+  }
+
+  forgottenPasswordAlert(error = false) {
+    const phoneRegex = /^[0-9]{10}$/;
+    const phone = prompt('Please enter your phone number',
+                         (error ? 'Invalid number' : (phoneRegex.test(this.loginForm.value.phone)
+                          ? this.loginForm.value.phone : '')));
+
+    if (phone === null) {
+      return;
+    }
+
+    if (phoneRegex.test(phone)) {
+      // TODO WS call
+      alert('Your password has been sent');
+    } else {
+      this.forgottenPasswordAlert(true);
+    }
   }
 
 }

@@ -1,3 +1,32 @@
-page-list-contacts {
-  .ios { .tabs { .tabbar { margin-top:25px; padding-bottom: 0px; } } }
+page-list {
+  .ios {
+    .tabs {
+      .tabbar {
+        margin-top: 25px;
+        padding-bottom: 0;
+      }
+    }
+  }
+  .tabs-ios, .tabs-md {
+    .tab-button[aria-selected=true] {
+      color: color($colors, myorange);
+      .icon {
+        color: color($colors, myorange);
+      }
+    }
+  }
+}
+
+
+ion-tabs {
+  margin-bottom: 0;
+}
+
+ion-tabs,
+ion-tabs .tabbar {
+  position: absolute;
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+  bottom: 0;
 }
