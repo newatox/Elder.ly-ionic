@@ -50,20 +50,35 @@ $colors: (
   black: #000000,
 );
 
+$color-purple-light: #9297BF;
+$color-purple: #39304A;
+$color-purple-dark: #202030;
+$color-purple-darker: #0E0E16;
+$color-grey-blue: #417373;
+$color-orange: #FF8A26;
+$color-orange-dark: #B3621B;
+$color-white: #FFFFFF;
+$color-black: #000000;
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
+$searchbar-ios-input-clear-icon-color: $color-purple-light;
+$searchbar-ios-input-search-icon-color: $color-grey-blue;
+$searchbar-ios-input-text-color: $color-grey-blue;
+$searchbar-ios-input-placeholder-color: $color-grey-blue;
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
-
+$searchbar-md-input-clear-icon-color: $color-white;
+$searchbar-md-input-search-icon-color: $color-grey-blue;
+$searchbar-md-input-text-color: $color-grey-blue;
+$searchbar-md-input-placeholder-color: $color-grey-blue;
+$searchbar-md-input-background-color: $color-purple-light;
 
 // App Windows Variables
 // --------------------------------------------------
