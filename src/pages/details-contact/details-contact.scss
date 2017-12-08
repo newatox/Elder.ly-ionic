@@ -1,11 +1,4 @@
 page-details-contact {
-  //ion-col div {
-  //  background-color: #f0f5af;
-  //  border: 1px solid #e6e9ee;
-  //  border-radius: 2px;
-  //  padding: 5px;
-  //  text-align: center;
-  //}
 
   .contact-centered {
     text-align: center;
@@ -38,5 +31,14 @@ page-details-contact {
   .contact-segment {
     color: dark;
     border-color: #32db64;
+  }
+
+  #favoriteButton {
+    background-color: $color-purple-dark;
+    margin: 20% auto;
+
+    &.activated {
+      background-color: $color-purple-darker;
+    }
   }
 }

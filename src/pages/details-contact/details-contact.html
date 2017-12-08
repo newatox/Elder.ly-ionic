@@ -19,12 +19,12 @@
 
 
 <ion-content padding>
-  <ion-grid>
+  <ion-grid no-lines>
     <ion-row>
       <ion-col class="contact-centered">
         <div class="contact-grav">
           <img class="contact-gravatar" src={{contact.gravatar}} />
-          <img class="contact-star-icon" src="assets/imgs/star-fill.png" />
+          <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
         </div>
       </ion-col>
     </ion-row>
@@ -37,13 +37,13 @@
     </ion-row>
     <ion-row>
       <ion-segment class="contact-segment" color="dark">
-        <ion-segment-button value="Texting">
+        <ion-segment-button value="Texting" (ionSelect)="segmentButtonSelected($event)">
           <ion-icon name="text"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="Calling">
+        <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
           <ion-icon name="call"></ion-icon>
         </ion-segment-button>
-        <ion-segment-button value="Emailing">
+        <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)">
           <ion-icon name="mail"></ion-icon>
         </ion-segment-button>
       </ion-segment>
@@ -54,9 +54,9 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)">
         <div>{{contact.email}}</div>
-      </ion-col>
+      </ion-segment-button>
     </ion-row>
     <ion-row>
       <ion-col>
@@ -64,15 +64,14 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
+      <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
         <div>{{contact.phone | phone}}</div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="contact-centered">
-        <button ion-button round>Ajouter aux favoris</button>
-      </ion-col>
-
+      </ion-segment-button>
     </ion-row>
   </ion-grid>
+  <div class="contact-centered">
+    <button ion-button round id="favoriteButton" (click)="favoriteButtonClicked()">
+      {{favoriteButtonLabel}}
+    </button>
+  </div>
 </ion-content>

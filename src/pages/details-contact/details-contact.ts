@@ -18,6 +18,7 @@ import Contact from '../../models/Contact';
 })
 export class DetailsContactPage {
   public contact: Contact;
+  public favoriteButtonLabel: String = 'Ajouter à mes favoris';
 
   constructor(public navCtrl: NavController,
               public alertCtrl: ActionSheetController, public platform: Platform) {
@@ -69,5 +70,19 @@ export class DetailsContactPage {
     });
 
     actionSheet.present().then();
+  }
+
+  favoriteButtonClicked() {
+    this.contact.isFavorite = !this.contact.isFavorite;
+    if(this.contact.isFavorite) {
+      this.favoriteButtonLabel = 'Retirer de mes favoris';
+    } else {
+      this.favoriteButtonLabel = 'Ajouter à mes favoris';
+    }
+  }
+
+  segmentButtonSelected(event) {
+    const interaction = event.value;
+    console.log(interaction);
   }
 }
