@@ -20,7 +20,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { ErrorProvider } from '../providers/error/error';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-import {PhonePipe} from '../pipes/phone/phone';
+import { PhonePipe } from '../pipes/phone/phone';
 
 
 @NgModule({
