@@ -18,10 +18,11 @@ import { ApiProvider } from '../providers/api/api';
 import { ContactsProvider } from '../providers/contacts/contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { ErrorProvider } from '../providers/error/error';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-import {PhonePipe} from '../pipes/phone/phone';
-
+import { PhonePipe } from '../pipes/phone/phone';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,13 @@ import {PhonePipe} from '../pipes/phone/phone';
     ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,3 +72,7 @@ import {PhonePipe} from '../pipes/phone/phone';
   ],
 })
 export class AppModule {}
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
