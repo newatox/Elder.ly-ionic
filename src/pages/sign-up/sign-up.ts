@@ -18,6 +18,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class SignUpPage {
   signupForm: FormGroup;
   formSubmitted = false;
+  profiles = [];
 
   constructor(public navCtrl: NavController,
               private formBuilder: FormBuilder, private auth: AuthProvider) {
@@ -29,6 +30,15 @@ export class SignUpPage {
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
       profile: ['', Validators.compose([Validators.required])],
     });
+
+    this.auth.getProfiles()
+      .then((profiles) => {
+        this.profiles = profiles;
+        this.signupForm.get('profile').setValue(profiles[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   ionViewDidLoad() {
