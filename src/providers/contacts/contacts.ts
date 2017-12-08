@@ -50,12 +50,12 @@ export class ContactsProvider {
             contact.lastName,
             contact.email,
             contact.profile,
+            contact._id,
+            contact.gravatar,
             contact.isFamilinkuser,
             contact.isEmergencyUser,
             contact.isFavorite,
             contact.frequency,
-            contact.wsId,
-            contact.gravatar,
           );
         });
         console.log('RETURN LOCAL CONTACTS');
@@ -65,16 +65,40 @@ export class ContactsProvider {
 
 
 
-  create() {
-
+  create(contact: Contact) {
+    return this.storage.get('token')
+      .then((token) => {
+        console.log('TOKEN', token) ;
+        return this.api.createContact(contact, token).toPromise();
+      })
+      .then((result) => {
+        const newContact = new Contact(
+          result['phone'],
+          result['firstName'],
+          result['lastName'],
+          result['email'],
+          result['profile'],
+          result['_id']);
+        this.contacts.push(newContact);
+        this.storage.set('contacts', this.contacts); // Save localy
+        return newContact;
+      });
   }
 
-  update() {
-
+  update(id, contact) {
+    return this.storage.get('token')
+      .then((token) => {
+        console.log('TOKEN', token) ;
+        return this.api.updateContact(id, contact, token).toPromise();
+      });
   }
 
-  delete() {
-
+  delete(id) {
+    return this.storage.get('token')
+      .then((token) => {
+        console.log('TOKEN', token) ;
+        return this.api.deleteContact(id, token).toPromise();
+      });
   }
 
 }
