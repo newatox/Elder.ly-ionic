@@ -30,13 +30,13 @@
     </ion-row>
     <ion-row margin-bottom="500px">
       <ion-col class="contact-centered">
-        <ion-title>
+        <ion-label id="contact-name" color="black">
           {{contact.firstName + ' ' + contact.lastName}}
-        </ion-title>
+        </ion-label>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-segment class="contact-segment" color="primary">
+      <ion-segment class="contact-segment" color="mypurple">
         <ion-segment-button value="Texting" (ionSelect)="segmentButtonSelected($event)">
           <ion-icon name="text"></ion-icon>
         </ion-segment-button>
@@ -70,7 +70,7 @@
     </ion-row>
   </ion-grid>
   <div class="contact-centered">
-    <button ion-button outline round id="favoriteButton" (click)="favoriteButtonClicked()" color="secondary">
+    <button ion-button outline round id="favoriteButton" (click)="favoriteButtonClicked()" color="myorange">
       {{favoriteButtonLabel}}
     </button>
   </div>

@@ -30,10 +30,6 @@ export class DetailsContactPage {
       'Dupont',
       'aaaa@aaa.com',
       'SENIOR',
-      false,
-      false,
-      false,
-      0,
       '',
       '' + gravURL,
     );
