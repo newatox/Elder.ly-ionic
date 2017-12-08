@@ -4,12 +4,12 @@ export default class Contact {
               public lastName: string,
               public email: string,
               public profile: string,
+              public wsId?: string,
+              public gravatar: string = '',
               public isFamilinkuser: boolean = false,
               public isEmergencyUser: boolean = false,
               public isFavorite: boolean = false,
-              public frequency: number = 0,
-              public wsId?: string,
-              public gravatar?: string) {
+              public frequency: number = 0) {
 
   }
 
