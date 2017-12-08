@@ -14,7 +14,6 @@ import { ApiProvider } from '../api/api';
 export class ContactsProvider {
 
   private contacts: Contact[] = [];
-  private token: String;
 
   constructor(public http: HttpClient, public api: ApiProvider, public storage: Storage) {
     console.log('Hello ContactsProvider Provider');
@@ -27,8 +26,24 @@ export class ContactsProvider {
         return this.api.getAllContacts(token).toPromise();
       })
       .then((contacts) => {
-        console.log('CONTACTS', contacts);
-        this.contacts = (contacts as any[]).map((contact) => {
+        // Get contact from API succeed
+        console.log('API OBJECTS CONTACTS', contacts);
+        // Set contacts localy
+        console.log('SET LOCAL CONTACTS');
+        return this.storage.set('contacts', contacts);
+      })
+      .catch((error) => {
+        // Get contact from API failed
+        console.log('API ERROR', error);
+      })
+      .then(() => {
+        // No matter what happened before get contacts from local storage
+        console.log('GET LOCAL CONTACTS');
+        return this.storage.get('contacts');
+      })
+      .then((localContacts) => {
+        // Return array of Contacts from local array of objects
+        this.contacts = localContacts.map((contact) => {
           return new Contact(
             contact.phone,
             contact.firstName,
@@ -43,6 +58,7 @@ export class ContactsProvider {
             contact.gravatar,
           );
         });
+        console.log('RETURN LOCAL CONTACTS');
         return [...this.contacts];
       });
   }
