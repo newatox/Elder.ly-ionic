@@ -20,6 +20,14 @@ page-login {
     font-size: 1.8rem;
   }
 
+  .icon.ng-invalid {
+    color: $color-orange;
+  }
+
+  .icon.ng-valid {
+    color: $color-purple-light;
+  }
+
   .toggle-ios.toggle-checked .toggle-icon {
     background-color: $color-orange;
   }
