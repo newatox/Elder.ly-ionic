@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import Contact from '../../models/Contact';
 
 /*
   Generated class for the ApiProvider provider.
@@ -77,18 +78,7 @@ export class ApiProvider {
     return this.http.get (`${BASE_URL}${CONTACTS}`,{ headers });
   }
 
-  createContact(
-    contact: {
-      phone: String,
-      firstName: String,
-      lastName: String,
-      email: String,
-      profile: String,
-      gravatar : String,
-      isFamilinkUser : Boolean,
-      isEmergencyUser: Boolean,
-    },
-    token: String) {
+  createContact(contact: Contact, token: String) {
     console.log('API-PROVIDER', 'create contact');
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
@@ -100,19 +90,7 @@ export class ApiProvider {
     );
   }
 
-  updateContact(
-    id: String,
-    contact: {
-      phone: String,
-      firstName: String,
-      lastName: String,
-      email: String,
-      profile: String,
-      gravatar : String,
-      isFamilinkUser : Boolean,
-      isEmergencyUser: Boolean,
-    },
-    token: String) {
+  updateContact(id: String, contact: Contact, token: String) {
     console.log('API-PROVIDER', 'update contact');
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + token)
