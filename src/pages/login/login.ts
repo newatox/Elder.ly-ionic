@@ -19,7 +19,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LoginPage {
   remember: boolean;
   loginForm: FormGroup;
-
+  formSubmitted = false;
 
   constructor(public viewCtrl: ViewController, public navCtrl: NavController,
               private formBuilder: FormBuilder, private auth: AuthProvider) {
@@ -37,6 +37,8 @@ export class LoginPage {
   doLogin() {
     console.log('Phone : ' + this.loginForm.value.phone);
     console.log('Password : ' + this.loginForm.value.password);
+
+    this.formSubmitted = true;
 
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)

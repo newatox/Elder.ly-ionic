@@ -14,15 +14,15 @@
       <ion-item>
         <ion-label stacked>{{ 'Phone' }}</ion-label>
         <ion-input type="tel" formControlName="phone" placeholder="{{ 'Phone' }}"></ion-input>
-        <ion-icon *ngIf="loginForm.get('phone').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
-        <ion-icon *ngIf="loginForm.get('phone').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && loginForm.get('phone').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && loginForm.get('phone').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>{{ 'Password' }}</ion-label>
         <ion-input type="password" formControlName="password" placeholder="{{ 'Password' }}"></ion-input>
-        <ion-icon *ngIf="loginForm.get('password').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
-        <ion-icon *ngIf="loginForm.get('password').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && loginForm.get('password').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && loginForm.get('password').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
