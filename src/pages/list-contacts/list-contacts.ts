@@ -12,7 +12,9 @@ import { DetailsContactPage } from '../details-contact/details-contact';
 })
 export class ListContactsPage {
   isLogged: boolean = false;
+  displayedList: Contact[] = [];
   contacts: Contact[] = [];
+  favorites: Contact[] = [];
   root = DetailsContactPage;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
@@ -30,6 +32,7 @@ export class ListContactsPage {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
+        this.displayedList = this.contacts;
       })
       .catch((error) => {
         console.log(error);
@@ -39,4 +42,18 @@ export class ListContactsPage {
   openAddEdit() {
     this.navCtrl.push(AddEditContactPage).then();
   }
+
+  displayFavorites() {
+    this.favorites = [];
+    this.contacts.map((contact) => { if(contact.isFavorite) this.favorites.push(contact); });
+    console.log(this.favorites.length);
+    this.displayedList = this.favorites;
+  }
+  displayFrequent() {
+    // TODO
+  }
+  displayAllContacts() {
+    this.displayedList = this.contacts;
+  }
+
 }
