@@ -4,21 +4,19 @@ import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { DetailsContactPage } from '../details-contact/details-contact';
+import {ContactsProvider} from "../../providers/contacts/contacts";
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list-contacts.html',
 })
 export class ListContactsPage {
-  contacts: any;
   isLogged: boolean = false;
   root = DetailsContactPage;
+  contacts: Contact[] = [];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
-    this.contacts = [];
-    for (let i = 1; i < 11; i = i + 1) this.contacts.push(new Contact(
-      '0600000042', 'Jean-Patrick', 'Dupont', 'SENIOR', 'aaaa@aaa.com',
-    ));
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
+              public contactProvider: ContactsProvider) {
   }
 
   ionViewDidLoad() {
@@ -26,6 +24,11 @@ export class ListContactsPage {
       const loginModal = this.modalCtrl.create(LoginPage);
       loginModal.present().then(() => { console.log('login opened'); });
     }
+    this.contactProvider.all()
+      .then((result) => {
+        this.contacts = result;
+      });
+
   }
 
   openAddEdit() {
