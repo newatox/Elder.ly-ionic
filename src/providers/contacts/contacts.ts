@@ -43,21 +43,24 @@ export class ContactsProvider {
       })
       .then((localContacts) => {
         // Return array of Contacts from local array of objects
-        this.contacts = localContacts.map((contact) => {
-          return new Contact(
-            contact.phone,
-            contact.firstName,
-            contact.lastName,
-            contact.email,
-            contact.profile,
-            contact._id,
-            contact.gravatar,
-            contact.isFamilinkuser,
-            contact.isEmergencyUser,
-            contact.isFavorite,
-            contact.frequency,
-          );
-        });
+        this.contacts = [];
+        if (localContacts != null && localContacts !== undefined) {
+          this.contacts = localContacts.map((contact) => {
+            return new Contact(
+              contact.phone,
+              contact.firstName,
+              contact.lastName,
+              contact.email,
+              contact.profile,
+              contact._id,
+              contact.gravatar,
+              contact.isFamilinkuser,
+              contact.isEmergencyUser,
+              contact.isFavorite,
+              contact.frequency,
+            );
+          });
+        }
         console.log('RETURN LOCAL CONTACTS');
         return [...this.contacts];
       });
