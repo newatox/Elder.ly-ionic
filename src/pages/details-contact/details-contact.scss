@@ -1,3 +1,43 @@
 page-details-contact {
 
+  .contact-centered {
+    text-align: center;
+  }
+
+  .contact-grav {
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+  }
+
+  #contact-name {
+    font-size: 24px;
+    font: "Helvetica";
+  }
+
+  .contact-gravatar {
+    position: absolute;
+    z-index: 1;
+    margin-left: -60px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+
+  .contact-star-icon {
+    position: absolute;
+    z-index: 2;
+    margin-left: -56px;
+    width: 30px;
+    height: 30px;
+    float:left;
+  }
+
+  #favoriteButton {
+    margin: 20% auto;
+
+    &.activated {
+      outline-color: $color-orange-dark;
+    }
+  }
 }

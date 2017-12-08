@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActionSheetController, IonicPage,
   NavController, Platform } from 'ionic-angular';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
+import Contact from '../../models/Contact';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -16,13 +17,27 @@ import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
   templateUrl: 'details-contact.html',
 })
 export class DetailsContactPage {
+  public contact: Contact;
+  public favoriteButtonLabel: String = 'Ajouter à mes favoris';
+
   constructor(public navCtrl: NavController,
               public alertCtrl: ActionSheetController, public platform: Platform) {
+    // const gravURL = 'https://adriendeneu.files.wordpress.com/2008/10/panorama-vertical.jpg?w=267&h=1024';
+    const gravURL = 'https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';
+    this.contact = new Contact(
+      '0600000042',
+      'Jean-Patrick',
+      'Dupont',
+      'aaaa@aaa.com',
+      'SENIOR',
+      '',
+      '' + gravURL,
+    );
   }
 
   present() {
     const actionSheet = this.alertCtrl.create({
-      title: 'Albums',
+      title: 'Options',
       buttons: [
         {
           text: 'Delete',
@@ -51,5 +66,19 @@ export class DetailsContactPage {
     });
 
     actionSheet.present().then();
+  }
+
+  favoriteButtonClicked() {
+    this.contact.isFavorite = !this.contact.isFavorite;
+    if (this.contact.isFavorite) {
+      this.favoriteButtonLabel = 'Retirer de mes favoris';
+    } else {
+      this.favoriteButtonLabel = 'Ajouter à mes favoris';
+    }
+  }
+
+  segmentButtonSelected(event) {
+    const interaction = event.value;
+    console.log(interaction);
   }
 }

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>DetailsContact</ion-title>
+    <ion-title>Détails</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="present()">
         <ion-icon name="keypad"></ion-icon>
@@ -19,7 +19,59 @@
 
 
 <ion-content padding>
-
-  Detailed contact
-
+  <ion-grid no-lines>
+    <ion-row>
+      <ion-col class="contact-centered">
+        <div class="contact-grav">
+          <img class="contact-gravatar" src={{contact.gravatar}} />
+          <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row margin-bottom="500px">
+      <ion-col class="contact-centered">
+        <ion-label id="contact-name" color="black">
+          {{contact.firstName + ' ' + contact.lastName}}
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-segment color="mypurple">
+        <ion-segment-button value="Texting" (ionSelect)="segmentButtonSelected($event)">
+          <ion-icon name="text"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
+          <ion-icon name="call"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)">
+          <ion-icon name="mail"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>Email</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)">
+        <div>{{contact.email}}</div>
+      </ion-segment-button>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>N° Tél</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
+        <div>{{contact.phone | phone}}</div>
+      </ion-segment-button>
+    </ion-row>
+  </ion-grid>
+  <div class="contact-centered">
+    <button ion-button outline round id="favoriteButton" (click)="favoriteButtonClicked()" color="myorange">
+      {{favoriteButtonLabel}}
+    </button>
+  </div>
 </ion-content>

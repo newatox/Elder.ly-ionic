@@ -31,6 +31,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    // this.viewCtrl.dismiss().then(); // TODO - Remove (useful for test only)
     console.log('ionViewDidLoad LoginPage');
   }
 
