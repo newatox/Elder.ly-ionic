@@ -7,32 +7,36 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
-    <ion-list>
+    <ion-list no-lines>
 
       <ion-item>
-        <ion-label fixed>{{ 'Phone' }}</ion-label>
-        <ion-input type="tel" formControlName="phone"></ion-input>
+        <ion-label stacked>{{ 'Phone' }}</ion-label>
+        <ion-input type="tel" formControlName="phone" placeholder="{{ 'Phone' }}"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'Password' }}</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-label stacked>{{ 'Password' }}</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="{{ 'Password' }}"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-checkbox ngControl="remember" name="remember"></ion-checkbox>
+        <ion-toggle item-left ngControl="remember" name="remember"></ion-toggle>
         <ion-label>{{ 'Remember me' }}</ion-label>
       </ion-item>
 
-      <div>
-        <button ion-button type="submit" color="primary" block>{{ 'Confirm' }}</button>
-      </div>
+      <ion-item></ion-item>
+
+      <ion-item>
+        <button ion-button large round color="primary" block type="submit" block>{{ 'Confirm' }}</button>
+      </ion-item>
 
     </ion-list>
   </form>
 
-  <button ion-button (click)="openSignUpPage()">{{ 'SignUp' }}</button>
+  <div padding>
+    <button ion-button large outline round block (click)="openSignUpPage()">{{ 'SignUp' }}</button>
+  </div>
 
 </ion-content>

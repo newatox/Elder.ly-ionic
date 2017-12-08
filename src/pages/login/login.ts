@@ -43,6 +43,10 @@ export class LoginPage {
         .then((token) => {
           console.log('RESULT', token);
 
+          if (this.loginForm.value.remember) {
+
+          }
+
           this.viewCtrl.dismiss().then();
         })
         .catch((httpErrorResponse) => {
