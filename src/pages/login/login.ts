@@ -59,4 +59,22 @@ export class LoginPage {
     this.navCtrl.push(SignUpPage).then();
   }
 
+  forgottenPasswordAlert(error = false) {
+    const phoneRegex = /^[0-9]{10}$/;
+    const phone = prompt('Please enter your phone number',
+                         (error ? 'Invalid number' : (phoneRegex.test(this.loginForm.value.phone)
+                          ? this.loginForm.value.phone : '')));
+
+    if (phone === null) {
+      return;
+    }
+
+    if (phoneRegex.test(phone)) {
+      // TODO WS call
+      alert('Your password has been sent');
+    } else {
+      this.forgottenPasswordAlert(true);
+    }
+  }
+
 }
