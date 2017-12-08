@@ -15,3 +15,14 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.ios, .md {
+  .toolbar-background {
+    background: color($colors, mypurple);
+  }
+  .toolbar-title {
+    color: color($colors, grey-blue);
+  }
+  .bar-button {
+    color: color($colors, grey-blue);
+  }
+}
