@@ -89,7 +89,8 @@ export class ContactsProvider {
     return this.storage.get('token')
       .then((token) => {
         console.log('TOKEN', token) ;
-        return this.api.updateContact(id, contact, token).toPromise();
+        return this.api.updateContact(id, contact, token).toPromise()
+          .then((result) => { return result; });
       });
   }
 
@@ -97,7 +98,8 @@ export class ContactsProvider {
     return this.storage.get('token')
       .then((token) => {
         console.log('TOKEN', token) ;
-        return this.api.deleteContact(id, token).toPromise();
+        return this.api.deleteContact(id, token).toPromise()
+          .then((result) => { return result; });
       });
   }
 

@@ -99,6 +99,11 @@ export class AuthProvider {
     });
   }
 
+  forgot(phoneNumber: String): Promise<any> {
+    return this.api.forgottenPassword(phoneNumber).toPromise()
+      .then((result) => { return result; });
+  }
+
   private getToken(): Promise<any> {
     return this.storage.get('token'); // Promise
   }

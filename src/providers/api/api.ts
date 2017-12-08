@@ -54,10 +54,12 @@ export class ApiProvider {
     return this.http.get(`${BASE_URL}${PROFILES}`, { headers });
   }
 
-  forgottenPassword(body: {phone: String}) {
+  forgottenPassword(phone: String) {
     console.log('API-PROVIDER', 'forgottenPassword');
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(`${BASE_URL}${FORGOTTEN_PASSWORD}`, body,{ headers });
+    return this.http.post(`${BASE_URL}${FORGOTTEN_PASSWORD}`,
+                          { phone },
+                          { headers, observe: 'response' });
   }
 
   // Current User HTTP Requests
@@ -98,7 +100,7 @@ export class ApiProvider {
     return this.http.put (
       `${BASE_URL}${CONTACTS}${id}`,
       contact,
-      { headers },
+      { headers, observe: 'response' },
     );
   }
 
@@ -109,7 +111,7 @@ export class ApiProvider {
       .set('Content-Type', 'application/json');
     return this.http.delete (
       `${BASE_URL}${CONTACTS}${id}`,
-      { headers },
+      { headers, observe: 'response' },
     );
   }
 
