@@ -86,17 +86,14 @@ export class AuthProvider {
   }
 
   getProfiles(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let profiles = Array<String>();
-      this.api.getProfiles()
-        .subscribe((result: any) => {
-          profiles = result;
-        },         (error) => {
-          reject(error);
-        },         () => {
-          resolve(profiles);
-        });
-    });
+    return this.api.getProfiles().toPromise()
+      .then((profiles) => {
+        return this.storage.set('profiles', profiles);
+      })
+      .catch((error) => { console.log('API ERROR', error); })
+      .then(() => {
+        return this.storage.get('profiles');
+      });
   }
 
   forgot(phoneNumber: String): Promise<any> {
