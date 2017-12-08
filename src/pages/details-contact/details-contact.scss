@@ -29,16 +29,14 @@ page-details-contact {
   }
 
   .contact-segment {
-    color: dark;
-    border-color: #32db64;
+
   }
 
   #favoriteButton {
-    background-color: $color-purple-dark;
     margin: 20% auto;
 
     &.activated {
-      background-color: $color-purple-darker;
+      outline-color: $color-orange-dark;
     }
   }
 }

@@ -74,7 +74,7 @@ export class DetailsContactPage {
 
   favoriteButtonClicked() {
     this.contact.isFavorite = !this.contact.isFavorite;
-    if(this.contact.isFavorite) {
+    if (this.contact.isFavorite) {
       this.favoriteButtonLabel = 'Retirer de mes favoris';
     } else {
       this.favoriteButtonLabel = 'Ajouter à mes favoris';
