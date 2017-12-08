@@ -6,7 +6,6 @@ ion-tabs {
   margin-bottom: 0;
 }
 
-
 ion-tabs,
 ion-tabs .tabbar {
   position: absolute;
@@ -16,3 +15,6 @@ ion-tabs .tabbar {
   bottom: 0;
 }
 
+ion-tabs .tab-button[aria-selected=true] {
+  background: color($colors, myorange);
+}
