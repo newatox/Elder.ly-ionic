@@ -10,25 +10,27 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar color="purple-dark">
+    <ion-searchbar placeholder="Search..."></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-toolbar color="purple-dark" ion-fixed>
-    <ion-searchbar placeholder="Search..."></ion-searchbar>
-  </ion-toolbar>
-
-  <ion-list>
+  <ion-list class="mylist">
     <ion-item *ngFor="let contact of contacts">
       <contact-cell [contact]="contact"></contact-cell>
     </ion-item>
   </ion-list>
+</ion-content>
 
-<!--
-  <ion-tabs tabs-only selectedIndex="2" color="purple-dark" ion-fixed>
+<ion-footer>
+  <ion-toolbar>
+  <ion-tabs tabs-only selectedIndex="2" color="purple-dark">
     <ion-tab tabTitle="Favorites" tabIcon="star" [root]="root"></ion-tab>
     <ion-tab tabTitle="Contacts" tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
     <ion-tab tabTitle="History" tabIcon="time" [root]="root"></ion-tab>
   </ion-tabs>
--->
+  </ion-toolbar>
+</ion-footer>
 
-</ion-content>
+
