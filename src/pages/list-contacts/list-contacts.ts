@@ -54,6 +54,7 @@ export class ListContactsPage {
   displayFavorites() {
     this.favorites = [];
     this.contacts.map((contact) => { if (contact.isFavorite) this.favorites.push(contact); });
+    this.favorites.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.favorites;
   }
   displayFrequent() {
