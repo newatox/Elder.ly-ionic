@@ -17,6 +17,7 @@ export class ListContactsPage {
   favorites: Contact[] = [];
   frequents: Contact[] = [];
   root = DetailsContactPage;
+  searchBarInput: string;
 
   @ViewChild('tabbar') tabRef: Tabs;
   @ViewChild('fav') tabFav: Tab;
@@ -38,9 +39,7 @@ export class ListContactsPage {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
-        if (this.tabRef.getSelected() === this.tabAll) this.displayAllContacts();
-        else if (this.tabRef.getSelected() === this.tabFav) this.displayFavorites();
-        else if (this.tabRef.getSelected() === this.tabFrq) this.displayFrequent();
+        this.resetList();
       })
       .catch((error) => {
         console.log(error);
@@ -56,6 +55,8 @@ export class ListContactsPage {
     this.contacts.map((contact) => { if (contact.isFavorite) this.favorites.push(contact); });
     this.favorites.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.favorites;
+    if (this.searchBarInput !== '')
+      this.searchLocalContacts(this.searchBarInput, this.favorites);
   }
   displayFrequent() {
     this.frequents = [];
@@ -68,26 +69,36 @@ export class ListContactsPage {
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
+    if (this.searchBarInput !== '')
+      this.searchLocalContacts(this.searchBarInput, this.contacts);
+  }
+  resetList() {
+    const currentTab = this.tabRef.getSelected();
+    if (currentTab === this.tabAll) this.displayAllContacts();
+    else if (currentTab === this.tabFav) this.displayFavorites();
+    else if (currentTab === this.tabFrq) this.displayFrequent();
   }
   doSearch(ev) {
     const content = ev.target.value;
+    const currentTab = this.tabRef.getSelected();
     if (!content || !content.trim()) {
-      this.displayAllContacts();
+      this.resetList();
       return;
     }
-    this.searchLocalContacts(content);
+    console.log(this.searchBarInput);
+    if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
+    else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
   }
-  searchLocalContacts(content: string) {
+  searchLocalContacts(content: string, list: Contact[]) {
     const matchingContacts = [];
     const regExp = RegExp(content, 'gi');
-    this.contacts.forEach((contact) => {
+    list.forEach((contact) => {
       if (contact.firstName.search(regExp) !== -1
         || contact.lastName.search(regExp) !== -1
         || contact.email.search(regExp) !== -1)
         matchingContacts.push(contact);
     });
     this.displayedList = matchingContacts;
-    console.log(matchingContacts);
   }
 
 }

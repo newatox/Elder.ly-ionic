@@ -10,8 +10,8 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-searchbar (ionInput)="doSearch($event)" placeholder="Search..."></ion-searchbar>
+  <ion-toolbar *ngIf="!(tabRef.getSelected()==tabFrq)">
+    <ion-searchbar [(ngModel)]="searchBarInput" (ionInput)="doSearch($event)" placeholder="Search..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
