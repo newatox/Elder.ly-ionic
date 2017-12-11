@@ -26,5 +26,11 @@
   "OPTIONS_LABEL": "Options",
   "MODIFY_LABEL": "Modifier",
   "DELETE_LABEL": "Supprimer",
-  "CANCEL_LABEL": "Annuler"
+  "CANCEL_LABEL": "Annuler",
+  "ADD_PAGE_NAME": "Ajouter contact",
+  "EDIT_PAGE_NAME": "Editer contact",
+  "PHONE_NUMBER_PLACEHOLDER_ADD_EDIT": "Son numéro",
+  "FIRST_NAME_PLACEHOLDER_ADD_EDIT": "Son prénom",
+  "FAMILY_NAME_PLACEHOLDER_ADD_EDIT": "Son nom",
+  "EMAIL_PLACEHOLDER_ADD_EDIT": "Son email"
 }
