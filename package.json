@@ -2,7 +2,7 @@
   "name": "Elder.ly",
   "version": "0.0.1",
   "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "homepage": "https://github.com/newatox/Elder.ly-ionic",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -74,7 +74,7 @@
     "tslint": "^5.8.0",
     "typescript": "^2.4.2"
   },
-  "description": "An Ionic project",
+  "description": "Our final project in Cordova Ionic",
   "cordova": {
     "plugins": {
       "ionic-plugin-keyboard": {},
