@@ -98,7 +98,7 @@ export class DetailsContactPage {
           text: this.modifyLabel,
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            this.navCtrl.push(AddEditContactPage).then();
+            this.navCtrl.push(AddEditContactPage,{ contact: this.contact }).then();
           },
         },
         {
