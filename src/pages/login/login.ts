@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
-import { AlertController, Events, IonicPage, NavController, ViewController } from 'ionic-angular';
+import {
+  AlertController,
+  Platform,
+  Events,
+  IonicPage,
+  NavController,
+  ViewController,
+} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +34,10 @@ export class LoginPage {
               public alertCtrl: AlertController,
               private formBuilder: FormBuilder,
               public events: Events,
-              private auth: AuthProvider) {
+              public splashScreen: SplashScreen,
+              public platform: Platform,
+              private auth: AuthProvider,
+  ) {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
@@ -36,6 +47,9 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    if (this.platform.is('ios') || this.platform.is('android')) {
+      this.splashScreen.hide();
+    }
   }
 
   doLogin() {
@@ -59,7 +73,7 @@ export class LoginPage {
         })
         .catch((httpErrorResponse) => {
           console.log('ERROR', httpErrorResponse.error.message);
-          //TODO: i18n
+          // TODO: i18n
           const alert = this.alertCtrl.create({
             title: 'Error',
             subTitle: httpErrorResponse.error.message,

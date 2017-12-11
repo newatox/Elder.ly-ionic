@@ -3,6 +3,7 @@ import { ActionSheetController, IonicPage,
   NavController, Platform } from 'ionic-angular';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -18,10 +19,17 @@ import Contact from '../../models/Contact';
 })
 export class DetailsContactPage {
   public contact: Contact;
-  public favoriteButtonLabel: String = 'Ajouter à mes favoris';
+  public favoriteButtonLabel: String = 'ADD_TO_FAVORITES'; // TODO - Load label according to contact
+
+  private optionsLabel = 'OPTIONS_LABEL';
+  private modifyLabel = 'MODIFY_LABEL';
+  private deleteLabel = 'DELETE_LABEL';
+  private cancelLabel = 'CANCEL_LABEL';
 
   constructor(public navCtrl: NavController,
-              public alertCtrl: ActionSheetController, public platform: Platform) {
+              public alertCtrl: ActionSheetController,
+              public platform: Platform,
+              translate: TranslateService) {
     // const gravURL = 'https://adriendeneu.files.wordpress.com/2008/10/panorama-vertical.jpg?w=267&h=1024';
     const gravURL = 'https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';
     this.contact = new Contact(
@@ -33,14 +41,33 @@ export class DetailsContactPage {
       '',
       '' + gravURL,
     );
+    /**
+     * We modify the labels in the code, with translate.get()
+     */
+    translate.get(this.optionsLabel).subscribe(
+      (translation) => {
+        this.optionsLabel = translation;
+      });
+    translate.get(this.modifyLabel).subscribe(
+      (translation) => {
+        this.modifyLabel = translation;
+      });
+    translate.get(this.deleteLabel).subscribe(
+      (translation) => {
+        this.deleteLabel = translation;
+      });
+    translate.get(this.cancelLabel).subscribe(
+      (translation) => {
+        this.cancelLabel = translation;
+      });
   }
 
   present() {
     const actionSheet = this.alertCtrl.create({
-      title: 'Options',
+      title: this.optionsLabel,
       buttons: [
         {
-          text: 'Delete',
+          text: this.deleteLabel,
           role: 'destructive',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
@@ -48,14 +75,14 @@ export class DetailsContactPage {
           },
         },
         {
-          text: 'Edit',
+          text: this.modifyLabel,
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
             this.navCtrl.push(AddEditContactPage).then();
           },
         },
         {
-          text: 'Cancel',
+          text: this.cancelLabel,
           role: 'cancel', // will always sort to be on the bottom
           icon: !this.platform.is('ios') ? 'close' : null,
           handler: () => {
@@ -71,9 +98,9 @@ export class DetailsContactPage {
   favoriteButtonClicked() {
     this.contact.isFavorite = !this.contact.isFavorite;
     if (this.contact.isFavorite) {
-      this.favoriteButtonLabel = 'Retirer de mes favoris';
+      this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
     } else {
-      this.favoriteButtonLabel = 'Ajouter à mes favoris';
+      this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
     }
   }
 
