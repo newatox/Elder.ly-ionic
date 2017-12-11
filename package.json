@@ -11,6 +11,8 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:lab": "ionic-app-scripts serve --lab -c",
     "ionic:serve": "ionic-app-scripts serve",
+    "ionic:run:android": "ionic cordova run android",
+    "ionic:run:ios": "ionic cordova run ios",
     "test": "karma start ./test-config/karma.conf.js",
     "test-ci": "karma start ./test-config/karma.conf.js --single-run",
     "test-coverage": "karma start ./test-config/karma.conf.js --coverage",

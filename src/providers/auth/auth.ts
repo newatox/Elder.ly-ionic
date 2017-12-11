@@ -21,17 +21,12 @@ export class AuthProvider {
   }
 
   login(phone: String, password: String): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.api.login({ phone, password })
-        .subscribe((result: any) => {
-          this.token = result['token'];
-          this.saveToken(result['token']);
-        },         (error) => {
-          reject(error);
-        },         () => {
-          resolve(this.token);
-        });
-    });
+    return this.api.login({ phone, password }).toPromise()
+      .then((result) => {
+        this.token = result['token'];
+        return this.saveToken(result['token']);
+      })
+      .then(() => { return this.token; });
   }
 
   signup(user: {
@@ -66,23 +61,18 @@ export class AuthProvider {
   }
 
   getCurrentUser(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      console.log('TOKEN', this.token);
-      this.api.currentAuth(this.token)
-        .subscribe((result: any) => {
-          this.auth = new User({
-            phone: result.phone,
-            firstName: result.firstName,
-            lastName: result.lastName,
-            email: result.email,
-            profile : result.profile,
-          });
-        },         (error) => {
-          reject(error);
-        },         () => {
-          resolve(this.auth);
+    console.log('TOKEN', this.token);
+    return this.api.currentAuth(this.token).toPromise()
+      .then((result) => {
+        this.auth = new User({
+          phone: result['phone'],
+          firstName: result['firstName'],
+          lastName: result['lastName'],
+          email: result['email'],
+          profile : result['profile'],
         });
-    });
+        return this.auth;
+      });
   }
 
   getProfiles(): Promise<any> {
@@ -105,7 +95,7 @@ export class AuthProvider {
     return this.storage.get('token'); // Promise
   }
 
-  private saveToken(token: String) {
-    this.storage.set('token', token).then(() => console.log('Saved token localy'));
+  private saveToken(token: String): Promise<any> {
+    return this.storage.set('token', token);
   }
 }
