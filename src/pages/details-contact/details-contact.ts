@@ -130,7 +130,13 @@ export class DetailsContactPage {
           .catch(() => console.log('Error launching dialer'));
         break;
       case 'Texting':
-        this.sms.send(this.contact.phone, message);
+        const options = {
+          replaceLineBreaks: true, // true to replace \n by a new line
+          android: {
+            intent: 'INTENT',
+          },
+        };
+        this.sms.send(this.contact.phone, message, options);
         break;
       case 'Emailing':
         const body = message;
