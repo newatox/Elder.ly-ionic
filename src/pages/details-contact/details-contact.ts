@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import {
-  ActionSheetController, IonicPage,
-  NavController, NavParams, Platform,
+  ActionSheetController,
+  IonicPage,
+  NavController,
+  NavParams,
+  Platform,
 } from 'ionic-angular';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
@@ -9,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { ContactsProvider } from '../../providers/contacts/contacts';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -37,6 +41,7 @@ export class DetailsContactPage {
               public navParams: NavParams,
               public alertCtrl: ActionSheetController,
               public platform: Platform,
+              public contactsProvider: ContactsProvider,
               public translate: TranslateService,
               private callNumber: CallNumber,
               private sms: SMS,
@@ -86,6 +91,7 @@ export class DetailsContactPage {
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             console.log('Delete clicked');
+            this.deleteContact();
           },
         },
         {
@@ -107,6 +113,11 @@ export class DetailsContactPage {
     });
 
     actionSheet.present().then();
+  }
+
+  deleteContact() {
+    this.contactsProvider.delete(this.contact.wsId);
+    this.navCtrl.pop();
   }
 
   favoriteButtonClicked() {
