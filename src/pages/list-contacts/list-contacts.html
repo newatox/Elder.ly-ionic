@@ -16,8 +16,9 @@
 </ion-header>
 
 <ion-content>
+  <h2 *ngIf="displayedList.length==0">TODO: design avec image de l'ajout de favoris dans détails (ou autre)</h2>
   <ion-list class="mylist">
-    <ion-item *ngFor="let contact of contacts">
+    <ion-item *ngFor="let contact of displayedList">
       <contact-cell [contact]="contact"></contact-cell>
     </ion-item>
   </ion-list>
@@ -26,9 +27,9 @@
 <ion-footer>
   <ion-toolbar>
   <ion-tabs tabs-only selectedIndex="1" color="purple-dark">
-    <ion-tab tabTitle="Favorites" tabIcon="star" [root]="root"></ion-tab>
-    <ion-tab tabTitle="Contacts" tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
-    <ion-tab tabTitle="History" tabIcon="time" [root]="root"></ion-tab>
+    <ion-tab (ionSelect)="displayFavorites()" tabTitle="Favorites" tabIcon="star" [root]="root"></ion-tab>
+    <ion-tab (ionSelect)="displayAllContacts()" tabTitle="Contacts" tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
+    <ion-tab (ionSelect)="displayFrequent()" tabTitle="History" tabIcon="time" [root]="root"></ion-tab>
   </ion-tabs>
   </ion-toolbar>
 </ion-footer>

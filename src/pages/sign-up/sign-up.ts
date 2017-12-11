@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the SignUpPage page.
@@ -14,16 +16,59 @@ import { IonicPage, NavController } from 'ionic-angular';
   templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
+  signupForm: FormGroup;
+  formSubmitted = false;
+  profiles = [];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+              private formBuilder: FormBuilder, private auth: AuthProvider) {
+    this.signupForm = this.formBuilder.group({
+      phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
+      profile: ['', Validators.compose([Validators.required])],
+    });
+
+    this.auth.getProfiles()
+      .then((profiles) => {
+        this.profiles = profiles;
+        this.signupForm.get('profile').setValue(profiles[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
   }
 
-  confirm() {
+  openLoginPage() {
     this.navCtrl.pop().then();
+  }
+
+  doSignup() {
+    this.formSubmitted = true;
+
+    if (this.signupForm.valid) {
+      this.auth.signup({ phone: this.signupForm.value.phone,
+        password: this.signupForm.value.password,
+        firstName: this.signupForm.value.firstname,
+        lastName: this.signupForm.value.lastname,
+        email: this.signupForm.value.email,
+        profile: this.signupForm.value.profile })
+        .then((token) => {
+          console.log('RESULT', token);
+
+          this.navCtrl.pop().then();
+        })
+        .catch((httpErrorResponse) => {
+          console.log('ERROR', httpErrorResponse.error.message);
+          alert(httpErrorResponse.error.message);
+        });
+    }
   }
 
 }

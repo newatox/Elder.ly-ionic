@@ -54,6 +54,7 @@ export class LoginPage {
         })
         .catch((httpErrorResponse) => {
           console.log('ERROR', httpErrorResponse.error.message);
+          alert(httpErrorResponse.error.message);
         });
     }
   }

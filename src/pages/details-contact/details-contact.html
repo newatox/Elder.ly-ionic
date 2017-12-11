@@ -10,7 +10,7 @@
     <ion-title>{{ 'DETAIL_PAGE_NAME' | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="present()">
-        <ion-icon name="keypad"></ion-icon>
+        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -35,7 +35,7 @@
         </ion-label>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row padding-bottom="30px">
       <ion-segment color="mypurple">
         <ion-segment-button value="Texting" (ionSelect)="segmentButtonSelected($event)">
           <ion-icon name="text"></ion-icon>
@@ -54,8 +54,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)">
-        <div>{{contact.email}}</div>
+      <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)" class="contact-links">
+          {{contact.email}}
       </ion-segment-button>
     </ion-row>
     <ion-row>
@@ -65,7 +65,7 @@
     </ion-row>
     <ion-row>
       <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
-        <div>{{contact.phone | phone}}</div>
+        <div class="contact-links">{{contact.phone | phone}}</div>
       </ion-segment-button>
     </ion-row>
   </ion-grid>
