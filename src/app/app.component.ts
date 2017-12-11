@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'app.html',
@@ -14,8 +15,11 @@ export class MyApp {
   listPage: any = ListContactsPage;
   pages: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar,
-              public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
+  constructor(public platform: Platform,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              private screenOrientation: ScreenOrientation,
+              translate: TranslateService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,6 +31,9 @@ export class MyApp {
       .catch((error) => {
         console.log('Not a mobile device');
       });
+
+    translate.setDefaultLang('fr');
+    translate.use('fr');
 
   }
 
