@@ -48,7 +48,7 @@ export class DetailsContactPage {
               private emailComposer: EmailComposer,
               ) {
 
-
+    // Get contact sent by list
     this.contact = navParams.get('contact');
     console.log('Contact affected : ', this.contact);
 
@@ -112,6 +112,13 @@ export class DetailsContactPage {
       ],
     });
 
+    // TO TEST - Favorite status is not loaded in local data yet
+    if (this.contact.isFavorite) {
+      this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+    } else {
+      this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+    }
+
     actionSheet.present().then();
   }
 
@@ -123,6 +130,7 @@ export class DetailsContactPage {
   favoriteButtonClicked() {
     this.contact.isFavorite = !this.contact.isFavorite;
     if (this.contact.isFavorite) {
+      // TODO - Store in local data
       this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
     } else {
       this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
