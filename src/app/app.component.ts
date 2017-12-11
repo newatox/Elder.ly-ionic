@@ -21,7 +21,6 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
     private screenOrientation: ScreenOrientation,
     public menuCtrl: MenuController,
     public alertCtrl: AlertController,
