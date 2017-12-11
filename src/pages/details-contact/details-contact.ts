@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, IonicPage,
-  NavController, Platform } from 'ionic-angular';
+import {
+  ActionSheetController, IonicPage,
+  NavController, NavParams, Platform } from 'ionic-angular';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,20 +28,15 @@ export class DetailsContactPage {
   private cancelLabel = 'CANCEL_LABEL';
 
   constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               public alertCtrl: ActionSheetController,
               public platform: Platform,
               translate: TranslateService) {
-    // const gravURL = 'https://adriendeneu.files.wordpress.com/2008/10/panorama-vertical.jpg?w=267&h=1024';
-    const gravURL = 'https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';
-    this.contact = new Contact(
-      '0600000042',
-      'Jean-Patrick',
-      'Dupont',
-      'aaaa@aaa.com',
-      'SENIOR',
-      '',
-      '' + gravURL,
-    );
+
+    this.contact = navParams.get('contact');
+    console.log('Contact affected : ', this.contact);
+    // console.log('Contact has property Phone : ', this.contact.phone);
+
     /**
      * We modify the labels in the code, with translate.get()
      */

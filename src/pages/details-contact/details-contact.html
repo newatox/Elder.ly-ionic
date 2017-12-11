@@ -23,15 +23,15 @@
     <ion-row>
       <ion-col class="contact-centered">
         <div class="contact-grav">
-          <img class="contact-gravatar" src={{contact.gravatar}} />
-          <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
+          <img class="contact-gravatar" src={{contact?.gravatar}} onError="this.src='https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';" />
+          <img *ngIf="contact?.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
         </div>
       </ion-col>
     </ion-row>
     <ion-row margin-bottom="500px">
       <ion-col class="contact-centered">
         <ion-label id="contact-name" color="black">
-          {{contact.firstName + ' ' + contact.lastName}}
+          {{contact?.firstName + ' ' + contact?.lastName}}
         </ion-label>
       </ion-col>
     </ion-row>
@@ -55,7 +55,7 @@
     </ion-row>
     <ion-row>
       <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)" class="contact-links">
-          {{contact.email}}
+          {{contact?.email}}
       </ion-segment-button>
     </ion-row>
     <ion-row>
@@ -65,7 +65,7 @@
     </ion-row>
     <ion-row>
       <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
-        <div class="contact-links">{{contact.phone | phone}}</div>
+        <div class="contact-links">{{contact?.phone | phone}}</div>
       </ion-segment-button>
     </ion-row>
   </ion-grid>
