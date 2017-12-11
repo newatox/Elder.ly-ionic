@@ -17,16 +17,14 @@ export class ContactCellComponent {
   @Input()
   contact: Contact;
 
-  fullName: string;
-
   constructor(public navCtrl: NavController) {
   }
 
   navigateToDetails() {
-    this.navCtrl.push(DetailsContactPage).then();
+    this.navCtrl.push(DetailsContactPage, { contact: this.contact }).then();
   }
 
   callContact() {
-    this.fullName = 'Appel du contact';
+    // TODO
   }
 }
