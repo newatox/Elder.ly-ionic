@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, Platform, ViewController} from 'ionic-angular';
+import { IonicPage, NavController, Platform, ViewController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
-import {SplashScreen} from "@ionic-native/splash-screen";
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 /**
  * Generated class for the LoginPage page.
