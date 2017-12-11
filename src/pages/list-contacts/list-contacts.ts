@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { ModalController, NavController, Tab, Tabs } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
@@ -18,6 +18,11 @@ export class ListContactsPage {
   frequents: Contact[] = [];
   root = DetailsContactPage;
 
+  @ViewChild('tabbar') tabRef: Tabs;
+  @ViewChild('fav') tabFav: Tab;
+  @ViewChild('all') tabAll: Tab;
+  @ViewChild('frq') tabFrq: Tab;
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
               public contactProvider: ContactsProvider) {
   }
@@ -33,7 +38,9 @@ export class ListContactsPage {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
-        this.displayAllContacts();
+        if (this.tabRef.getSelected() === this.tabAll) this.displayAllContacts();
+        else if (this.tabRef.getSelected() === this.tabFav) this.displayFavorites();
+        else if (this.tabRef.getSelected() === this.tabFrq) this.displayFrequent();
       })
       .catch((error) => {
         console.log(error);
