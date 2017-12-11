@@ -78,6 +78,7 @@
         <splash height="1536" src="resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" />
         <splash height="2048" src="resources/ios/splash/Default-Landscape@~ipadpro.png" width="2732" />
         <splash height="768" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
+        <preference name="AutoHideSplashScreen" value="true" />
     </platform>
     <allow-navigation href="http://10.1.1.155:8100" />
     <engine name="android" spec="^6.3.0" />

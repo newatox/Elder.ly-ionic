@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, Events, MenuController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
 import { AuthProvider } from '../providers/auth/auth';

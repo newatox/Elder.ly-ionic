@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalController, NavController, Tab, Tabs } from 'ionic-angular';
+import { ModalController, NavController, Platform, Tab, Tabs } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { ContactsProvider } from '../../providers/contacts/contacts';
 import { DetailsContactPage } from '../details-contact/details-contact';
 import { TranslateService } from '@ngx-translate/core';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
   selector: 'page-list',
@@ -31,7 +32,8 @@ export class ListContactsPage {
   @ViewChild('frq') tabFrq: Tab;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-              public contactProvider: ContactsProvider, translate: TranslateService) {
+              public contactProvider: ContactsProvider, translate: TranslateService,
+              public splashScreen: SplashScreen, public platform: Platform) {
     /**
      * Search Bar placeholder and tab names cannot be translated in HTML with the 'translate' pipe.
      * Therefore I translate them here.
@@ -58,6 +60,10 @@ export class ListContactsPage {
     if (!this.isLogged) {
       const loginModal = this.modalCtrl.create(LoginPage);
       loginModal.present().then(() => { console.log('login opened'); });
+    } else {
+      if (this.platform.is('ios') || this.platform.is('android')) {
+        this.splashScreen.hide();
+      }
     }
   }
 
