@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Platform, ViewController } from 'ionic-angular';
+import {
+  AlertController,
+  Platform,
+  Events,
+  IonicPage,
+  NavController,
+  ViewController,
+} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -22,9 +29,15 @@ export class LoginPage {
   loginForm: FormGroup;
   formSubmitted = false;
 
-  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
-              private formBuilder: FormBuilder, private auth: AuthProvider,
-              public splashScreen: SplashScreen, public platform: Platform) {
+  constructor(public viewCtrl: ViewController,
+              public navCtrl: NavController,
+              public alertCtrl: AlertController,
+              private formBuilder: FormBuilder,
+              public events: Events,
+              public splashScreen: SplashScreen,
+              public platform: Platform,
+              private auth: AuthProvider,
+  ) {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
@@ -51,14 +64,22 @@ export class LoginPage {
           console.log('RESULT', token);
 
           if (this.loginForm.value.remember) {
-
+            // TODO: remember login
           }
+
+          this.events.publish('auth:login'); // Send the 'login' event to MyApp
 
           this.viewCtrl.dismiss().then();
         })
         .catch((httpErrorResponse) => {
           console.log('ERROR', httpErrorResponse.error.message);
-          alert(httpErrorResponse.error.message);
+          // TODO: i18n
+          const alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: httpErrorResponse.error.message,
+            buttons: ['OK'],
+          });
+          alert.present();
         });
     }
   }

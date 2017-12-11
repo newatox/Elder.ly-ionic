@@ -26,3 +26,16 @@
     color: color($colors, grey-blue);
   }
 }
+
+.user-gravatar {
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+}
+
+ion-toolbar {
+  .toolbar-background {
+    background-color: white;
+  }
+}
