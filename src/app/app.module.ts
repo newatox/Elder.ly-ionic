@@ -18,7 +18,7 @@ import { ApiProvider } from '../providers/api/api';
 import { ContactsProvider } from '../providers/contacts/contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { ErrorProvider } from '../providers/error/error';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { PhonePipe } from '../pipes/phone/phone';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
