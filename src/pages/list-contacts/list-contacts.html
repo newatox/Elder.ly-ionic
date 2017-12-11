@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Contacts</ion-title>
+    <ion-title>{{'CONTACTS_PAGE_NAME' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openAddEdit()">
         <ion-icon name="add"></ion-icon>
@@ -11,12 +11,14 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
-    <ion-searchbar placeholder="Search..."></ion-searchbar>
+    <ion-searchbar placeholder={{searchPlaceholder}}></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2 *ngIf="displayedList.length==0">TODO: design avec image de l'ajout de favoris dans détails (ou autre)</h2>
+  <h2 *ngIf="favorites.length==0 && tabRef.getSelected()==tabFav">TODO: design avec image de l'ajout de favoris dans détails (ou autre)</h2>
+  <h2 *ngIf="contacts.length==0 && tabRef.getSelected()==tabAll">TODO: liste de contact vide: flèche indiquant comment ajouter</h2>
+  <h2 *ngIf="frequents.length==0 && tabRef.getSelected()==tabFrq">TODO: pas de contacts fréquents: informer</h2>
   <ion-list class="mylist">
     <ion-item *ngFor="let contact of displayedList">
       <contact-cell [contact]="contact"></contact-cell>
@@ -26,10 +28,10 @@
 
 <ion-footer>
   <ion-toolbar>
-  <ion-tabs tabs-only selectedIndex="1" color="purple-dark">
-    <ion-tab (ionSelect)="displayFavorites()" tabTitle="Favorites" tabIcon="star" [root]="root"></ion-tab>
-    <ion-tab (ionSelect)="displayAllContacts()" tabTitle="Contacts" tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
-    <ion-tab (ionSelect)="displayFrequent()" tabTitle="History" tabIcon="time" [root]="root"></ion-tab>
+  <ion-tabs #tabbar tabs-only selectedIndex="1" color="purple-dark">
+    <ion-tab #fav (ionSelect)="displayFavorites()" tabTitle={{favoriteContactsTabName}} tabIcon="star" [root]="root"></ion-tab>
+    <ion-tab #all (ionSelect)="displayAllContacts()" tabTitle={{allContactsTabName}} tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
+    <ion-tab #frq (ionSelect)="displayFrequent()" tabTitle={{frequentContactsTabName}} tabIcon="time" [root]="root"></ion-tab>
   </ion-tabs>
   </ion-toolbar>
 </ion-footer>
