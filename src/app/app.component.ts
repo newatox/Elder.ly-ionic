@@ -17,7 +17,6 @@ export class MyApp {
 
   constructor(public platform: Platform,
               public statusBar: StatusBar,
-              public splashScreen: SplashScreen,
               private screenOrientation: ScreenOrientation,
               translate: TranslateService) {
     this.initializeApp();
@@ -42,7 +41,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+
     });
     /*this.auth.login();*/
   }
