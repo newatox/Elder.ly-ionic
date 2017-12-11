@@ -78,6 +78,18 @@ export class ListContactsPage {
       });
   }
 
+  callContact(phone: String) {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log('event', event);
+    // TODO: make a call
+    console.log('Appeler :', phone);
+  }
+
+  navigateToDetails(contact) {
+    this.navCtrl.push(DetailsContactPage, { contact }).then();
+  }
+
   openAddEdit() {
     this.navCtrl.push(AddEditContactPage).then();
   }

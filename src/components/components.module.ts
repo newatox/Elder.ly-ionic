@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { ContactCellComponent } from './contact-cell/contact-cell';
 @NgModule({
-  declarations: [ContactCellComponent],
+  declarations: [],
   imports: [],
-  exports: [ContactCellComponent],
+  exports: [],
 })
 export class ComponentsModule {}
