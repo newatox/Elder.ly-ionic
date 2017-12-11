@@ -44,8 +44,6 @@ export class AddEditContactPage {
         if (this.contactEdit = navParams.get('contact')) {
           this.isEditMode = true;
           this.addEditForm.get('profile').setValue(this.contactEdit.profile);
-        } else {
-          this.addEditForm.get('profile').setValue('FAMILLE');
         }
       })
       .catch((error) => {
