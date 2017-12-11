@@ -36,7 +36,7 @@
       </ion-col>
     </ion-row>
     <ion-row padding-bottom="30px">
-      <ion-segment color="mypurple">
+      <ion-segment [(ngModel)]="segment" color="mypurple">
         <ion-segment-button value="Texting" (ionSelect)="segmentButtonSelected($event)">
           <ion-icon name="text"></ion-icon>
         </ion-segment-button>

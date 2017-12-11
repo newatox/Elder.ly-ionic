@@ -28,8 +28,11 @@ export class ListContactsPage {
   @ViewChild('all') tabAll: Tab;
   @ViewChild('frq') tabFrq: Tab;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-              public contactProvider: ContactsProvider, translate: TranslateService) {
+  constructor(public navCtrl: NavController,
+              public modalCtrl: ModalController,
+              public contactProvider: ContactsProvider,
+              translate: TranslateService,
+              ) {
     /**
      * Search Bar placeholder and tab names cannot be translated in HTML with the 'translate' pipe.
      * Therefore I translate them here.

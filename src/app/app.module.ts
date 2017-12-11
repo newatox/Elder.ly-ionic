@@ -23,6 +23,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { PhonePipe } from '../pipes/phone/phone';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CallNumber } from '@ionic-native/call-number';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     ContactsProvider,
     AuthProvider,
     ErrorProvider,
+    CallNumber,
   ],
 })
 export class AppModule {}

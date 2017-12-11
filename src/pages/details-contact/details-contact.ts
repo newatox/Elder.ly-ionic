@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import {
   ActionSheetController, IonicPage,
-  NavController, NavParams, Platform } from 'ionic-angular';
+  NavController, NavParams, Platform,
+} from 'ionic-angular';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { TranslateService } from '@ngx-translate/core';
+import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -27,15 +29,18 @@ export class DetailsContactPage {
   private deleteLabel = 'DELETE_LABEL';
   private cancelLabel = 'CANCEL_LABEL';
 
+  segment: String;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: ActionSheetController,
               public platform: Platform,
-              translate: TranslateService) {
+              public translate: TranslateService,
+              private callNumber: CallNumber,
+              ) {
 
     this.contact = navParams.get('contact');
     console.log('Contact affected : ', this.contact);
-    // console.log('Contact has property Phone : ', this.contact.phone);
 
     /**
      * We modify the labels in the code, with translate.get()
@@ -56,6 +61,9 @@ export class DetailsContactPage {
       (translation) => {
         this.cancelLabel = translation;
       });
+
+    // Set segment
+    this.segment = '';
   }
 
   present() {
@@ -102,6 +110,17 @@ export class DetailsContactPage {
 
   segmentButtonSelected(event) {
     const interaction = event.value;
-    console.log(interaction);
+    console.log('Interaction : ', interaction);
+    switch (interaction) {
+      case 'Calling':
+        this.callNumber.callNumber(this.contact.phone, true)
+          .then(() => console.log('Launched dialer!'))
+          .catch(() => console.log('Error launching dialer'));
+        break;
+      default:
+        console.log('Segment : ', this.segment);
+        break;
+    }
+
   }
 }

@@ -13,7 +13,7 @@ export class PhonePipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(value: string, ...args) {
-    if (value === null) {
+    if (value == null) {
       return '';
     }
     return this.chunk(value,2).join(' ');
