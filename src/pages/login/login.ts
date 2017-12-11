@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import {IonicPage, NavController, Platform, ViewController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
+import {SplashScreen} from "@ionic-native/splash-screen";
 
 /**
  * Generated class for the LoginPage page.
@@ -22,7 +23,8 @@ export class LoginPage {
   formSubmitted = false;
 
   constructor(public viewCtrl: ViewController, public navCtrl: NavController,
-              private formBuilder: FormBuilder, private auth: AuthProvider) {
+              private formBuilder: FormBuilder, private auth: AuthProvider,
+              public splashScreen: SplashScreen, public platform: Platform) {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
@@ -31,8 +33,10 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    // this.viewCtrl.dismiss().then(); // TODO - Remove (useful for test only)
     console.log('ionViewDidLoad LoginPage');
+    if (this.platform.is('ios') || this.platform.is('android')) {
+      this.splashScreen.hide();
+    }
   }
 
   doLogin() {

@@ -15,7 +15,7 @@ export class MyApp {
   pages: any;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
-              public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
+              private screenOrientation: ScreenOrientation) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,7 +35,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+
     });
     /*this.auth.login();*/
   }
