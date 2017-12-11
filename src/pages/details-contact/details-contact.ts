@@ -7,6 +7,8 @@ import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { TranslateService } from '@ngx-translate/core';
 import { CallNumber } from '@ionic-native/call-number';
+import { SMS } from '@ionic-native/sms';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -28,8 +30,8 @@ export class DetailsContactPage {
   private modifyLabel = 'MODIFY_LABEL';
   private deleteLabel = 'DELETE_LABEL';
   private cancelLabel = 'CANCEL_LABEL';
-
-  segment: String;
+  private helloString = 'HELLO';
+  private greetingString = 'GREETING_MESSAGE';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -37,7 +39,10 @@ export class DetailsContactPage {
               public platform: Platform,
               public translate: TranslateService,
               private callNumber: CallNumber,
+              private sms: SMS,
+              private emailComposer: EmailComposer,
               ) {
+
 
     this.contact = navParams.get('contact');
     console.log('Contact affected : ', this.contact);
@@ -61,9 +66,14 @@ export class DetailsContactPage {
       (translation) => {
         this.cancelLabel = translation;
       });
-
-    // Set segment
-    this.segment = '';
+    translate.get('HELLO').subscribe(
+      (translation) => {
+        this.helloString = translation;
+      });
+    translate.get('GREETING_MESSAGE').subscribe(
+      (translation) => {
+        this.greetingString = translation;
+      });
   }
 
   present() {
@@ -111,16 +121,29 @@ export class DetailsContactPage {
   segmentButtonSelected(event) {
     const interaction = event.value;
     console.log('Interaction : ', interaction);
+    const message = this.helloString + this.contact.firstName + this.greetingString;
+
     switch (interaction) {
       case 'Calling':
         this.callNumber.callNumber(this.contact.phone, true)
           .then(() => console.log('Launched dialer!'))
           .catch(() => console.log('Error launching dialer'));
         break;
+      case 'Texting':
+        this.sms.send(this.contact.phone, message);
+        break;
+      case 'Emailing':
+        const body = message;
+        const email = {
+          body,
+          to: this.contact.email,
+          subject: 'Nouvelles',
+          isHtml: true,
+        };
+        this.emailComposer.open(email);
+        break;
       default:
-        console.log('Segment : ', this.segment);
         break;
     }
-
   }
 }

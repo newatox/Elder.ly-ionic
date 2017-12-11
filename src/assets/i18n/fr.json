@@ -26,5 +26,7 @@
   "OPTIONS_LABEL": "Options",
   "MODIFY_LABEL": "Modifier",
   "DELETE_LABEL": "Supprimer",
-  "CANCEL_LABEL": "Annuler"
+  "CANCEL_LABEL": "Annuler",
+  "HELLO": "Bonjour ",
+  "GREETING_MESSAGE": ", comment vas-tu ?\n"
 }
