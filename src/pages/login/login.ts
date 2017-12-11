@@ -90,21 +90,50 @@ export class LoginPage {
 
   forgottenPasswordAlert(error = false) {
     const phoneRegex = /^[0-9]{10}$/;
-    const phone = prompt('Please enter your phone number',
-                         (error ? 'Invalid number' : (phoneRegex.test(this.loginForm.value.phone)
-                          ? this.loginForm.value.phone : '')));
+    var phone = '';
+    const prompt = this.alertCtrl.create({
+      title: 'Forgotten password',
+      message: 'Please enter your phone number',
+      inputs: [
+        {
+          name: 'phone',
+          placeholder: (error ? 'Invalid number' : (phoneRegex.test(this.loginForm.value.phone)
+                                 ? this.loginForm.value.phone : '')),
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            return;
+          },
+        },
+        {
+          text: 'Send',
+          handler: (data) => {
+            phone = data.phone;
+            console.log('Saved clicked');
+            console.log(phone);
 
-    if (phone === null) {
-      return;
-    }
-
-    if (phoneRegex.test(phone)) {
-      this.auth.forgot(phone).then(() => {
-        alert('Your password has been sent');
-      });
-    } else {
-      this.forgottenPasswordAlert(true);
-    }
+            if (phoneRegex.test(phone)) {
+              this.auth.forgot(phone).then(() => {
+                const successAlert = this.alertCtrl.create({
+                  title: 'Forgotten password',
+                  message: 'Your password has been sent',
+                  buttons: [
+                    { text: 'Ok' },
+                  ],
+                });
+                successAlert.present().then();
+              });
+            } else {
+              this.forgottenPasswordAlert(true);
+            }
+          },
+        },
+      ],
+    });
+    prompt.present().then();
   }
-
 }
