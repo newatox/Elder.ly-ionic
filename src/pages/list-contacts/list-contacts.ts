@@ -15,6 +15,7 @@ export class ListContactsPage {
   displayedList: Contact[] = [];
   contacts: Contact[] = [];
   favorites: Contact[] = [];
+  frequents: Contact[] = [];
   root = DetailsContactPage;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
@@ -32,7 +33,7 @@ export class ListContactsPage {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
-        this.displayedList = this.contacts;
+        this.displayAllContacts();
       })
       .catch((error) => {
         console.log(error);
@@ -45,14 +46,19 @@ export class ListContactsPage {
 
   displayFavorites() {
     this.favorites = [];
-    this.contacts.map((contact) => { if(contact.isFavorite) this.favorites.push(contact); });
-    console.log(this.favorites.length);
+    this.contacts.map((contact) => { if (contact.isFavorite) this.favorites.push(contact); });
     this.displayedList = this.favorites;
   }
   displayFrequent() {
-    // TODO
+    this.frequents = [];
+    this.contacts.sort((a, b) => b.frequency - a.frequency);
+    this.contacts.map((contact) => {
+      if (contact.frequency > 0 && this.frequents.length < 5) this.frequents.push(contact);
+    });
+    this.displayedList = this.frequents;
   }
   displayAllContacts() {
+    this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
   }
 
