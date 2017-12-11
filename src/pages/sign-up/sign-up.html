@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'SignUp' }}</ion-title>
+    <ion-title>{{'SIGN_UP_PAGE_NAME' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,42 +18,42 @@
     <ion-list no-lines>
 
       <ion-item>
-        <ion-label stacked>{{ 'Phone' }}</ion-label>
-        <ion-input type="tel" formControlName="phone" placeholder="{{ 'Phone' }}"></ion-input>
+        <ion-label stacked>{{'PHONE_NUMBER' | translate}}</ion-label>
+        <ion-input type="tel" formControlName="phone" placeholder="{{'PHONE_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && signupForm.get('phone').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && signupForm.get('phone').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{ 'Firstname' }}</ion-label>
-        <ion-input type="text" formControlName="firstname" placeholder="{{ 'Firstname' }}"></ion-input>
+        <ion-label stacked>{{'FIRST_NAME' | translate}}</ion-label>
+        <ion-input type="text" formControlName="firstname" placeholder="{{'FIRST_NAME_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && signupForm.get('firstname').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && signupForm.get('firstname').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{ 'Lastname' }}</ion-label>
-        <ion-input type="text" formControlName="lastname" placeholder="{{ 'Lastname' }}"></ion-input>
+        <ion-label stacked>{{'FAMILY_NAME' | translate}}</ion-label>
+        <ion-input type="text" formControlName="lastname" placeholder="{{'FAMILY_NAME_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && signupForm.get('lastname').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && signupForm.get('lastname').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{ 'Email' }}</ion-label>
-        <ion-input type="email" formControlName="email" placeholder="{{ 'Email' }}"></ion-input>
+        <ion-label stacked>{{'EMAIL' | translate}}</ion-label>
+        <ion-input type="email" formControlName="email" placeholder="{{'EMAIL_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && signupForm.get('email').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && signupForm.get('email').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{ 'Password' }}</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="{{ 'Password' }}"></ion-input>
+        <ion-label stacked>{{'PASSWORD' | translate}}</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && signupForm.get('password').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && signupForm.get('password').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{ 'Profile' }}</ion-label>
+        <ion-label stacked>{{'PROFILE' | translate}}</ion-label>
         <ion-select formControlName="profile" interface="popover">
           <ion-option *ngFor="let profile of profiles" value="{{ profile }}">{{ profile }}</ion-option>
         </ion-select>
@@ -62,13 +62,13 @@
       </ion-item>
 
       <ion-item>
-        <button ion-button large round color="primary" block type="submit" block>{{ 'Confirm' }}</button>
+        <button ion-button large round color="primary" block type="submit" block>{{'CONFIRM' | translate}}</button>
       </ion-item>
 
     </ion-list>
   </form>
 
   <div padding>
-    <button ion-button outline round block (click)="openLoginPage()">{{ 'Login' }}</button>
+    <button ion-button outline round block (click)="openLoginPage()">{{'LOGIN_PAGE_NAME' | translate}}</button>
   </div>
 </ion-content>

@@ -49,9 +49,9 @@
       </ion-segment>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <p>{{'EMAIL' | translate}}</p>
-      </ion-col>
+      <ion-label>
+        <b>{{'EMAIL' | translate}}</b>
+      </ion-label>
     </ion-row>
     <ion-row>
       <ion-segment-button value="Emailing" (ionSelect)="segmentButtonSelected($event)" class="contact-links">
@@ -59,9 +59,9 @@
       </ion-segment-button>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <p>{{'PHONE_NUMBER' | translate}}</p>
-      </ion-col>
+      <ion-label>
+        <b>{{'PHONE_NUMBER' | translate}}</b>
+      </ion-label>
     </ion-row>
     <ion-row>
       <ion-segment-button value="Calling" (ionSelect)="segmentButtonSelected($event)">
@@ -71,7 +71,7 @@
   </ion-grid>
   <div class="contact-centered">
     <button ion-button outline round id="favoriteButton" (click)="favoriteButtonClicked()" color="myorange">
-      {{favoriteButtonLabel}}
+      {{favoriteButtonLabel | translate}}
     </button>
   </div>
 </ion-content>

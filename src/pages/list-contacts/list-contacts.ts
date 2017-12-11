@@ -5,6 +5,7 @@ import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { ContactsProvider } from '../../providers/contacts/contacts';
 import { DetailsContactPage } from '../details-contact/details-contact';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-list',
@@ -16,9 +17,33 @@ export class ListContactsPage {
   contacts: Contact[] = [];
   favorites: Contact[] = [];
   root = DetailsContactPage;
+  searchPlaceholder = 'SEARCH_PLACEHOLDER';
+  favoriteContactsTabName = 'FAVORITE_TAB';
+  allContactsTabName = 'ALL_TAB';
+  frequentContactsTabName = 'FREQUENT_TAB';
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-              public contactProvider: ContactsProvider) {
+              public contactProvider: ContactsProvider, translate: TranslateService) {
+    /**
+     * Search Bar placeholder and tab names cannot be translated in HTML with the 'translate' pipe.
+     * Therefore I translate them here.
+     */
+    translate.get(this.searchPlaceholder).subscribe(
+      (translation) => {
+        this.searchPlaceholder = translation;
+      });
+    translate.get(this.favoriteContactsTabName).subscribe(
+      (translation) => {
+        this.favoriteContactsTabName = translation;
+      });
+    translate.get(this.allContactsTabName).subscribe(
+      (translation) => {
+        this.allContactsTabName = translation;
+      });
+    translate.get(this.frequentContactsTabName).subscribe(
+      (translation) => {
+        this.frequentContactsTabName = translation;
+      });
   }
 
   ionViewDidLoad() {
