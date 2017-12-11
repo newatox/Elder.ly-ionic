@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'Login' }}</ion-title>
+    <ion-title>{{ 'LOGIN_PAGE_NAME' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,39 +12,39 @@
     <ion-list no-lines>
 
       <ion-item>
-        <ion-label stacked>{{ 'Phone' }}</ion-label>
-        <ion-input type="tel" formControlName="phone" placeholder="{{ 'Phone' }}"></ion-input>
+        <ion-label stacked>{{'PHONE_NUMBER' | translate}}</ion-label>
+        <ion-input type="tel" formControlName="phone" placeholder="{{'PHONE_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && loginForm.get('phone').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && loginForm.get('phone').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{ 'Password' }}</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="{{ 'Password' }}"></ion-input>
+        <ion-label stacked>{{'PASSWORD' | translate}}</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && loginForm.get('password').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && loginForm.get('password').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
         <ion-toggle item-left ngControl="remember" name="remember"></ion-toggle>
-        <ion-label>{{ 'Remember me' }}</ion-label>
+        <ion-label>{{'REMEMBER_ME' | translate}}</ion-label>
       </ion-item>
 
       <ion-item></ion-item>
 
       <ion-item>
-        <button ion-button large round color="primary" block type="submit" block>{{ 'Confirm' }}</button>
+        <button ion-button large round color="primary" block type="submit" block>{{'CONFIRM' | translate }}</button>
       </ion-item>
 
     </ion-list>
   </form>
 
   <div padding>
-    <button ion-button outline round block (click)="openSignUpPage()">{{ 'SignUp' }}</button>
+    <button ion-button outline round block (click)="openSignUpPage()">{{'SIGN_UP_PAGE_NAME' | translate }}</button>
   </div>
 
   <p text-center>
-    <a (click)="forgottenPasswordAlert()">{{ 'Forgotten password' }}</a>
+    <a (click)="forgottenPasswordAlert()">{{'FORGOTTEN_PASSWORD_PAGE_NAME' | translate}}</a>
   </p>
 
 </ion-content>
