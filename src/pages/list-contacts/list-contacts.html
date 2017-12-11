@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar *ngIf="!(tabRef.getSelected()==tabFrq)">
-    <ion-searchbar [(ngModel)]="searchBarInput" (ionInput)="doSearch($event)" placeholder="Search..."></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchBarInput" (ionInput)="doSearch($event)" placeholder="{{searchPlaceholder}}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

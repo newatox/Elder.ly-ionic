@@ -18,7 +18,7 @@ export class ListContactsPage {
   favorites: Contact[] = [];
   frequents: Contact[] = [];
   root = DetailsContactPage;
-  searchBarInput: string;
+  searchBarInput: string = '';
 
   searchPlaceholder = 'SEARCH_PLACEHOLDER';
   favoriteContactsTabName = 'FAVORITE_TAB';
@@ -117,11 +117,12 @@ export class ListContactsPage {
   }
   searchLocalContacts(content: string, list: Contact[]) {
     const matchingContacts = [];
-    const regExp = RegExp(content, 'gi');
+    const normalizedContent = content.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const regExp = RegExp(normalizedContent, 'gi');
     list.forEach((contact) => {
-      if (contact.firstName.search(regExp) !== -1
-        || contact.lastName.search(regExp) !== -1
-        || contact.email.search(regExp) !== -1)
+      if (contact.firstName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').search(regExp) !== -1
+        || contact.lastName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').search(regExp) !== -1
+        || contact.email.normalize('NFD').replace(/[\u0300-\u036f]/g, '').search(regExp) !== -1)
         matchingContacts.push(contact);
     });
     this.displayedList = matchingContacts;
