@@ -78,8 +78,9 @@ export class LoginPage {
     }
 
     if (phoneRegex.test(phone)) {
-      // TODO WS call
-      alert('Your password has been sent');
+      this.auth.forgot(phone).then(() => {
+        alert('Your password has been sent');
+      });
     } else {
       this.forgottenPasswordAlert(true);
     }
