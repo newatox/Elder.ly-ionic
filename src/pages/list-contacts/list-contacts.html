@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Contacts</ion-title>
+    <ion-title>{{'CONTACTS_PAGE_NAME' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openAddEdit()">
         <ion-icon name="add"></ion-icon>
@@ -29,9 +29,9 @@
 <ion-footer>
   <ion-toolbar>
   <ion-tabs #tabbar tabs-only selectedIndex="1" color="purple-dark">
-    <ion-tab #fav (ionSelect)="displayFavorites()" tabTitle="Favorites" tabIcon="star" [root]="root"></ion-tab>
-    <ion-tab #all (ionSelect)="displayAllContacts()" tabTitle="Contacts" tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
-    <ion-tab #frq (ionSelect)="displayFrequent()" tabTitle="History" tabIcon="time" [root]="root"></ion-tab>
+    <ion-tab #fav (ionSelect)="displayFavorites()" tabTitle={{favoriteContactsTabName}} tabIcon="star" [root]="root"></ion-tab>
+    <ion-tab #all (ionSelect)="displayAllContacts()" tabTitle={{allContactsTabName}} tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
+    <ion-tab #frq (ionSelect)="displayFrequent()" tabTitle={{frequentContactsTabName}} tabIcon="time" [root]="root"></ion-tab>
   </ion-tabs>
   </ion-toolbar>
 </ion-footer>

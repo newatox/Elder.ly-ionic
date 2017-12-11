@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'app.html',
@@ -14,8 +15,10 @@ export class MyApp {
   listPage: any = ListContactsPage;
   pages: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar,
-              public splashScreen: SplashScreen, private screenOrientation: ScreenOrientation) {
+  constructor(public platform: Platform,
+              public statusBar: StatusBar,
+              private screenOrientation: ScreenOrientation,
+              translate: TranslateService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -28,6 +31,9 @@ export class MyApp {
         console.log('Not a mobile device');
       });
 
+    translate.setDefaultLang('fr');
+    translate.use('fr');
+
   }
 
   initializeApp() {
@@ -35,7 +41,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+
     });
     /*this.auth.login();*/
   }
