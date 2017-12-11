@@ -69,5 +69,18 @@ export class ListContactsPage {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
   }
+  searchLocalContacts(content: string) {
+    const matchingContacts = [];
+    const regExp = RegExp(content, 'gi');
+    this.contacts.forEach((contact) => {
+      console.log(contact.firstName.search(regExp));
+      if (contact.firstName.search(regExp) !== -1
+        || contact.lastName.search(regExp) !== -1
+        || contact.email.search(regExp) !== -1)
+        matchingContacts.push(contact);
+    });
+    this.displayedList = matchingContacts;
+    console.log(matchingContacts);
+  }
 
 }
