@@ -43,7 +43,11 @@ export class AddEditContactPage {
         this.addEditForm.get('profile').setValue(profiles[0]);
         if (this.contactEdit = navParams.get('contact')) {
           this.isEditMode = true;
-          this.addEditForm.get('profile').setValue(this.contactEdit.profile);
+          this.addEditForm.setValue({phone: this.contactEdit.phone,
+            firstName: this.contactEdit.firstName,
+            lastName: this.contactEdit.lastName,
+            email: this.contactEdit.email,
+            profile: this.contactEdit.profile });
         }
       })
       .catch((error) => {
@@ -58,9 +62,14 @@ export class AddEditContactPage {
   }
   editContact() {
     if (this.addEditForm.valid) {
+      this.contactEdit.phone = this.addEditForm.value.phone;
+      this.contactEdit.firstName = this.addEditForm.value.firstName;
+      this.contactEdit.lastName = this.addEditForm.value.lastName;
+      this.contactEdit.email = this.addEditForm.value.email;
+      this.contactEdit.profile = this.addEditForm.value.profile;
       this.contactsProvider.update(this.contactEdit.wsId, this.contactEdit)
-        .then((token) => {
-          console.log('RESULT', token);
+        .then((result) => {
+          console.log('RESULT', result);
           this.navCtrl.pop().then();
         })
         .catch((httpErrorResponse) => {
