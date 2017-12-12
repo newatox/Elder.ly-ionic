@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalController, NavController, Platform, Tab, Tabs } from 'ionic-angular';
+import {Events, ModalController, NavController, Platform, Tab, Tabs} from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
@@ -30,9 +30,14 @@ export class ListContactsPage {
   @ViewChild('all') tabAll: Tab;
   @ViewChild('frq') tabFrq: Tab;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-              public contactProvider: ContactsProvider, translate: TranslateService,
-              public splashScreen: SplashScreen, public platform: Platform) {
+  constructor(public navCtrl: NavController,
+              public modalCtrl: ModalController,
+              public contactProvider: ContactsProvider,
+              public translate: TranslateService,
+              public splashScreen: SplashScreen,
+              public events: Events,
+              public platform: Platform,
+  ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
      * Therefore I translate them here.
@@ -49,6 +54,9 @@ export class ListContactsPage {
       (translation) => {
         this.frequentContactsTabName = translation;
       });
+
+    // Subscribe to the login event
+    this.events.subscribe('auth:login', () => { this.isLogged = true; this.fetchContacts(); });
   }
 
   ionViewDidLoad() {
@@ -63,6 +71,10 @@ export class ListContactsPage {
   }
 
   ionViewDidEnter() {
+    if (this.isLogged) { this.fetchContacts(); }
+  }
+
+  fetchContacts() {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
@@ -97,6 +109,7 @@ export class ListContactsPage {
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.favorites);
   }
+
   displayFrequent() {
     this.frequents = [];
     this.contacts.sort((a, b) => b.frequency - a.frequency);
@@ -105,18 +118,21 @@ export class ListContactsPage {
     });
     this.displayedList = this.frequents;
   }
+
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.contacts);
   }
+
   resetList() {
     const currentTab = this.tabRef.getSelected();
     if (currentTab === this.tabAll) this.displayAllContacts();
     else if (currentTab === this.tabFav) this.displayFavorites();
     else if (currentTab === this.tabFrq) this.displayFrequent();
   }
+
   doSearch(ev) {
     const content = ev.target.value;
     const currentTab = this.tabRef.getSelected();
@@ -128,6 +144,7 @@ export class ListContactsPage {
     if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
     else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
   }
+
   searchLocalContacts(content: string, list: Contact[]) {
     const matchingContacts = [];
     const normalizedContent = content.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
