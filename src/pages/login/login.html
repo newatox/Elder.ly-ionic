@@ -20,7 +20,7 @@
 
       <ion-item>
         <ion-label stacked>{{'PASSWORD' | translate}}</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-input type="number" style="-webkit-text-security:disc;" ng-pattern="/^[0-9]{4}$/" formControlName="password" placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}"></ion-input>
         <ion-icon *ngIf="formSubmitted && loginForm.get('password').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && loginForm.get('password').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
