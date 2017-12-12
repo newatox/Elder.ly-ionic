@@ -24,12 +24,12 @@ export default class Contact {
   }
 
   setGravatar() {
-    this.theGravatar = gravatar.url(this.email, { s: '200', d: 'retro' });
+    this.theGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
   }
 
   get gravatar() {
     if (this.theGravatar === '') {
-      this.theGravatar = gravatar.url(this.email, { s: '200', d: 'retro' });
+      this.theGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
     }
     return this.theGravatar;
   }

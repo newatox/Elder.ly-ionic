@@ -16,6 +16,6 @@ export default class User {
   }
 
   gravatarImage(): String {
-    return gravatar.url(this.email, { s: '200', d: 'retro' });
+    return gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
   }
 }
