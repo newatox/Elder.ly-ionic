@@ -28,9 +28,27 @@ export class ContactsProvider {
       .then((contacts) => {
         // Get contact from API succeed
         console.log('API OBJECTS CONTACTS', contacts);
+
+        // set local array of contact
+        this.contacts = (contacts as any[]).map((contact) => {
+          return new Contact(
+            contact.phone,
+            contact.firstName,
+            contact.lastName,
+            contact.email,
+            contact.profile,
+            contact._id,
+            contact.gravatar,
+            contact.isFamilinkuser,
+            contact.isEmergencyUser,
+            contact.isFavorite,
+            contact.frequency,
+          );
+        });
+
         // Set contacts locally
         console.log('SET LOCAL CONTACTS');
-        return this.storage.set('contacts', contacts);
+        return this.storage.set('contacts', [...this.contacts]);
       })
       .catch((error) => {
         // Get contact from API failed

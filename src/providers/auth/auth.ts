@@ -91,9 +91,12 @@ export class AuthProvider {
       .then((result) => { return result; });
   }
 
+  // Unused function
+  /*
   private getToken(): Promise<any> {
     return this.storage.get('token'); // Promise
   }
+  */
 
   private saveToken(token: String): Promise<any> {
     return this.storage.set('token', token);
