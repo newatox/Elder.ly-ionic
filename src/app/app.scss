@@ -34,12 +34,17 @@
   border-radius: 50%;
 }
 
+.menu-footer {
+  padding-bottom: 30px;
+}
+
+.logout-button {
+  width: 90%;
+  margin: 0 auto;
+}
+
 ion-toolbar {
   .toolbar-background {
     background-color: white;
-  }
-
-  .logout-button {
-    width: 90%;
   }
 }
