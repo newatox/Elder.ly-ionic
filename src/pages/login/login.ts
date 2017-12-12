@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * Generated class for the LoginPage page.
@@ -37,6 +38,7 @@ export class LoginPage {
               public splashScreen: SplashScreen,
               public platform: Platform,
               private auth: AuthProvider,
+              public translate: TranslateService,
   ) {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
@@ -91,21 +93,89 @@ export class LoginPage {
   }
 
   forgottenPasswordAlert(error = false) {
+    var forgottenPwPlaceholder = 'FORGOTTEN_PASSWORD_PAGE_NAME';
+    var forgottenPwMessagePlaceholder = 'FORGOTTEN_PW_MESSAGE';
+    var invalidNumberPlaceholder = 'INVALID_NUMBER';
+    var cancelLabelPlaceholder = 'CANCEL_LABEL';
+    var sendLabelPlaceholder = 'SEND_LABEL';
+    var forgottenPWSentPlaceholder = 'FORGOTTEN_PW_SENT';
+    var okLabelPlaceholder = 'OK_LABEL';
+
+    this.translate.get(forgottenPwPlaceholder).subscribe(
+      (translation) => {
+        forgottenPwPlaceholder = translation;
+      });
+    this.translate.get(forgottenPwMessagePlaceholder).subscribe(
+      (translation) => {
+        forgottenPwMessagePlaceholder = translation;
+      });
+    this.translate.get(invalidNumberPlaceholder).subscribe(
+      (translation) => {
+        invalidNumberPlaceholder = translation;
+      });
+    this.translate.get(cancelLabelPlaceholder).subscribe(
+      (translation) => {
+        cancelLabelPlaceholder = translation;
+      });
+    this.translate.get(sendLabelPlaceholder).subscribe(
+      (translation) => {
+        sendLabelPlaceholder = translation;
+      });
+    this.translate.get(forgottenPWSentPlaceholder).subscribe(
+      (translation) => {
+        forgottenPWSentPlaceholder = translation;
+      });
+    this.translate.get(okLabelPlaceholder).subscribe(
+      (translation) => {
+        okLabelPlaceholder = translation;
+      });
+
     const phoneRegex = /^[0-9]{10}$/;
-    const phone = prompt('Please enter your phone number',
-                         (error ? 'Invalid number' : (phoneRegex.test(this.loginForm.value.phone)
-                          ? this.loginForm.value.phone : '')));
+    var phone = '';
+    const prompt = this.alertCtrl.create({
+      title: forgottenPwPlaceholder,
+      message: forgottenPwMessagePlaceholder,
+      inputs: [
+        {
+          name: 'phone',
+          placeholder: (error ? invalidNumberPlaceholder :
+                                  (phoneRegex.test(this.loginForm.value.phone)
+                                  ? this.loginForm.value.phone : '')),
+        },
+      ],
+      buttons: [
+        {
+          text: cancelLabelPlaceholder,
+          handler: () => {
+            console.log('Cancel clicked');
+            return;
+          },
+        },
+        {
+          text: sendLabelPlaceholder,
+          handler: (data) => {
+            phone = data.phone;
+            console.log('Saved clicked');
+            console.log(phone);
 
-    if (phone === null) {
-      return;
-    }
-
-    if (phoneRegex.test(phone)) {
-      // TODO WS call
-      alert('Your password has been sent');
-    } else {
-      this.forgottenPasswordAlert(true);
-    }
+            if (phoneRegex.test(phone)) {
+              this.auth.forgot(phone).then(() => {
+                const successAlert = this.alertCtrl.create({
+                  title: forgottenPwPlaceholder,
+                  message: forgottenPWSentPlaceholder,
+                  buttons: [
+                    { text: okLabelPlaceholder },
+                  ],
+                });
+                successAlert.present().then();
+              });
+            } else {
+              this.forgottenPasswordAlert(true);
+            }
+          },
+        },
+      ],
+    });
+    prompt.present().then();
   }
-
 }
