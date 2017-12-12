@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {Events, ModalController, NavController, Platform, Tab, Tabs} from 'ionic-angular';
+import { Events, ModalController, NavController, Platform, Tab, Tabs } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
@@ -30,13 +30,14 @@ export class ListContactsPage {
   @ViewChild('all') tabAll: Tab;
   @ViewChild('frq') tabFrq: Tab;
 
-  constructor(public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              public contactProvider: ContactsProvider,
-              public translate: TranslateService,
-              public splashScreen: SplashScreen,
-              public events: Events,
-              public platform: Platform,
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    public contactProvider: ContactsProvider,
+    public translate: TranslateService,
+    public splashScreen: SplashScreen,
+    public events: Events,
+    public platform: Platform,
   ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
