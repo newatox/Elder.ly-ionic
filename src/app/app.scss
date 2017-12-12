@@ -20,10 +20,10 @@
     background: color($colors, mypurple);
   }
   .toolbar-title {
-    color: color($colors, grey-blue);
+    color: color($colors, white);
   }
   .bar-button {
-    color: color($colors, grey-blue);
+    color: color($colors, white);
   }
 }
 
@@ -37,5 +37,9 @@
 ion-toolbar {
   .toolbar-background {
     background-color: white;
+  }
+
+  .logout-button {
+    width: 90%;
   }
 }

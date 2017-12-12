@@ -1,3 +1,59 @@
-page-add-edit-contact {
+@import '../../theme/variables';
 
+page-add-edit-contact {
+  .toolbar-title {
+    text-align: center;
+  }
+
+  .item-ios, .item-md {
+    padding-bottom: 15px;
+  }
+
+  .label-ios[stacked], .label-md[stacked] {
+    font-size: 1.8rem;
+  }
+
+  .icon.ng-invalid {
+    color: $color-orange;
+  }
+
+  .icon.ng-valid {
+    color: $color-purple-light;
+  }
+
+  .toggle-ios.toggle-checked .toggle-icon {
+    background-color: $color-orange;
+  }
+
+  .toggle-md.toggle-checked .toggle-icon {
+    background-color: lighten($color-orange, 25%);
+
+    .toggle-inner {
+      background-color: $color-orange;
+    }
+  }
+
+  .button-ios-primary, .button-md-primary {
+    background-color: $color-purple-dark;
+    color: $color-white;
+    font-family: Helvetica;
+
+    &.activated {
+      background-color: $color-purple-darker;
+    }
+  }
+
+  .button-outline {
+    border-color: $color-orange;
+    color: $color-orange;
+
+    &.activated {
+      background-color: $color-orange;
+      color: $color-white;
+    }
+  }
+
+  a {
+    color: $color-orange;
+  }
 }

@@ -7,16 +7,58 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>AddEditContact</ion-title>
+    <ion-title *ngIf="!isEditMode;else edit_mode">{{'ADD_PAGE_NAME' | translate}}</ion-title>
+    <ng-template #edit_mode>{{'EDIT_PAGE_NAME' | translate}}</ng-template>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <form [formGroup]="addEditForm" (ngSubmit)="addEditContact()">
+    <ion-list no-lines>
 
-  Add or edit contact
+      <ion-item>
+        <ion-label stacked>{{'PHONE_NUMBER' | translate}}</ion-label>
+        <ion-input type="tel" formControlName="phone" placeholder="{{'PHONE_NUMBER_PLACEHOLDER_ADD_EDIT' | translate}}"></ion-input>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('phone').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('phone').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+      </ion-item>
 
-  <button ion-button block (click)="confirm()">Confirm</button>
+      <ion-item>
+        <ion-label stacked>{{'FIRST_NAME' | translate}}</ion-label>
+        <ion-input type="text" formControlName="firstName" placeholder="{{'FIRST_NAME_PLACEHOLDER_ADD_EDIT' | translate}}"></ion-input>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('firstName').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('firstName').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+      </ion-item>
 
+      <ion-item>
+        <ion-label stacked>{{'FAMILY_NAME' | translate}}</ion-label>
+        <ion-input type="text" formControlName="lastName" placeholder="{{'FAMILY_NAME_PLACEHOLDER_ADD_EDIT' | translate}}"></ion-input>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('lastName').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('lastName').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{'EMAIL' | translate}}</ion-label>
+        <ion-input type="email" formControlName="email" placeholder="{{'EMAIL_PLACEHOLDER_ADD_EDIT' | translate}}"></ion-input>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('email').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('email').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{'PROFILE' | translate}}</ion-label>
+        <ion-select formControlName="profile" interface="popover">
+          <ion-option *ngFor="let profile of profiles" value="{{ profile }}">{{ profile }}</ion-option>
+        </ion-select>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('profile').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
+        <ion-icon *ngIf="formSubmitted && addEditForm.get('profile').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <button ion-button large round color="primary" block type="submit" block>{{'CONFIRM' | translate}}</button>
+      </ion-item>
+
+    </ion-list>
+  </form>
 </ion-content>

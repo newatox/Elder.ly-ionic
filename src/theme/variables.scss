@@ -59,26 +59,28 @@ $color-orange: #FF8A26;
 $color-orange-dark: #B3621B;
 $color-white: #FFFFFF;
 $color-black: #000000;
+$color-black-alpha: rgba(#000000, .2);
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
 $searchbar-ios-input-clear-icon-color: $color-purple-light;
-$searchbar-ios-input-search-icon-color: $color-grey-blue;
-$searchbar-ios-input-text-color: $color-grey-blue;
-$searchbar-ios-input-placeholder-color: $color-grey-blue;
+$searchbar-ios-input-search-icon-color: $color-purple-light;
+$searchbar-ios-input-text-color: $color-purple-light;
+$searchbar-ios-input-placeholder-color: $color-purple-light;
+$searchbar-ios-background-color: $color-black;
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-$searchbar-md-input-clear-icon-color: $color-white;
-$searchbar-md-input-search-icon-color: $color-grey-blue;
-$searchbar-md-input-text-color: $color-grey-blue;
-$searchbar-md-input-placeholder-color: $color-grey-blue;
-$searchbar-md-input-background-color: $color-purple-light;
+$searchbar-md-input-clear-icon-color: $color-purple-light;
+$searchbar-md-input-search-icon-color: $color-purple-light;
+$searchbar-md-input-text-color: $color-purple-light;
+$searchbar-md-input-placeholder-color: $color-purple-light;
+$searchbar-md-input-background-color: $color-black-alpha;
 
 // App Windows Variables
 // --------------------------------------------------
