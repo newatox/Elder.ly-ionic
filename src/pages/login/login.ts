@@ -106,13 +106,13 @@ export class LoginPage {
   }
 
   forgottenPasswordAlert(error = false) {
-    var forgottenPwPlaceholder = 'FORGOTTEN_PASSWORD_PAGE_NAME';
-    var forgottenPwMessagePlaceholder = 'FORGOTTEN_PW_MESSAGE';
-    var invalidNumberPlaceholder = 'INVALID_NUMBER';
-    var cancelLabelPlaceholder = 'CANCEL_LABEL';
-    var sendLabelPlaceholder = 'SEND_LABEL';
-    var forgottenPWSentPlaceholder = 'FORGOTTEN_PW_SENT';
-    var okLabelPlaceholder = 'OK_LABEL';
+    let forgottenPwPlaceholder = 'FORGOTTEN_PASSWORD_PAGE_NAME';
+    let forgottenPwMessagePlaceholder = 'FORGOTTEN_PW_MESSAGE';
+    let invalidNumberPlaceholder = 'INVALID_NUMBER';
+    let cancelLabelPlaceholder = 'CANCEL_LABEL';
+    let sendLabelPlaceholder = 'SEND_LABEL';
+    let forgottenPWSentPlaceholder = 'FORGOTTEN_PW_SENT';
+    let okLabelPlaceholder = 'OK_LABEL';
 
     this.translate.get(forgottenPwPlaceholder).subscribe(
       (translation) => {
@@ -144,7 +144,7 @@ export class LoginPage {
       });
 
     const phoneRegex = /^[0-9]{10}$/;
-    var phone = '';
+    let phone = '';
     const prompt = this.alertCtrl.create({
       title: forgottenPwPlaceholder,
       message: forgottenPwMessagePlaceholder,
