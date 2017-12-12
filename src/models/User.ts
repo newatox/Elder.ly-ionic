@@ -1,3 +1,5 @@
+import * as gravatar from 'gravatar';
+
 export default class User {
   phone: string;
   firstName: string;
@@ -14,7 +16,6 @@ export default class User {
   }
 
   gravatarImage(): String {
-    // TODO : call gravatar provider with the email
-    return 'https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';
+    return gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
   }
 }
