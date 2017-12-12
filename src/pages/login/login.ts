@@ -141,6 +141,7 @@ export class LoginPage {
           placeholder: (error ? invalidNumberPlaceholder :
                                   (phoneRegex.test(this.loginForm.value.phone)
                                   ? this.loginForm.value.phone : '')),
+          type: 'number',
         },
       ],
       buttons: [
