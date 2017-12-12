@@ -1,7 +1,7 @@
 <ion-menu type="overlay" [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>{{'MENU_PAGE_NAME' | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -25,7 +25,7 @@
       <ion-row>
         <ion-col text-center>
           <div>
-            <p ion-text>Bonjour,</p>
+            <p ion-text>{{'MENU_HELLO' | translate }}</p>
             <p ion-text><b>{{currentUser?.firstName}} {{currentUser?.lastName}}</b></p>
           </div>
         </ion-col>
@@ -34,7 +34,7 @@
       <ion-row>
         <ion-col text-center>
           <div>
-            <p ion-text>Vos coordonnées</p>
+            <p ion-text>{{'MENU_CONTACT_INFO' | translate }}</p>
             <p ion-text><b>{{currentUser?.phone}}</b></p>
             <p ion-text><b>{{currentUser?.email}}</b></p>
           </div>
@@ -42,9 +42,10 @@
       </ion-row>
 
     </ion-grid>
-
     <ion-footer no-border no-shadow class="menu-footer">
-        <button ion-button outline round block small color="secondary" (click)="userLogout()" class="logout-button">{{ 'Logout' }}</button>
+        <button ion-button outline round block small color="secondary" (click)="userLogout()" class="logout-button">
+          {{ 'MENU_LOGOUT' | translate }}
+        </button>
     </ion-footer>
 
   </ion-content>

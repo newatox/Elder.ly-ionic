@@ -21,7 +21,6 @@ export class ListContactsPage {
   root = DetailsContactPage;
   searchBarInput: string = '';
 
-  searchPlaceholder = 'SEARCH_PLACEHOLDER';
   favoriteContactsTabName = 'FAVORITE_TAB';
   allContactsTabName = 'ALL_TAB';
   frequentContactsTabName = 'FREQUENT_TAB';
@@ -35,13 +34,9 @@ export class ListContactsPage {
               public contactProvider: ContactsProvider, translate: TranslateService,
               public splashScreen: SplashScreen, public platform: Platform) {
     /**
-     * Search Bar placeholder and tab names cannot be translated in HTML with the 'translate' pipe.
+     * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
      * Therefore I translate them here.
      */
-    translate.get(this.searchPlaceholder).subscribe(
-      (translation) => {
-        this.searchPlaceholder = translation;
-      });
     translate.get(this.favoriteContactsTabName).subscribe(
       (translation) => {
         this.favoriteContactsTabName = translation;
