@@ -11,7 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {TranslateService} from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +27,6 @@ import {TranslateService} from "@ngx-translate/core";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  remember: boolean;
   loginForm: FormGroup;
   formSubmitted = false;
 
@@ -39,12 +39,18 @@ export class LoginPage {
               public platform: Platform,
               private auth: AuthProvider,
               public translate: TranslateService,
+              public storage: Storage,
   ) {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
       remember: [false],
     });
+    this.storage.get('storedPhoneNumber')
+      .then((phone) => {
+        this.loginForm.get('phone').setValue(phone);
+      });
+
   }
 
   ionViewDidLoad() {
@@ -57,18 +63,25 @@ export class LoginPage {
   doLogin() {
     console.log('Phone : ' + this.loginForm.value.phone);
     console.log('Password : ' + this.loginForm.value.password);
+    console.log('REMEMBER', this.loginForm.value.remember);
+
 
     this.formSubmitted = true;
 
-    // TODO uncomment: if (this.loginForm.valid) {
+    // TODO: uncomment if (this.loginForm.valid) {
     if (true) {
-      // TODO uncomment: this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
+      // TODO: uncomment this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
       this.auth.login('0600000042', '0000')
         .then((token) => {
           console.log('RESULT', token);
 
+          console.log('REMEMBER', this.loginForm.value.remember);
           if (this.loginForm.value.remember) {
-            // TODO: remember login
+            console.log('remember checked', this.loginForm.value.phone);
+            this.storage.set('storedPhoneNumber', this.loginForm.value.phone)
+              .then(() => {
+                console.log('phone number stored');
+              });
           }
 
           this.events.publish('auth:login'); // Send the 'login' event to MyApp
