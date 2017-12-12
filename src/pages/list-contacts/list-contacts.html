@@ -22,7 +22,7 @@
   <ion-list class="mylist">
     <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
         <ion-avatar item-start>
-          <img src="http://www.ac-grenoble.fr/ecoles/gm/local/cache-vignettes/L500xH500/chaton_1-33648.png">
+          <img src="{{contact.gravatar}}">
         </ion-avatar>
         <h2>{{contact.firstName}} {{contact.lastName}}</h2>
         <button ion-button round outline small item-right color="secondary" (click)="callContact(contact.phone)">Appeler</button>

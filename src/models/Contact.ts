@@ -1,3 +1,5 @@
+import * as gravatar from 'gravatar';
+
 export default class Contact {
   constructor(public phone: string,
               public firstName: string,
@@ -5,7 +7,7 @@ export default class Contact {
               public email: string,
               public profile: string,
               public wsId?: string,
-              public gravatar: string = '',
+              private theGravatar: string = '',
               public isFamilinkuser: boolean = false,
               public isEmergencyUser: boolean = false,
               public isFavorite: boolean = false,
@@ -19,5 +21,16 @@ export default class Contact {
 
   toggleFavorite() {
     this.isFavorite = !this.isFavorite;
+  }
+
+  setGravatar() {
+    this.theGravatar = gravatar.url(this.email, { s: '200', d: 'retro' });
+  }
+
+  get gravatar() {
+    if (this.theGravatar === '') {
+      this.theGravatar = gravatar.url(this.email, { s: '200', d: 'retro' });
+    }
+    return this.theGravatar;
   }
 }
