@@ -46,5 +46,6 @@
   "EMAIL_SUBJECT": "Des nouvelles",
   "HELLO": "Bonjour ",
   "GREETING_MESSAGE": ", comment vas-tu ?\n",
-  "DELETE_CONFIRM": "Êtes-vous sûr(e) de vouloir supprimer ce contact ?"
+  "DELETE_CONFIRM": "Êtes-vous sûr(e) de vouloir supprimer ce contact ?",
+  "NETWORK_NONE_MESSAGE": "Votre connexion internet semble être indisponible. L'intégrité des données n'est pas garantie."
 }
