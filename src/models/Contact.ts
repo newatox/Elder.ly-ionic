@@ -7,7 +7,7 @@ export default class Contact {
               public email: string,
               public profile: string,
               public wsId?: string,
-              private theGravatar: string = '',
+              private urlGravatar: string = '',
               public isFamilinkuser: boolean = false,
               public isEmergencyUser: boolean = false,
               public isFavorite: boolean = false,
@@ -24,13 +24,13 @@ export default class Contact {
   }
 
   setGravatar() {
-    this.theGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
+    this.urlGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
   }
 
   get gravatar() {
-    if (this.theGravatar === '') {
-      this.theGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
+    if (this.urlGravatar === '') {
+      this.urlGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
     }
-    return this.theGravatar;
+    return this.urlGravatar;
   }
 }
