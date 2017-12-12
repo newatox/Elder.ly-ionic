@@ -42,8 +42,7 @@
   "CALL_ACTION": "Appeler",
   "MENU_HELLO": "Bonjour,",
   "MENU_CONTACT_INFO": "Mes coordonnées",
-  "MENU_LOGOUT": "Se déconnecter"
-  "EMAIL_PLACEHOLDER_ADD_EDIT": "Son email",
+  "MENU_LOGOUT": "Se déconnecter",
   "EMAIL_SUBJECT": "Des nouvelles",
   "HELLO": "Bonjour ",
   "GREETING_MESSAGE": ", comment vas-tu ?\n",
