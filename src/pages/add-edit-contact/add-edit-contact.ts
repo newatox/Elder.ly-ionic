@@ -60,6 +60,7 @@ export class AddEditContactPage {
     if (this.isEditMode) this.editContact();
     else this.addContact();
   }
+
   editContact() {
     if (this.addEditForm.valid) {
       this.contactEdit.phone = this.addEditForm.value.phone;
@@ -67,6 +68,7 @@ export class AddEditContactPage {
       this.contactEdit.lastName = this.addEditForm.value.lastName;
       this.contactEdit.email = this.addEditForm.value.email;
       this.contactEdit.profile = this.addEditForm.value.profile;
+      this.contactEdit.setGravatar(); // update gravatar
       this.contactsProvider.update(this.contactEdit.wsId, this.contactEdit)
         .then((result) => {
           console.log('RESULT', result);
@@ -78,16 +80,20 @@ export class AddEditContactPage {
         });
     }
   }
+
   addContact() {
     if (this.addEditForm.valid) {
-      this.contactsProvider.create(new Contact(
+      const newContact = new Contact(
         this.addEditForm.value.phone,
         this.addEditForm.value.firstName,
         this.addEditForm.value.lastName,
         this.addEditForm.value.email,
-        this.addEditForm.value.profile))
-        .then((token) => {
-          console.log('RESULT', token);
+        this.addEditForm.value.profile,
+      );
+      newContact.setGravatar();
+      this.contactsProvider.create(newContact)
+        .then((contact) => {
+          console.log('CONTACT ADDED', contact);
           this.navCtrl.pop().then();
         })
         .catch((httpErrorResponse) => {

@@ -47,5 +47,6 @@
   "HELLO": "Bonjour ",
   "GREETING_MESSAGE": ", comment vas-tu ?\n",
   "DELETE_CONFIRM": "Êtes-vous sûr(e) de vouloir supprimer ce contact ?",
-  "NETWORK_NONE_MESSAGE": "Votre connexion internet semble être indisponible. L'intégrité des données n'est pas garantie."
+  "NETWORK_NONE_MESSAGE": "Votre connexion internet semble être indisponible. L'intégrité des données n'est pas garantie.",
+  "ADD_FIRST_CONTACT_MESSAGE": "Ajoutez votre premier contact ici"
 }

@@ -1,3 +1,5 @@
+@import '../../theme/variables';
+
 page-list {
   .ios {
     .tabs {
@@ -20,6 +22,29 @@ page-list {
 .card {
   min-height: 7rem;
 }
+
+.zero-contacts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  left: 15%;
+  right: 4%;
+  .text {
+    font-size: 2.2rem;
+    opacity: .30;
+    position: absolute;
+    bottom: 0;
+    right: 80px;
+    left: 20px;
+  }
+  .arrow-image {
+    width: 80px;
+    opacity: .30;
+  }
+}
+
 
 ion-tabs {
   margin-bottom: 0;

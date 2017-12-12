@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title *ngIf="!isEditMode;else edit_mode">{{'ADD_PAGE_NAME' | translate}}</ion-title>
-    <ng-template #edit_mode>{{'EDIT_PAGE_NAME' | translate}}</ng-template>
+    <ng-template #edit_mode><ion-title>{{'EDIT_PAGE_NAME' | translate}}</ion-title></ng-template>
   </ion-navbar>
 
 </ion-header>
