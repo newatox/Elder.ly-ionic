@@ -68,10 +68,10 @@ export class LoginPage {
 
     this.formSubmitted = true;
 
-    // TODO: uncomment if (this.loginForm.valid) {
-    if (true) {
-      // TODO: uncomment this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
-      this.auth.login('0600000042', '0000')
+    if (this.loginForm.valid) {
+    // if (true) {
+      this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
+      // this.auth.login('0600000042', '0000')
         .then((token) => {
           console.log('RESULT', token);
 
