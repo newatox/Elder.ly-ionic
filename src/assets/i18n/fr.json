@@ -33,6 +33,8 @@
   "FIRST_NAME_PLACEHOLDER_ADD_EDIT": "Son prénom",
   "FAMILY_NAME_PLACEHOLDER_ADD_EDIT": "Son nom",
   "EMAIL_PLACEHOLDER_ADD_EDIT": "Son email",
+  "EMAIL_SUBJECT": "Des nouvelles",
   "HELLO": "Bonjour ",
-  "GREETING_MESSAGE": ", comment vas-tu ?\n"
+  "GREETING_MESSAGE": ", comment vas-tu ?\n",
+  "DELETE_CONFIRM": "Êtes-vous sûr(e) de vouloir supprimer ce contact ?"
 }

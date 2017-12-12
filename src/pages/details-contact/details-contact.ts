@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {
   ActionSheetController,
+  AlertController,
   IonicPage,
   NavController,
   NavParams,
@@ -36,6 +37,8 @@ export class DetailsContactPage {
   private cancelLabel = 'CANCEL_LABEL';
   private helloString = 'HELLO';
   private greetingString = 'GREETING_MESSAGE';
+  private emailSubjectString = 'EMAIL_SUBJECT';
+  private deleteConfirmString = 'DELETE_CONFIRM';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -46,6 +49,7 @@ export class DetailsContactPage {
               private callNumber: CallNumber,
               private sms: SMS,
               private emailComposer: EmailComposer,
+              private delAlertCtrl: AlertController,
               ) {
 
     // Get contact sent by list
@@ -71,14 +75,23 @@ export class DetailsContactPage {
       (translation) => {
         this.cancelLabel = translation;
       });
-    translate.get('HELLO').subscribe(
+    translate.get(this.deleteConfirmString).subscribe(
+      (translation) => {
+        this.deleteConfirmString = translation;
+      });
+    translate.get(this.emailSubjectString).subscribe(
+      (translation) => {
+        this.emailSubjectString = translation;
+      });
+    translate.get(this.helloString).subscribe(
       (translation) => {
         this.helloString = translation;
       });
-    translate.get('GREETING_MESSAGE').subscribe(
+    translate.get(this.greetingString).subscribe(
       (translation) => {
         this.greetingString = translation;
       });
+
   }
 
   present() {
@@ -123,8 +136,35 @@ export class DetailsContactPage {
   }
 
   deleteContact() {
-    this.contactsProvider.delete(this.contact.wsId);
-    this.navCtrl.pop();
+    const delAlert = this.delAlertCtrl.create({
+      title: this.deleteLabel,
+      message : this.deleteConfirmString,
+      buttons: [
+        {
+          text: this.cancelLabel,
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: this.deleteLabel,
+          handler: () => {
+            console.log('Confirm clicked');
+            this.contactsProvider.delete(this.contact.wsId).then(
+              () => {
+                this.navCtrl.pop();
+              },
+              (error) => {
+                console.log(error);
+              });
+          },
+        },
+      ],
+    });
+    delAlert.present();
+    // this.contactsProvider.delete(this.contact.wsId);
+    // this.navCtrl.pop();
   }
 
   favoriteButtonClicked() {
@@ -162,7 +202,7 @@ export class DetailsContactPage {
         const email = {
           body,
           to: this.contact.email,
-          subject: 'Nouvelles',
+          subject: this.emailSubjectString,
           isHtml: true,
         };
         this.emailComposer.open(email);
