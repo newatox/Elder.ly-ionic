@@ -13,7 +13,6 @@ import { ListContactsPage } from '../pages/list-contacts/list-contacts';
 import { DetailsContactPage } from '../pages/details-contact/details-contact';
 import { AddEditContactPage } from '../pages/add-edit-contact/add-edit-contact';
 import { SignUpPage } from '../pages/sign-up/sign-up';
-import { ContactCellComponent } from '../components/contact-cell/contact-cell';
 import { ApiProvider } from '../providers/api/api';
 import { ContactsProvider } from '../providers/contacts/contacts';
 import { AuthProvider } from '../providers/auth/auth';
@@ -36,7 +35,6 @@ import { EmailComposer } from '@ionic-native/email-composer';
     AddEditContactPage,
     SignUpPage,
     LoginPage,
-    ContactCellComponent,
     PhonePipe,
   ],
   imports: [
@@ -62,7 +60,6 @@ import { EmailComposer } from '@ionic-native/email-composer';
     AddEditContactPage,
     SignUpPage,
     LoginPage,
-    ContactCellComponent,
   ],
   providers: [
     StatusBar,

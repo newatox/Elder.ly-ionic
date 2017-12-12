@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { ModalController, NavController, Tab, Tabs } from 'ionic-angular';
+import { ModalController, NavController, Platform, Tab, Tabs } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { AddEditContactPage } from '../add-edit-contact/add-edit-contact';
 import Contact from '../../models/Contact';
 import { ContactsProvider } from '../../providers/contacts/contacts';
 import { DetailsContactPage } from '../details-contact/details-contact';
 import { TranslateService } from '@ngx-translate/core';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
   selector: 'page-list',
@@ -18,6 +19,8 @@ export class ListContactsPage {
   favorites: Contact[] = [];
   frequents: Contact[] = [];
   root = DetailsContactPage;
+  searchBarInput: string = '';
+
   searchPlaceholder = 'SEARCH_PLACEHOLDER';
   favoriteContactsTabName = 'FAVORITE_TAB';
   allContactsTabName = 'ALL_TAB';
@@ -28,11 +31,9 @@ export class ListContactsPage {
   @ViewChild('all') tabAll: Tab;
   @ViewChild('frq') tabFrq: Tab;
 
-  constructor(public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              public contactProvider: ContactsProvider,
-              translate: TranslateService,
-              ) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
+              public contactProvider: ContactsProvider, translate: TranslateService,
+              public splashScreen: SplashScreen, public platform: Platform) {
     /**
      * Search Bar placeholder and tab names cannot be translated in HTML with the 'translate' pipe.
      * Therefore I translate them here.
@@ -59,6 +60,10 @@ export class ListContactsPage {
     if (!this.isLogged) {
       const loginModal = this.modalCtrl.create(LoginPage);
       loginModal.present().then(() => { console.log('login opened'); });
+    } else {
+      if (this.platform.is('ios') || this.platform.is('android')) {
+        this.splashScreen.hide();
+      }
     }
   }
 
@@ -66,13 +71,23 @@ export class ListContactsPage {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
-        if (this.tabRef.getSelected() === this.tabAll) this.displayAllContacts();
-        else if (this.tabRef.getSelected() === this.tabFav) this.displayFavorites();
-        else if (this.tabRef.getSelected() === this.tabFrq) this.displayFrequent();
+        this.resetList();
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  callContact(phone: String) {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log('event', event);
+    // TODO: make a call
+    console.log('Appeler :', phone);
+  }
+
+  navigateToDetails(contact) {
+    this.navCtrl.push(DetailsContactPage, { contact }).then();
   }
 
   openAddEdit() {
@@ -84,6 +99,8 @@ export class ListContactsPage {
     this.contacts.map((contact) => { if (contact.isFavorite) this.favorites.push(contact); });
     this.favorites.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.favorites;
+    if (this.searchBarInput !== '')
+      this.searchLocalContacts(this.searchBarInput, this.favorites);
   }
   displayFrequent() {
     this.frequents = [];
@@ -96,6 +113,37 @@ export class ListContactsPage {
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
+    if (this.searchBarInput !== '')
+      this.searchLocalContacts(this.searchBarInput, this.contacts);
+  }
+  resetList() {
+    const currentTab = this.tabRef.getSelected();
+    if (currentTab === this.tabAll) this.displayAllContacts();
+    else if (currentTab === this.tabFav) this.displayFavorites();
+    else if (currentTab === this.tabFrq) this.displayFrequent();
+  }
+  doSearch(ev) {
+    const content = ev.target.value;
+    const currentTab = this.tabRef.getSelected();
+    if (!content || !content.trim()) {
+      this.resetList();
+      return;
+    }
+    console.log(this.searchBarInput);
+    if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
+    else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
+  }
+  searchLocalContacts(content: string, list: Contact[]) {
+    const matchingContacts = [];
+    const normalizedContent = content.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const regExp = RegExp(normalizedContent, 'gi');
+    list.forEach((contact) => {
+      if (contact.firstName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').search(regExp) !== -1
+        || contact.lastName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').search(regExp) !== -1
+        || contact.email.normalize('NFD').replace(/[\u0300-\u036f]/g, '').search(regExp) !== -1)
+        matchingContacts.push(contact);
+    });
+    this.displayedList = matchingContacts;
   }
 
 }

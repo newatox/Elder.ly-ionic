@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import {
+  AlertController,
+  Platform,
+  Events,
+  IonicPage,
+  NavController,
+  ViewController,
+} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignUpPage } from '../sign-up/sign-up';
 import { AuthProvider } from '../../providers/auth/auth';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 /**
  * Generated class for the LoginPage page.
@@ -21,8 +29,15 @@ export class LoginPage {
   loginForm: FormGroup;
   formSubmitted = false;
 
-  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
-              private formBuilder: FormBuilder, private auth: AuthProvider) {
+  constructor(public viewCtrl: ViewController,
+              public navCtrl: NavController,
+              public alertCtrl: AlertController,
+              private formBuilder: FormBuilder,
+              public events: Events,
+              public splashScreen: SplashScreen,
+              public platform: Platform,
+              private auth: AuthProvider,
+  ) {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
@@ -31,8 +46,10 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    // this.viewCtrl.dismiss().then(); // TODO - Remove (useful for test only)
     console.log('ionViewDidLoad LoginPage');
+    if (this.platform.is('ios') || this.platform.is('android')) {
+      this.splashScreen.hide();
+    }
   }
 
   doLogin() {
@@ -41,20 +58,30 @@ export class LoginPage {
 
     this.formSubmitted = true;
 
-    if (this.loginForm.valid) {
-      this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
+    // TODO uncomment: if (this.loginForm.valid) {
+    if (true) {
+      // TODO uncomment: this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
+      this.auth.login('0600000042', '0000')
         .then((token) => {
           console.log('RESULT', token);
 
           if (this.loginForm.value.remember) {
-
+            // TODO: remember login
           }
+
+          this.events.publish('auth:login'); // Send the 'login' event to MyApp
 
           this.viewCtrl.dismiss().then();
         })
         .catch((httpErrorResponse) => {
           console.log('ERROR', httpErrorResponse.error.message);
-          alert(httpErrorResponse.error.message);
+          // TODO: i18n
+          const alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: httpErrorResponse.error.message,
+            buttons: ['OK'],
+          });
+          alert.present();
         });
     }
   }

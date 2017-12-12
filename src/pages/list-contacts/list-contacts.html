@@ -10,8 +10,8 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar>
-    <ion-searchbar placeholder={{searchPlaceholder}}></ion-searchbar>
+  <ion-toolbar *ngIf="!(tabRef.getSelected()==tabFrq)">
+    <ion-searchbar [(ngModel)]="searchBarInput" (ionInput)="doSearch($event)" placeholder="{{searchPlaceholder}}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -20,8 +20,12 @@
   <h2 *ngIf="contacts.length==0 && tabRef.getSelected()==tabAll">TODO: liste de contact vide: flèche indiquant comment ajouter</h2>
   <h2 *ngIf="frequents.length==0 && tabRef.getSelected()==tabFrq">TODO: pas de contacts fréquents: informer</h2>
   <ion-list class="mylist">
-    <ion-item *ngFor="let contact of displayedList">
-      <contact-cell [contact]="contact"></contact-cell>
+    <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
+        <ion-avatar item-start>
+          <img src="http://www.ac-grenoble.fr/ecoles/gm/local/cache-vignettes/L500xH500/chaton_1-33648.png">
+        </ion-avatar>
+        <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+        <button ion-button round outline small item-right color="secondary" (click)="callContact(contact.phone)">Appeler</button>
     </ion-item>
   </ion-list>
 </ion-content>

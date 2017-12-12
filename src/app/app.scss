@@ -20,9 +20,26 @@
     background: color($colors, mypurple);
   }
   .toolbar-title {
-    color: color($colors, grey-blue);
+    color: color($colors, white);
   }
   .bar-button {
-    color: color($colors, grey-blue);
+    color: color($colors, white);
+  }
+}
+
+.user-gravatar {
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+}
+
+ion-toolbar {
+  .toolbar-background {
+    background-color: white;
+  }
+
+  .logout-button {
+    width: 90%;
   }
 }
