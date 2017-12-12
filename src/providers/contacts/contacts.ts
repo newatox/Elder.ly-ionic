@@ -70,7 +70,7 @@ export class ContactsProvider {
               contact.lastName,
               contact.email,
               contact.profile,
-              contact._id,
+              contact.wsId,
               contact.gravatar,
               contact.isFamilinkuser,
               contact.isEmergencyUser,

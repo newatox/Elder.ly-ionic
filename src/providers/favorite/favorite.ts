@@ -19,9 +19,21 @@ export class FavoriteProvider {
     console.log('Hello FavoriteProvider Provider');
   }
 
-  addToFavorites(newFavorite: Contact) {
-    const contacts = this.storage.get('contacts');
-    console.log('Contacts = ', contacts);
+  updateFavoriteStatus(newFavorite: Contact) {
+    this.storage.get('contacts')
+      .then((contacts) => {
+        console.log('Contacts from local storage = ', contacts);
+        const newFavIndex = contacts.findIndex(contact => contact.wsId === newFavorite.wsId);
+        if (newFavIndex >= 0 && contacts[newFavIndex].isFavorite === newFavorite.isFavorite) {
+          contacts[newFavIndex].isFavorite = !newFavorite.isFavorite;
+          console.log('Contacts before setting storage = ', contacts);
+          this.storage.set('contacts', [...contacts]);
+          return this.storage.get('contacts');
+        }
+      })
+      .then((storageContacts) => {
+        console.log('Contacts now in storage = ', storageContacts);
+      });
   }
 
 }

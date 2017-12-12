@@ -170,10 +170,9 @@ export class DetailsContactPage {
   }
 
   favoriteButtonClicked() {
-    this.contact.isFavorite = !this.contact.isFavorite;
+    // this.contact.isFavorite = !this.contact.isFavorite;
+    this.favProvider.updateFavoriteStatus(this.contact);
     if (this.contact.isFavorite) {
-      // TODO - Store in local data
-      this.favProvider.addToFavorites(this.contact);
       this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
     } else {
       this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
