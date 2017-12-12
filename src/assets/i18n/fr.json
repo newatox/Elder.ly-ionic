@@ -26,5 +26,10 @@
   "OPTIONS_LABEL": "Options",
   "MODIFY_LABEL": "Modifier",
   "DELETE_LABEL": "Supprimer",
-  "CANCEL_LABEL": "Annuler"
+  "CANCEL_LABEL": "Annuler",
+  "FORGOTTEN_PW_MESSAGE": "Veuillez entrer votre numéro de téléphone",
+  "INVALID_NUMBER": "Numéro invalide",
+  "SEND_LABEL": "Envoyer",
+  "FORGOTTEN_PW_SENT": "Votre mot de passe a été envoyé",
+  "OK_LABEL": "OK"
 }
