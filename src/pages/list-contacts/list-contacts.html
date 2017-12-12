@@ -10,14 +10,17 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar *ngIf="!(tabRef.getSelected()==tabFrq)">
+  <ion-toolbar *ngIf="!(tabRef.getSelected()==tabFrq || contacts.length==0)">
     <ion-searchbar [(ngModel)]="searchBarInput" (ionInput)="doSearch($event)" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <h2 *ngIf="favorites.length==0 && tabRef.getSelected()==tabFav">TODO: design avec image de l'ajout de favoris dans détails (ou autre)</h2>
-  <h2 *ngIf="contacts.length==0 && tabRef.getSelected()==tabAll">TODO: liste de contact vide: flèche indiquant comment ajouter</h2>
+  <div *ngIf="contacts.length==0 && tabRef.getSelected()==tabAll" class="zero-contacts">
+    <strong class="text">Ajoutez votre premier contact ici</strong>
+    <img src="assets/imgs/arrow.png" class="arrow-image"/>
+  </div>
   <h2 *ngIf="frequents.length==0 && tabRef.getSelected()==tabFrq">TODO: pas de contacts fréquents: informer</h2>
   <ion-list class="mylist">
     <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
