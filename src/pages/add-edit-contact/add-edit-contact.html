@@ -7,8 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title *ngIf="!isEditMode;else edit_mode">{{'ADD_PAGE_NAME' | translate}}</ion-title>
-    <ng-template #edit_mode><ion-title>{{'EDIT_PAGE_NAME' | translate}}</ion-title></ng-template>
+    <ion-title>{{pageTitle | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addEditContact()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
