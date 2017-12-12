@@ -7,6 +7,7 @@ import { ContactsProvider } from '../../providers/contacts/contacts';
 import { DetailsContactPage } from '../details-contact/details-contact';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NetworkService } from '../../services/NetworkService';
 
 @Component({
   selector: 'page-list',
@@ -38,6 +39,7 @@ export class ListContactsPage {
     public splashScreen: SplashScreen,
     public events: Events,
     public platform: Platform,
+    public networkService: NetworkService
   ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
@@ -61,6 +63,7 @@ export class ListContactsPage {
   }
 
   ionViewDidLoad() {
+    this.networkService.watch();
     if (!this.isLogged) {
       const loginModal = this.modalCtrl.create(LoginPage);
       loginModal.present().then(() => { console.log('login opened'); });
