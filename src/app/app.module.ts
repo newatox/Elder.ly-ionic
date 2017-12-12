@@ -25,6 +25,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { FavoriteProvider } from '../providers/favorite/favorite';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     CallNumber,
     SMS,
     EmailComposer,
+    FavoriteProvider,
   ],
 })
 export class AppModule {}

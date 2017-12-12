@@ -14,6 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { ContactsProvider } from '../../providers/contacts/contacts';
+import {FavoriteProvider} from "../../providers/favorite/favorite";
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -50,6 +51,7 @@ export class DetailsContactPage {
               private sms: SMS,
               private emailComposer: EmailComposer,
               private delAlertCtrl: AlertController,
+              public favProvider: FavoriteProvider,
               ) {
 
     // Get contact sent by list
@@ -171,6 +173,7 @@ export class DetailsContactPage {
     this.contact.isFavorite = !this.contact.isFavorite;
     if (this.contact.isFavorite) {
       // TODO - Store in local data
+      this.favProvider.addToFavorites(this.contact);
       this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
     } else {
       this.favoriteButtonLabel = 'ADD_TO_FAVORITES';

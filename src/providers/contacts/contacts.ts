@@ -28,7 +28,7 @@ export class ContactsProvider {
       .then((contacts) => {
         // Get contact from API succeed
         console.log('API OBJECTS CONTACTS', contacts);
-        // Set contacts localy
+        // Set contacts locally
         console.log('SET LOCAL CONTACTS');
         return this.storage.set('contacts', contacts);
       })
