@@ -23,47 +23,28 @@ export class NetworkService {
   watch() {
     if (this.platform.is('ios') || this.platform.is('android')) {
       console.log('Watching network on device');
-
-      this.network.onConnect().subscribe((data) => {
-        console.log('Online (device)');
-        if (this.toastVisible) {
-          this.toast.dismiss();
-        }
-        this.events.publish('connected');
-      },                                 (error) => {
-        console.error(error);
-      });
-
-      this.network.onDisconnect().subscribe((data) => {
-        console.log('Offline (device)');
-        this.initMessage();
-        this.showMessage();
-        this.events.publish('disconnected');
-      },                                    (error) => {
-        console.error(error);
-      });
     } else {
       console.log('Watching network on Webview');
-
-      this.network.onConnect().subscribe((data) => {
-        console.log('Online (Webview)');
-        if (this.toastVisible) {
-          this.toast.dismiss();
-        }
-        this.events.publish('connected');
-      },                                 (error) => {
-        console.error(error);
-      });
-
-      this.network.onDisconnect().subscribe((data) => {
-        console.log('Offline (Webview)');
-        this.initMessage();
-        this.showMessage();
-        this.events.publish('disconnected');
-      },                                    (error) => {
-        console.error(error);
-      });
     }
+
+    this.network.onConnect().subscribe((data) => {
+      console.log('Online');
+      if (this.toastVisible) {
+        this.toast.dismiss();
+      }
+      this.events.publish('connected');
+    },                                 (error) => {
+      console.error(error);
+    });
+
+    this.network.onDisconnect().subscribe((data) => {
+      console.log('Offline');
+      this.initMessage();
+      this.showMessage();
+      this.events.publish('disconnected');
+    },                                    (error) => {
+      console.error(error);
+    });
   }
 
   private initMessage() {
