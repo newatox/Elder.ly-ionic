@@ -72,13 +72,16 @@ export class LoginPage {
       this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
         .then((token) => {
           console.log('RESULT', token);
-
-          console.log('REMEMBER', this.loginForm.value.remember);
           if (this.loginForm.value.remember) {
             console.log('remember checked', this.loginForm.value.phone);
             this.storage.set('storedPhoneNumber', this.loginForm.value.phone)
               .then(() => {
                 console.log('phone number stored');
+              });
+          } else {
+            this.storage.remove('storedPhoneNumber')
+              .then(() => {
+                console.log('stored phone number erased');
               });
           }
 
