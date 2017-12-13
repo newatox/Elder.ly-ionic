@@ -52,5 +52,7 @@
   "NETWORK_NONE_MESSAGE": "Votre connexion internet semble être indisponible. L'intégrité des données n'est pas garantie.",
   "ADD_FIRST_CONTACT_MESSAGE": "Ajoutez votre premier contact ici",
   "FREQUENT_CONTACT_MESSAGE": "Vos contacts les plus fréquemment ajoutés s'afficheront ici.",
+  "LOGIN_OFFLINE_ERROR_MESSAGE": "Pas de connexion internet.",
+  "LOGIN_ERROR": "Erreur de connexion",
   "ADD_FAVORITE_CONTACT_MESSAGE": "Trouvez ce bouton sur un contact pour l'ajouter aux favoris."
 }

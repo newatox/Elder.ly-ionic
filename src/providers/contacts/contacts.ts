@@ -52,7 +52,7 @@ export class ContactsProvider {
       })
       .catch((error) => {
         // Get contact from API failed
-        console.log('API ERROR', error);
+        console.log('API ERROR', error.message);
       })
       .then(() => {
         // No matter what happened before get contacts from local storage

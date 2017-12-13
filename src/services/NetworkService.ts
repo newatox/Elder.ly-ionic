@@ -70,7 +70,9 @@ export class NetworkService {
   }
 
   showMessage() {
-    this.toast.present();
+    if (!this.toastVisible) {
+      this.toast.present();
+    }
     this.toastVisible = true;
   }
 }
