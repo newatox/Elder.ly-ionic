@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   ActionSheetController,
-  AlertController,
+  AlertController, Events,
   IonicPage,
   NavController,
   NavParams,
@@ -32,6 +32,7 @@ export class DetailsContactPage {
   public contact: Contact;
   public favoriteButtonLabel: String = 'ADD_TO_FAVORITES';
   public isFavorite: boolean;
+  isLogged: boolean = false;
 
   private optionsLabel = 'OPTIONS_LABEL';
   private modifyLabel = 'MODIFY_LABEL';
@@ -53,6 +54,7 @@ export class DetailsContactPage {
               private emailComposer: EmailComposer,
               private delAlertCtrl: AlertController,
               public favProvider: FavoriteProvider,
+              public events: Events,
   ) {
 
     // Get contact sent by list
@@ -95,17 +97,25 @@ export class DetailsContactPage {
         this.greetingString = translation;
       });
 
+    // Subscribe to the login event
+    this.events.subscribe('auth:login', () => { this.isLogged = true; });
   }
 
   ionViewDidLoad() {
-    this.favProvider.isLocalFavorite(this.contact).then((isFav: boolean) => {
-      this.isFavorite = isFav;
-      if (isFav) {
-        this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-      } else {
-        this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-      }
-    });
+    if (this.isLogged) {
+      this.favProvider.isLocalFavorite(this.contact)
+        .then((isFav: boolean) => {
+          this.isFavorite = isFav;
+          if (isFav) {
+            this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+          } else {
+            this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   present() {
@@ -206,7 +216,7 @@ export class DetailsContactPage {
           })
           .then(() => {
             console.log(interaction, ', frequency updated');
-        })
+          })
           .catch(() => {
             console.log('TODO');
           });

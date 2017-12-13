@@ -59,8 +59,8 @@ export class FavoriteProvider {
           .then(() => {
             resolve(isNewFavorite);
           })
-          .catch(() => {
-            reject();
+          .catch((error) => {
+            reject(error);
           });
       }
     });
@@ -78,7 +78,7 @@ export class FavoriteProvider {
      */
     return new Promise((resolve, reject) => {
       if ((contactWithInteraction === null) || (contactWithInteraction === undefined)) {
-        reject();
+        reject('Null or undefined contact');
       } else {
         let frequency = increment; // True if no interaction before
         let key;
@@ -111,8 +111,8 @@ export class FavoriteProvider {
           .then(() => {
             resolve();
           })
-          .catch(() => {
-            reject();
+          .catch((error) => {
+            reject(error);
           });
       }
     });
@@ -135,8 +135,8 @@ export class FavoriteProvider {
             resolve(isFav);
           }
         })
-        .catch(() => {
-          reject();
+        .catch((error) => {
+          reject(error);
         });
     });
   }
@@ -158,8 +158,8 @@ export class FavoriteProvider {
             resolve(frequents.slice(0, 4));
           }
         })
-        .catch(() => {
-          reject();
+        .catch((error) => {
+          reject(error);
         });
     });
   }
