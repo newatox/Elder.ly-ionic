@@ -117,7 +117,6 @@ export class ListContactsPage {
           if (isFav) this.favorites.push(contact);
         });
     });
-    this.favorites.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.favorites;
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.favorites);
@@ -125,10 +124,14 @@ export class ListContactsPage {
 
   displayFrequent() {
     this.frequents = [];
-    this.contacts.sort((a, b) => b.frequency - a.frequency);
-    this.contacts.map((contact) => {
-      if (contact.frequency > 0 && this.frequents.length < 5) this.frequents.push(contact);
-    });
+    this.favProvider.getMostFrequentContacts()
+      .then((frequentContacts: string[]) => {
+        frequentContacts.forEach((id) => {
+          this.contacts.map((contact) => {
+            if (contact.wsId === id) this.frequents.push(contact);
+          });
+        });
+      });
     this.displayedList = this.frequents;
   }
 
