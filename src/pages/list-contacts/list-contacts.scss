@@ -35,12 +35,40 @@ page-list {
     font-size: 2.2rem;
     opacity: .30;
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 80px;
     left: 20px;
   }
   .arrow-image {
     width: 80px;
+    opacity: .30;
+  }
+}
+
+.zero-favoris {
+  position: absolute;
+  bottom: 3rem;
+  .text {
+    text-align: center;
+    font-size: 2.2rem;
+    opacity: .30;
+  }
+  .pseudo-fav {
+    width: fit-content;
+    margin: 1rem auto 0;
+    &.activated {
+      color: inherit;
+      background-color: inherit;
+    }
+  }
+}
+
+.zero-frequent {
+  position: absolute;
+  bottom: 50%;
+  .text {
+    text-align: center;
+    font-size: 2.2rem;
     opacity: .30;
   }
 }
