@@ -16,12 +16,21 @@
 </ion-header>
 
 <ion-content>
-  <h2 *ngIf="favorites.length==0 && tabRef.getSelected()==tabFav">TODO: design avec image de l'ajout de favoris dans détails (ou autre)</h2>
+  <div *ngIf="favorites.length==0 && tabRef.getSelected()==tabFav" class="zero-favoris">
+    <p class="text">{{'ADD_FAVORITE_CONTACT_MESSAGE' | translate}}</p>
+    <div class="pseudo-fav">
+      <button ion-button outline round id="favoriteButton" color="myorange">
+        {{'ADD_TO_FAVORITES' | translate}}
+      </button>
+    </div>
+  </div>
   <div *ngIf="contacts.length==0 && tabRef.getSelected()==tabAll" class="zero-contacts">
-    <strong class="text">{{'ADD_FIRST_CONTACT_MESSAGE' | translate}}</strong>
+    <p class="text">{{'ADD_FIRST_CONTACT_MESSAGE' | translate}}</p>
     <img src="assets/imgs/arrow.png" class="arrow-image"/>
   </div>
-  <h2 *ngIf="frequents.length==0 && tabRef.getSelected()==tabFrq">TODO: pas de contacts fréquents: informer</h2>
+  <div *ngIf="frequents.length==0 && tabRef.getSelected()==tabFrq" class="zero-frequent">
+    <p class="text">{{'FREQUENT_CONTACT_MESSAGE' | translate}}</p>
+  </div>
   <ion-list class="mylist">
     <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
         <ion-avatar item-start>

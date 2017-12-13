@@ -69,9 +69,7 @@ export class LoginPage {
     this.formSubmitted = true;
 
     if (this.loginForm.valid) {
-    // if (true) {
       this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
-      // this.auth.login('0600000042', '0000')
         .then((token) => {
           console.log('RESULT', token);
 
