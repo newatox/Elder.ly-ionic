@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NetworkService } from '../../services/NetworkService';
 import { CallNumber } from '@ionic-native/call-number';
+import { FavoriteProvider } from '../../providers/favorite/favorite';
 
 @Component({
   selector: 'page-list',
@@ -42,6 +43,7 @@ export class ListContactsPage {
     public platform: Platform,
     public networkService: NetworkService,
     private callNumber: CallNumber,
+    public favProvider: FavoriteProvider,
   ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
@@ -109,7 +111,12 @@ export class ListContactsPage {
 
   displayFavorites() {
     this.favorites = [];
-    this.contacts.map((contact) => { if (contact.isFavorite) this.favorites.push(contact); });
+    this.contacts.map((contact) => {
+      this.favProvider.isLocalFavorite(contact)
+        .then((isFav: boolean) => {
+          if (isFav) this.favorites.push(contact);
+        });
+    });
     this.favorites.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.favorites;
     if (this.searchBarInput !== '')
