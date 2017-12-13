@@ -14,7 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { ContactsProvider } from '../../providers/contacts/contacts';
-import {FavoriteProvider} from "../../providers/favorite/favorite";
+import { FavoriteProvider } from '../../providers/favorite/favorite';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -30,7 +30,7 @@ import {FavoriteProvider} from "../../providers/favorite/favorite";
 })
 export class DetailsContactPage {
   public contact: Contact;
-  public favoriteButtonLabel: String = 'ADD_TO_FAVORITES'; // TODO - Load label according to contact
+  public favoriteButtonLabel: String = 'ADD_TO_FAVORITES';
   public isFavorite: boolean;
 
   private optionsLabel = 'OPTIONS_LABEL';
@@ -170,12 +170,9 @@ export class DetailsContactPage {
       ],
     });
     delAlert.present();
-    // this.contactsProvider.delete(this.contact.wsId);
-    // this.navCtrl.pop();
   }
 
   favoriteButtonClicked() {
-    // this.contact.isFavorite = !this.contact.isFavorite;
     this.favProvider.toggleLocalFavoriteStatus(this.contact).then((isNewFavorite) => {
       if (isNewFavorite) {
         this.isFavorite = true;
@@ -206,7 +203,7 @@ export class DetailsContactPage {
           console.log(interaction, ', frequency updated');
         });
         const options = {
-          replaceLineBreaks: true, // true to replace \n by a new line
+          replaceLineBreaks: true, // true : replaces \n by a new line
           android: {
             intent: 'INTENT',
           },
