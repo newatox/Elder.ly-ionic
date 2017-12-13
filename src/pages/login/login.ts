@@ -90,11 +90,12 @@ export class LoginPage {
           this.viewCtrl.dismiss().then();
         })
         .catch((httpErrorResponse) => {
-          console.log('ERROR', httpErrorResponse.error.message);
-          // TODO: i18n
+          console.log('LOGIN ERROR', httpErrorResponse.error.message);
+          const errorMessage =
+            navigator.onLine ? httpErrorResponse.error.message : this.translate.instant('LOGIN_OFFLINE_ERROR_MESSAGE');
           const alert = this.alertCtrl.create({
-            title: 'Error',
-            subTitle: httpErrorResponse.error.message,
+            title: this.translate.instant('LOGIN_ERROR'),
+            subTitle: errorMessage,
             buttons: ['OK'],
           });
           alert.present();
