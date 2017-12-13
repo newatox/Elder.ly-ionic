@@ -59,15 +59,6 @@ export class DetailsContactPage {
     this.contact = navParams.get('contact');
     console.log('Contact affected : ', this.contact);
 
-    this.favProvider.isLocalFavorite(this.contact).then((isFav: boolean) => {
-      this.isFavorite = isFav;
-      if (isFav) {
-        this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-      } else {
-        this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-      }
-    });
-
     /**
      * We modify the labels in the code, with translate.get()
      */
@@ -104,6 +95,17 @@ export class DetailsContactPage {
         this.greetingString = translation;
       });
 
+  }
+
+  ionViewDidLoad() {
+    this.favProvider.isLocalFavorite(this.contact).then((isFav: boolean) => {
+      this.isFavorite = isFav;
+      if (isFav) {
+        this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+      } else {
+        this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+      }
+    });
   }
 
   present() {
@@ -192,11 +194,17 @@ export class DetailsContactPage {
 
     switch (interaction) {
       case 'Calling':
+        this.favProvider.increaseFrequentStatus(this.contact,2).then(() => {
+          console.log(interaction, ', frequency updated');
+        });
         this.callNumber.callNumber(this.contact.phone, true)
           .then(() => console.log('Launched dialer!'))
           .catch(() => console.log('Error launching dialer'));
         break;
       case 'Texting':
+        this.favProvider.increaseFrequentStatus(this.contact,1).then(() => {
+          console.log(interaction, ', frequency updated');
+        });
         const options = {
           replaceLineBreaks: true, // true to replace \n by a new line
           android: {
@@ -206,6 +214,9 @@ export class DetailsContactPage {
         this.sms.send(this.contact.phone, message, options);
         break;
       case 'Emailing':
+        this.favProvider.increaseFrequentStatus(this.contact,1).then(() => {
+          console.log(interaction, ', frequency updated');
+        });
         const body = message;
         const email = {
           body,
