@@ -31,6 +31,7 @@ import {FavoriteProvider} from "../../providers/favorite/favorite";
 export class DetailsContactPage {
   public contact: Contact;
   public favoriteButtonLabel: String = 'ADD_TO_FAVORITES'; // TODO - Load label according to contact
+  public isFavorite: boolean;
 
   private optionsLabel = 'OPTIONS_LABEL';
   private modifyLabel = 'MODIFY_LABEL';
@@ -57,6 +58,15 @@ export class DetailsContactPage {
     // Get contact sent by list
     this.contact = navParams.get('contact');
     console.log('Contact affected : ', this.contact);
+
+    this.favProvider.isLocalFavorite(this.contact).then((isFav: boolean) => {
+      this.isFavorite = isFav;
+      if (isFav) {
+        this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+      } else {
+        this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+      }
+    });
 
     /**
      * We modify the labels in the code, with translate.get()
@@ -127,13 +137,6 @@ export class DetailsContactPage {
       ],
     });
 
-    // TO TEST - Favorite status is not loaded in local data yet
-    if (this.contact.isFavorite) {
-      this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-    } else {
-      this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-    }
-
     actionSheet.present().then();
   }
 
@@ -171,12 +174,15 @@ export class DetailsContactPage {
 
   favoriteButtonClicked() {
     // this.contact.isFavorite = !this.contact.isFavorite;
-    this.favProvider.updateFavoriteStatus(this.contact);
-    if (this.contact.isFavorite) {
-      this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-    } else {
-      this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-    }
+    this.favProvider.toggleLocalFavoriteStatus(this.contact).then((isNewFavorite) => {
+      if (isNewFavorite) {
+        this.isFavorite = true;
+        this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+      } else {
+        this.isFavorite = false;
+        this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+      }
+    });
   }
 
   segmentButtonSelected(event) {

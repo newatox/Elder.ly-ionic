@@ -15,25 +15,91 @@ export class FavoriteProvider {
 
   constructor(public http: HttpClient,
               public storage: Storage,
-              ) {
+  ) {
     console.log('Hello FavoriteProvider Provider');
   }
 
-  updateFavoriteStatus(newFavorite: Contact) {
-    this.storage.get('contacts')
-      .then((contacts) => {
-        console.log('Contacts from local storage = ', contacts);
-        const newFavIndex = contacts.findIndex(contact => contact.wsId === newFavorite.wsId);
-        if (newFavIndex >= 0 && contacts[newFavIndex].isFavorite === newFavorite.isFavorite) {
-          contacts[newFavIndex].isFavorite = !newFavorite.isFavorite;
-          console.log('Contacts before setting storage = ', contacts);
-          this.storage.set('contacts', [...contacts]);
-          return this.storage.get('contacts');
-        }
-      })
-      .then((storageContacts) => {
-        console.log('Contacts now in storage = ', storageContacts);
-      });
+  toggleLocalFavoriteStatus(newFavorite: Contact) {
+    return new Promise((resolve, reject) => {
+      let isNewFavorite = true;
+      this.storage.get('user')
+        .then((user) => {
+          const key = 'favorites' + user.phone;
+          this.storage.get(key)
+            .then((localFavorites) => {
+              console.log('Favorites from local storage = ', localFavorites);
+              let favorites = [];
+              if (localFavorites == null) {
+                favorites.push(newFavorite.wsId);
+              } else {
+                favorites = [...localFavorites];
+                const index = localFavorites.findIndex(id => id === newFavorite.wsId);
+                if (index === -1) {
+                  favorites.push(newFavorite.wsId);
+                } else {
+                  isNewFavorite = false;
+                  favorites = favorites.filter(id => id !== newFavorite.wsId);
+                }
+              }
+              this.storage.set(key, favorites)
+                .then(() => {
+                  resolve(isNewFavorite);
+                })
+                .catch(() => {
+                  reject();
+                });
+            });
+        });
+    });
   }
 
+  increaseFrequentStatus(contactWithInteraction: Contact, increment: number) {
+    return new Promise((resolve, reject) => {
+      let frequency = increment; // If no interaction before
+      this.storage.get('user')
+        .then((user) => {
+          const key = 'frequency' + user.phone;
+          this.storage.get(key)
+            .then((localFrequentContacts) => {
+              console.log('Favorites from local storage = ', localFrequentContacts);
+              let frequentContacts = [];
+              if (localFrequentContacts == null) {
+                frequentContacts.push({ id: contactWithInteraction.wsId, frequency: increment });
+              } else {
+                frequentContacts = [...localFrequentContacts];
+                const index = localFrequentContacts.findIndex((freqContact) => {
+                  return freqContact.id === contactWithInteraction.wsId;
+                });
+                if (index === -1) {
+                  frequentContacts.push({ id: contactWithInteraction.wsId, frequency: increment });
+                } else {
+                  // TODO - Get contact and update frequency
+                }
+              }
+              this.storage.set(key, frequentContacts)
+                .then(() => {
+                  resolve(isNewFavorite);
+                })
+                .catch(() => {
+                  reject();
+                });
+            });
+        });
+    });
+  }
+
+  isLocalFavorite(contact: Contact) {
+    return new Promise((resolve) => {
+      this.storage.get('user').then((user) => {
+        this.storage.get('favorites' + user.phone).then((localFavorites) => {
+          if (localFavorites == null) {
+            resolve(false);
+          } else {
+            const isFav = localFavorites.findIndex(id => id === contact.wsId) >= 0;
+            resolve(isFav);
+          }
+        });
+      });
+    });
+  }
 }
