@@ -84,7 +84,6 @@ export class ListContactsPage {
     this.contactProvider.all()
       .then((result) => {
         this.contacts = result;
-        console.log('Contacts from "all" : ', this.contacts);
         this.resetList();
       })
       .catch((error) => {
@@ -129,7 +128,6 @@ export class ListContactsPage {
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
-    console.log('All created contacts', this.displayedList);
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.contacts);
   }

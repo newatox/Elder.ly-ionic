@@ -53,7 +53,7 @@ export class DetailsContactPage {
               private emailComposer: EmailComposer,
               private delAlertCtrl: AlertController,
               public favProvider: FavoriteProvider,
-              ) {
+  ) {
 
     // Get contact sent by list
     this.contact = navParams.get('contact');
@@ -173,15 +173,19 @@ export class DetailsContactPage {
   }
 
   favoriteButtonClicked() {
-    this.favProvider.toggleLocalFavoriteStatus(this.contact).then((isNewFavorite) => {
-      if (isNewFavorite) {
-        this.isFavorite = true;
-        this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-      } else {
-        this.isFavorite = false;
-        this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-      }
-    });
+    this.favProvider.toggleLocalFavoriteStatus(this.contact)
+      .then((isNewFavorite: boolean) => {
+        if (isNewFavorite) {
+          this.isFavorite = true;
+          this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+        } else {
+          this.isFavorite = false;
+          this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+        }
+      })
+      .catch(() => {
+        console.log('favButtonClicked error');
+      });
   }
 
   segmentButtonSelected(event) {
@@ -192,11 +196,21 @@ export class DetailsContactPage {
     switch (interaction) {
       case 'Calling':
         this.favProvider.increaseFrequentStatus(this.contact,2).then(() => {
-          console.log(interaction, ', frequency updated');
+
         });
         this.callNumber.callNumber(this.contact.phone, true)
           .then(() => console.log('Launched dialer!'))
-          .catch(() => console.log('Error launching dialer'));
+          .catch(() => console.log('Error launching dialer'))
+          .then(() => {
+            return this.favProvider.increaseFrequentStatus(this.contact,2);
+          })
+          .then(() => {
+            console.log(interaction, ', frequency updated');
+        })
+          .catch(() => {
+            console.log('TODO');
+          });
+
         break;
       case 'Texting':
         this.favProvider.increaseFrequentStatus(this.contact,1).then(() => {
