@@ -39,7 +39,7 @@ export class ListContactsPage {
     public splashScreen: SplashScreen,
     public events: Events,
     public platform: Platform,
-    public networkService: NetworkService
+    public networkService: NetworkService,
   ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
