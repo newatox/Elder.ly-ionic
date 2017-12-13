@@ -79,7 +79,7 @@ export class ContactsProvider {
             );
           });
         }
-        console.log('RETURN LOCAL CONTACTS');
+        console.log('RETURN LOCAL CONTACTS', this.contacts);
         return [...this.contacts];
       });
   }

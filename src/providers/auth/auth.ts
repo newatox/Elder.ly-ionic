@@ -64,12 +64,19 @@ export class AuthProvider {
     console.log('TOKEN', this.token);
     return this.api.currentAuth(this.token).toPromise()
       .then((result) => {
+        return this.storage.set('user', result);
+      })
+      .catch((error) => { console.log('ERROR', error); })
+      .then(() => {
+        return this.storage.get('user');
+      })
+      .then((localUser) => {
         this.auth = new User({
-          phone: result['phone'],
-          firstName: result['firstName'],
-          lastName: result['lastName'],
-          email: result['email'],
-          profile : result['profile'],
+          phone: localUser['phone'],
+          firstName: localUser['firstName'],
+          lastName: localUser['lastName'],
+          email: localUser['email'],
+          profile: localUser['profile'],
         });
         return this.auth;
       });

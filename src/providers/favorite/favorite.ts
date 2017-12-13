@@ -73,12 +73,13 @@ export class FavoriteProvider {
                 if (index === -1) {
                   frequentContacts.push({ id: contactWithInteraction.wsId, frequency: increment });
                 } else {
-                  // TODO - Get contact and update frequency
+                  frequency = frequentContacts[index].frequency + increment;
+                  frequentContacts[index].frequency = frequency;
                 }
               }
               this.storage.set(key, frequentContacts)
                 .then(() => {
-                  resolve(isNewFavorite);
+                  resolve(frequency);
                 })
                 .catch(() => {
                   reject();

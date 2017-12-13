@@ -7,6 +7,8 @@ import { ContactsProvider } from '../../providers/contacts/contacts';
 import { DetailsContactPage } from '../details-contact/details-contact';
 import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NetworkService } from '../../services/NetworkService';
+import { CallNumber } from '@ionic-native/call-number';
 
 @Component({
   selector: 'page-list',
@@ -38,6 +40,8 @@ export class ListContactsPage {
     public splashScreen: SplashScreen,
     public events: Events,
     public platform: Platform,
+    public networkService: NetworkService,
+    private callNumber: CallNumber,
   ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
@@ -61,6 +65,7 @@ export class ListContactsPage {
   }
 
   ionViewDidLoad() {
+    this.networkService.watch();
     if (!this.isLogged) {
       const loginModal = this.modalCtrl.create(LoginPage);
       loginModal.present().then(() => { console.log('login opened'); });
@@ -87,12 +92,12 @@ export class ListContactsPage {
       });
   }
 
-  callContact(phone: String) {
+  callContact(phone: string) {
     event.stopPropagation();
     event.preventDefault();
-    console.log('event', event);
-    // TODO: make a call
-    console.log('Appeler :', phone);
+    this.callNumber.callNumber(phone, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
   }
 
   navigateToDetails(contact) {

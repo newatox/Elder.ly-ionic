@@ -53,9 +53,29 @@ export class MyApp {
   }
 
   userLogout() {
-    this.menuCtrl.close();
-    this.auth.logout();
-    this.nav.goToRoot({ animate: true });
+    const delAlert = this.alertCtrl.create({
+      title: this.translate.instant('MENU_LOGOUT'),
+      message : this.translate.instant('ARE_YOU_SURE_TO_LOGOUT'),
+      buttons: [
+        {
+          text: this.translate.instant('CANCEL_LABEL'),
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: this.translate.instant('LOGOUT'),
+          handler: () => {
+            console.log('Confirm clicked');
+            this.menuCtrl.close();
+            this.auth.logout();
+            this.nav.goToRoot({ animate: true });
+          },
+        },
+      ],
+    });
+    delAlert.present();
   }
 
   setUIUserProfilInfos() {

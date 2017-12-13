@@ -23,12 +23,16 @@ export class AddEditContactPage {
   profiles = [];
   isEditMode = false;
   contactEdit: Contact;
+  pageTitle: String;
 
   constructor(public navCtrl: NavController,
               private formBuilder: FormBuilder,
               private auth: AuthProvider,
               private contactsProvider: ContactsProvider,
               public navParams: NavParams) {
+
+    this.pageTitle = 'ADD_PAGE_NAME';
+
     this.addEditForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       firstName: ['', Validators.required],
@@ -42,6 +46,7 @@ export class AddEditContactPage {
         this.profiles = profiles;
         this.addEditForm.get('profile').setValue(profiles[0]);
         if (this.contactEdit = navParams.get('contact')) {
+          this.pageTitle = 'EDIT_PAGE_NAME';
           this.isEditMode = true;
           this.addEditForm.setValue({phone: this.contactEdit.phone,
             firstName: this.contactEdit.firstName,

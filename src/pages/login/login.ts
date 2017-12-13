@@ -68,19 +68,20 @@ export class LoginPage {
 
     this.formSubmitted = true;
 
-    // TODO: uncomment if (this.loginForm.valid) {
-    if (true) {
-      // TODO: uncomment this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
-      this.auth.login('0600000042', '0000')
+    if (this.loginForm.valid) {
+      this.auth.login(this.loginForm.value.phone, this.loginForm.value.password)
         .then((token) => {
           console.log('RESULT', token);
-
-          console.log('REMEMBER', this.loginForm.value.remember);
           if (this.loginForm.value.remember) {
             console.log('remember checked', this.loginForm.value.phone);
             this.storage.set('storedPhoneNumber', this.loginForm.value.phone)
               .then(() => {
                 console.log('phone number stored');
+              });
+          } else {
+            this.storage.remove('storedPhoneNumber')
+              .then(() => {
+                console.log('stored phone number erased');
               });
           }
 
