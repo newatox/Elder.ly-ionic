@@ -24,7 +24,11 @@ export default class Contact {
   }
 
   setGravatar() {
-    this.urlGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
+    if (navigator.onLine) {
+      this.urlGravatar = gravatar.url(this.email, { protocol: 'https', s: '200', d: 'retro' });
+    } else {
+      this.urlGravatar = 'assets/imgs/default-avatar.png';
+    }
   }
 
   get gravatar() {
