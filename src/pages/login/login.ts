@@ -44,7 +44,7 @@ export class LoginPage {
     this.loginForm = this.formBuilder.group({
       phone: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{10}$')])],
       password: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]{4,}$')])],
-      remember: [false],
+      remember: [true],
     });
     this.storage.get('storedPhoneNumber')
       .then((phone) => {

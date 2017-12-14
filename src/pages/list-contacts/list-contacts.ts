@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NetworkService } from '../../services/NetworkService';
 import { CallNumber } from '@ionic-native/call-number';
+import { FavoriteProvider } from '../../providers/favorite/favorite';
 
 @Component({
   selector: 'page-list',
@@ -42,6 +43,7 @@ export class ListContactsPage {
     public platform: Platform,
     public networkService: NetworkService,
     private callNumber: CallNumber,
+    public favProvider: FavoriteProvider,
   ) {
     /**
      * Tab names cannot be translated in HTML with the 'translate' pipe (no pipe allowed there).
@@ -90,10 +92,13 @@ export class ListContactsPage {
       });
   }
 
-  callContact(phone: string) {
+  callContact(contact: Contact) {
     event.stopPropagation();
     event.preventDefault();
-    this.callNumber.callNumber(phone, true)
+    this.favProvider.increaseFrequentStatus(contact,2).then(() => {
+
+    });
+    this.callNumber.callNumber(contact.phone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
   }
@@ -107,21 +112,49 @@ export class ListContactsPage {
   }
 
   displayFavorites() {
+    const promises = [];
     this.favorites = [];
-    this.contacts.map((contact) => { if (contact.isFavorite) this.favorites.push(contact); });
-    this.favorites.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
-    this.displayedList = this.favorites;
-    if (this.searchBarInput !== '')
-      this.searchLocalContacts(this.searchBarInput, this.favorites);
+    this.contacts.map((contact) => {
+      promises.push(new Promise ((resolve, reject) => {
+        this.favProvider.isLocalFavorite(contact)
+          .then((isFav: boolean) => {
+            if (isFav) this.favorites.push(contact);
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }));
+    });
+    Promise.all(promises)
+      .then(() => {
+        this.displayedList = this.favorites;
+        if (this.searchBarInput !== '')
+          this.searchLocalContacts(this.searchBarInput, this.favorites);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   displayFrequent() {
     this.frequents = [];
-    this.contacts.sort((a, b) => b.frequency - a.frequency);
-    this.contacts.map((contact) => {
-      if (contact.frequency > 0 && this.frequents.length < 5) this.frequents.push(contact);
-    });
-    this.displayedList = this.frequents;
+    this.favProvider.getMostFrequentContacts()
+      .then((frequentContacts: {id, frequency}[]) => {
+        frequentContacts.forEach((frequentContact) => {
+          this.contacts.map((contact) => {
+            if (contact.wsId === frequentContact.id) {
+              this.frequents.push(contact);
+            }
+          });
+        });
+        this.displayedList = this.frequents;
+        if (this.searchBarInput !== '')
+          this.searchLocalContacts(this.searchBarInput, this.frequents);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   displayAllContacts() {
@@ -148,6 +181,7 @@ export class ListContactsPage {
     console.log(this.searchBarInput);
     if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
     else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
+    else if (currentTab === this.tabFrq) this.searchLocalContacts(content, this.frequents);
   }
 
   searchLocalContacts(content: string, list: Contact[]) {

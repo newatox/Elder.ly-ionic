@@ -23,6 +23,7 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
+    <preference name="Orientation" value="portrait" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -80,20 +81,31 @@
         <splash height="2048" src="resources/ios/splash/Default-Landscape@~ipadpro.png" width="2732" />
         <splash height="768" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
         <preference name="AutoHideSplashScreen" value="true" />
+        <config-file parent="UISupportedInterfaceOrientations" platform="ios" target="*-Info.plist">
+            <array>
+                <string>UIInterfaceOrientationPortrait</string>
+            </array>
+        </config-file>
+        <config-file parent="UISupportedInterfaceOrientations~ipad" platform="ios" target="*-Info.plist">
+            <array>
+                <string>UIInterfaceOrientationPortrait</string>
+            </array>
+        </config-file>
     </platform>
     <allow-navigation href="http://10.1.1.155:8100" />
     <allow-navigation href="http://10.1.1.155:8101" />
     <engine name="android" spec="^6.3.0" />
     <engine name="ios" spec="4.5.4" />
-    <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
-    <plugin name="call-number" spec="~0.0.2" />
+    <plugin name="cordova-sqlite-storage" spec="^2.1.2" />
+    <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.11" />
     <plugin name="cordova-plugin-network-information" spec="~1.3.4" />
+    <plugin name="call-number" spec="~0.0.2" />
 </widget>

@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar *ngIf="!(tabRef.getSelected()==tabFrq || (contacts.length==0 && tabRef.getSelected()==tabAll))">
+  <ion-toolbar *ngIf="!(contacts.length==0 && tabRef.getSelected()==tabAll)">
     <ion-searchbar [(ngModel)]="searchBarInput" (ionInput)="doSearch($event)" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}"></ion-searchbar>
   </ion-toolbar>
 </ion-header>

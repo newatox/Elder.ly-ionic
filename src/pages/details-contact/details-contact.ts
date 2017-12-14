@@ -14,6 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { ContactsProvider } from '../../providers/contacts/contacts';
+import { AuthProvider } from '../../providers/auth/auth';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 
 /**
@@ -53,9 +54,9 @@ export class DetailsContactPage {
               private sms: SMS,
               private emailComposer: EmailComposer,
               private delAlertCtrl: AlertController,
+              public auth: AuthProvider,
               public favProvider: FavoriteProvider,
-              public events: Events,
-  ) {
+              public events: Events) {
 
     // Get contact sent by list
     this.contact = navParams.get('contact');
@@ -174,6 +175,7 @@ export class DetailsContactPage {
               },
               (error) => {
                 console.log(error);
+                this.auth.invalidToken();
               });
           },
         },
@@ -210,17 +212,7 @@ export class DetailsContactPage {
         });
         this.callNumber.callNumber(this.contact.phone, true)
           .then(() => console.log('Launched dialer!'))
-          .catch(() => console.log('Error launching dialer'))
-          .then(() => {
-            return this.favProvider.increaseFrequentStatus(this.contact,2);
-          })
-          .then(() => {
-            console.log(interaction, ', frequency updated');
-          })
-          .catch(() => {
-            console.log('TODO');
-          });
-
+          .catch(() => console.log('Error launching dialer'));
         break;
       case 'Texting':
         this.favProvider.increaseFrequentStatus(this.contact,1).then(() => {
