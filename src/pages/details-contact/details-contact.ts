@@ -33,7 +33,6 @@ export class DetailsContactPage {
   public contact: Contact;
   public favoriteButtonLabel: String = 'ADD_TO_FAVORITES';
   public isFavorite: boolean;
-  isLogged: boolean = false;
 
   private optionsLabel = 'OPTIONS_LABEL';
   private modifyLabel = 'MODIFY_LABEL';
@@ -97,9 +96,6 @@ export class DetailsContactPage {
       (translation) => {
         this.greetingString = translation;
       });
-
-    // Subscribe to the login event
-    this.events.subscribe('auth:login', () => { this.isLogged = true; });
   }
 
   ionViewDidLoad() {
