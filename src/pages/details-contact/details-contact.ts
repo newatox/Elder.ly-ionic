@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   ActionSheetController,
-  AlertController,
+  AlertController, Events,
   IonicPage,
   NavController,
   NavParams,
@@ -14,6 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { ContactsProvider } from '../../providers/contacts/contacts';
+import { FavoriteProvider } from '../../providers/favorite/favorite';
 
 /**
  * Generated class for the DetailsContactPage page.
@@ -29,7 +30,9 @@ import { ContactsProvider } from '../../providers/contacts/contacts';
 })
 export class DetailsContactPage {
   public contact: Contact;
-  public favoriteButtonLabel: String = 'ADD_TO_FAVORITES'; // TODO - Load label according to contact
+  public favoriteButtonLabel: String = 'ADD_TO_FAVORITES';
+  public isFavorite: boolean;
+  isLogged: boolean = false;
 
   private optionsLabel = 'OPTIONS_LABEL';
   private modifyLabel = 'MODIFY_LABEL';
@@ -50,7 +53,9 @@ export class DetailsContactPage {
               private sms: SMS,
               private emailComposer: EmailComposer,
               private delAlertCtrl: AlertController,
-              ) {
+              public favProvider: FavoriteProvider,
+              public events: Events,
+  ) {
 
     // Get contact sent by list
     this.contact = navParams.get('contact');
@@ -92,6 +97,25 @@ export class DetailsContactPage {
         this.greetingString = translation;
       });
 
+    // Subscribe to the login event
+    this.events.subscribe('auth:login', () => { this.isLogged = true; });
+  }
+
+  ionViewDidLoad() {
+    if (this.isLogged) {
+      this.favProvider.isLocalFavorite(this.contact)
+        .then((isFav: boolean) => {
+          this.isFavorite = isFav;
+          if (isFav) {
+            this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+          } else {
+            this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   present() {
@@ -125,13 +149,6 @@ export class DetailsContactPage {
       ],
     });
 
-    // TO TEST - Favorite status is not loaded in local data yet
-    if (this.contact.isFavorite) {
-      this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-    } else {
-      this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-    }
-
     actionSheet.present().then();
   }
 
@@ -163,18 +180,22 @@ export class DetailsContactPage {
       ],
     });
     delAlert.present();
-    // this.contactsProvider.delete(this.contact.wsId);
-    // this.navCtrl.pop();
   }
 
   favoriteButtonClicked() {
-    this.contact.isFavorite = !this.contact.isFavorite;
-    if (this.contact.isFavorite) {
-      // TODO - Store in local data
-      this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-    } else {
-      this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-    }
+    this.favProvider.toggleLocalFavoriteStatus(this.contact)
+      .then((isNewFavorite: boolean) => {
+        if (isNewFavorite) {
+          this.isFavorite = true;
+          this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+        } else {
+          this.isFavorite = false;
+          this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+        }
+      })
+      .catch(() => {
+        console.log('favButtonClicked error');
+      });
   }
 
   segmentButtonSelected(event) {
@@ -184,13 +205,29 @@ export class DetailsContactPage {
 
     switch (interaction) {
       case 'Calling':
+        this.favProvider.increaseFrequentStatus(this.contact,2).then(() => {
+
+        });
         this.callNumber.callNumber(this.contact.phone, true)
           .then(() => console.log('Launched dialer!'))
-          .catch(() => console.log('Error launching dialer'));
+          .catch(() => console.log('Error launching dialer'))
+          .then(() => {
+            return this.favProvider.increaseFrequentStatus(this.contact,2);
+          })
+          .then(() => {
+            console.log(interaction, ', frequency updated');
+          })
+          .catch(() => {
+            console.log('TODO');
+          });
+
         break;
       case 'Texting':
+        this.favProvider.increaseFrequentStatus(this.contact,1).then(() => {
+          console.log(interaction, ', frequency updated');
+        });
         const options = {
-          replaceLineBreaks: true, // true to replace \n by a new line
+          replaceLineBreaks: true, // true : replaces \n by a new line
           android: {
             intent: 'INTENT',
           },
@@ -198,6 +235,9 @@ export class DetailsContactPage {
         this.sms.send(this.contact.phone, message, options);
         break;
       case 'Emailing':
+        this.favProvider.increaseFrequentStatus(this.contact,1).then(() => {
+          console.log(interaction, ', frequency updated');
+        });
         const body = message;
         const email = {
           body,

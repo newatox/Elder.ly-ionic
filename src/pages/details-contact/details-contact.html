@@ -24,7 +24,7 @@
       <ion-col class="contact-centered">
         <div class="contact-grav">
           <img class="contact-gravatar" src={{contact?.gravatar}} onError="this.src='https://www.shareicon.net/download/2016/07/05/791214_man_512x512.png';" />
-          <img *ngIf="contact?.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
+          <img *ngIf="isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
         </div>
       </ion-col>
     </ion-row>
