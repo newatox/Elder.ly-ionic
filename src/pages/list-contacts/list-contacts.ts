@@ -83,7 +83,6 @@ export class ListContactsPage {
   fetchContacts() {
     this.contactProvider.all()
       .then((result) => {
-        this.contacts = result;
         this.resetList();
       })
       .catch((error) => {

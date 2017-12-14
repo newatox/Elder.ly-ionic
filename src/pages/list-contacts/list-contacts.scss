@@ -27,6 +27,14 @@ p.contact-profile {
   font-size: 1.2rem;
 }
 
+img.contact-star-icon {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  width: 6% !important;
+  height: auto !important;
+}
+
 .zero-contacts {
   display: flex;
   flex-direction: row;
