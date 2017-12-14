@@ -8,7 +8,6 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
 import { DetailsContactPage } from '../pages/details-contact/details-contact';
 import { AddEditContactPage } from '../pages/add-edit-contact/add-edit-contact';
@@ -67,7 +66,6 @@ import { FavoriteProvider } from '../providers/favorite/favorite';
   providers: [
     StatusBar,
     SplashScreen,
-    ScreenOrientation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ApiProvider,
     ContactsProvider,
