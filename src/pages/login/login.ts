@@ -92,7 +92,8 @@ export class LoginPage {
         .catch((httpErrorResponse) => {
           console.log('LOGIN ERROR', httpErrorResponse.error.message);
           const errorMessage =
-            navigator.onLine ? httpErrorResponse.error.message : this.translate.instant('LOGIN_OFFLINE_ERROR_MESSAGE');
+            navigator.onLine ? httpErrorResponse.error.message
+              : this.translate.instant('LOGIN_OFFLINE_ERROR_MESSAGE');
           const alert = this.alertCtrl.create({
             title: this.translate.instant('LOGIN_ERROR'),
             subTitle: errorMessage,
@@ -108,52 +109,22 @@ export class LoginPage {
   }
 
   forgottenPasswordAlert(error = false) {
+    // Translated first here because potentially used twice
     let forgottenPwPlaceholder = 'FORGOTTEN_PASSWORD_PAGE_NAME';
-    let forgottenPwMessagePlaceholder = 'FORGOTTEN_PW_MESSAGE';
-    let invalidNumberPlaceholder = 'INVALID_NUMBER';
-    let cancelLabelPlaceholder = 'CANCEL_LABEL';
-    let sendLabelPlaceholder = 'SEND_LABEL';
-    let forgottenPWSentPlaceholder = 'FORGOTTEN_PW_SENT';
-    let okLabelPlaceholder = 'OK_LABEL';
-
     this.translate.get(forgottenPwPlaceholder).subscribe(
       (translation) => {
         forgottenPwPlaceholder = translation;
-      });
-    this.translate.get(forgottenPwMessagePlaceholder).subscribe(
-      (translation) => {
-        forgottenPwMessagePlaceholder = translation;
-      });
-    this.translate.get(invalidNumberPlaceholder).subscribe(
-      (translation) => {
-        invalidNumberPlaceholder = translation;
-      });
-    this.translate.get(cancelLabelPlaceholder).subscribe(
-      (translation) => {
-        cancelLabelPlaceholder = translation;
-      });
-    this.translate.get(sendLabelPlaceholder).subscribe(
-      (translation) => {
-        sendLabelPlaceholder = translation;
-      });
-    this.translate.get(forgottenPWSentPlaceholder).subscribe(
-      (translation) => {
-        forgottenPWSentPlaceholder = translation;
-      });
-    this.translate.get(okLabelPlaceholder).subscribe(
-      (translation) => {
-        okLabelPlaceholder = translation;
       });
 
     const phoneRegex = /^[0-9]{10}$/;
     let phone = '';
     const prompt = this.alertCtrl.create({
       title: forgottenPwPlaceholder,
-      message: forgottenPwMessagePlaceholder,
+      message: this.translate.instant('FORGOTTEN_PW_MESSAGE'),
       inputs: [
         {
           name: 'phone',
-          placeholder: (error ? invalidNumberPlaceholder :
+          placeholder: (error ? this.translate.instant('INVALID_NUMBER') :
                                   (phoneRegex.test(this.loginForm.value.phone)
                                   ? this.loginForm.value.phone : '')),
           type: 'number',
@@ -161,14 +132,14 @@ export class LoginPage {
       ],
       buttons: [
         {
-          text: cancelLabelPlaceholder,
+          text: this.translate.instant('CANCEL_LABEL'),
           handler: () => {
             console.log('Cancel clicked');
             return;
           },
         },
         {
-          text: sendLabelPlaceholder,
+          text: this.translate.instant('SEND_LABEL'),
           handler: (data) => {
             phone = data.phone;
             console.log('Saved clicked');
@@ -178,9 +149,9 @@ export class LoginPage {
               this.auth.forgot(phone).then(() => {
                 const successAlert = this.alertCtrl.create({
                   title: forgottenPwPlaceholder,
-                  message: forgottenPWSentPlaceholder,
+                  message: this.translate.instant('FORGOTTEN_PW_SENT'),
                   buttons: [
-                    { text: okLabelPlaceholder },
+                    { text: this.translate.instant('OK_LABEL') },
                   ],
                 });
                 successAlert.present().then();

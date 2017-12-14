@@ -48,21 +48,10 @@ export class NetworkService {
   }
 
   private initMessage() {
-    let noNetworkMessage = 'NETWORK_NONE_MESSAGE';
-    let okLabel = 'OK_LABEL';
-    this.translate.get(noNetworkMessage).subscribe(
-      (translation) => {
-        noNetworkMessage = translation;
-      });
-    this.translate.get(okLabel).subscribe(
-      (translation) => {
-        okLabel = translation;
-      });
-
     this.toast = this.toastCtrl.create({
-      message: noNetworkMessage,
+      message: this.translate.instant('NETWORK_NONE_MESSAGE'),
       showCloseButton: true,
-      closeButtonText: okLabel,
+      closeButtonText: this.translate.instant('OK_LABEL'),
     });
     this.toast.onDidDismiss(() => {
       this.toastVisible = false;
