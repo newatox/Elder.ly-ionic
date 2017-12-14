@@ -103,20 +103,20 @@ export class DetailsContactPage {
   }
 
   ionViewDidLoad() {
-    if (this.isLogged) {
-      this.favProvider.isLocalFavorite(this.contact)
-        .then((isFav: boolean) => {
-          this.isFavorite = isFav;
-          if (isFav) {
-            this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-          } else {
-            this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    this.favProvider.isLocalFavorite(this.contact)
+      .then((isFav: boolean) => {
+        console.log('ISFAVORITE', isFav);
+        this.isFavorite = isFav;
+        if (isFav) {
+          this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+        } else {
+          this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+        }
+      })
+      .catch((error) => {
+        console.log('ISFAVORITE ERROR');
+        console.log(error);
+      });
   }
 
   present() {
