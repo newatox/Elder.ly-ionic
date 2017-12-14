@@ -115,11 +115,12 @@ export class ListContactsPage {
       this.favProvider.isLocalFavorite(contact)
         .then((isFav: boolean) => {
           if (isFav) this.favorites.push(contact);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     });
     this.displayedList = this.favorites;
-    if (this.searchBarInput !== '')
-      this.searchLocalContacts(this.searchBarInput, this.favorites);
   }
 
   displayFrequent() {
@@ -128,10 +129,8 @@ export class ListContactsPage {
       .then((frequentContacts: {id, frequency}[]) => {
         frequentContacts.forEach((frequentContact) => {
           this.contacts.map((contact) => {
-            console.log ('compare with: ', contact.wsId);
             if (contact.wsId === frequentContact.id) {
               this.frequents.push(contact);
-              console.log(contact);
             }
           });
         });
@@ -166,6 +165,7 @@ export class ListContactsPage {
     console.log(this.searchBarInput);
     if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
     else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
+    else if (currentTab === this.tabFrq) this.searchLocalContacts(content, this.frequents);
   }
 
   searchLocalContacts(content: string, list: Contact[]) {
