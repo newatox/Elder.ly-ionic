@@ -37,7 +37,7 @@
           <img src="{{contact.gravatar}}">
         </ion-avatar>
         <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-        <button ion-button round outline small item-right color="secondary" (click)="callContact(contact.phone)">{{'CALL_ACTION' | translate}}</button>
+        <button ion-button round outline small item-right color="secondary" (click)="callContact(contact)">{{'CALL_ACTION' | translate}}</button>
     </ion-item>
   </ion-list>
 </ion-content>

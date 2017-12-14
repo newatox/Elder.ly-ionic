@@ -93,10 +93,13 @@ export class ListContactsPage {
       });
   }
 
-  callContact(phone: string) {
+  callContact(contact: Contact) {
     event.stopPropagation();
     event.preventDefault();
-    this.callNumber.callNumber(phone, true)
+    this.favProvider.increaseFrequentStatus(contact,2).then(() => {
+
+    });
+    this.callNumber.callNumber(contact.phone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
   }
