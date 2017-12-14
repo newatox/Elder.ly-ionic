@@ -36,10 +36,7 @@ export class AuthProvider {
         this.token = result['token'];
         return this.saveToken(result['token']);
       })
-      .then(() => { return this.token; })
-      .catch((error) => {
-        console.log('LOGIN ERROR', error);
-      });
+      .then(() => { return this.token; });
   }
 
   signup(user: {
