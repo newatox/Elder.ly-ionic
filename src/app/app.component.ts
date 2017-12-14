@@ -33,6 +33,9 @@ export class MyApp {
 
     // Translate
     translate.setDefaultLang('fr');
+
+    // Back button action
+    this.platform.registerBackButtonAction(() => { this.backPressed(); }, 1);
   }
 
   initializeApp() {
@@ -42,6 +45,14 @@ export class MyApp {
       this.statusBar.styleDefault();
 
     });
+  }
+
+  backPressed() {
+    if (this.nav.canGoBack()) {
+      this.nav.pop();
+    } else {
+      this.platform.exitApp();
+    }
   }
 
   userLogout() {
