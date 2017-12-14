@@ -197,7 +197,6 @@ export class ListContactsPage {
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.groupContacts(this.contacts);
-    this.checkFavorites(this.displayedList);
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.contacts);
   }
