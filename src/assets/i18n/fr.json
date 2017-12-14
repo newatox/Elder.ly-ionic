@@ -56,5 +56,5 @@
   "LOGIN_ERROR": "Erreur de connexion",
   "ADD_FAVORITE_CONTACT_MESSAGE": "Trouvez ce bouton sur un contact pour l'ajouter aux favoris.",
   "INVALID_TOKEN_TITLE": "Reconnexion",
-  "INVALID_TOKEN_SUBTITLE": "Vous êtes restés inactif trop longtemps, veuillez vous reconnecter."
+  "INVALID_TOKEN_SUBTITLE": "Vous êtes resté inactif trop longtemps, veuillez vous reconnecter."
 }
