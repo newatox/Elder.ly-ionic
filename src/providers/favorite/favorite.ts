@@ -184,11 +184,19 @@ export class FavoriteProvider {
         return this.storage.get(key);
       })
       .then((storedFavorites) => {
+        console.log('Clearing favorites', storedFavorites);
+        if ((storedFavorites === null) || (storedFavorites === undefined)) {
+          console.log('No favorite contact => nothing to clear');
+          return;
+        }
         let favorites;
         favorites = storedFavorites.filter((favorite) => {
-          return idList.findIndex(favorite) >= 0;
+          return (idList.findIndex(favorite) >= 0);
         });
         return this.storage.set(key, favorites);
+      })
+      .catch((error) => {
+        console.log('No favorite ? ', error);
       });
   }
 
@@ -200,11 +208,19 @@ export class FavoriteProvider {
         return this.storage.get(key);
       })
       .then((storedFrequents) => {
+        if ((storedFrequents === null) || (storedFrequents === undefined)) {
+          console.log('No frequent contact => nothing to clear');
+          return;
+        }
+        console.log('Clearing frequents', storedFrequents);
         let frequents;
-        frequents = storedFrequents.filter((frequent) => {
-          return idList.findIndex(frequent) >= 0;
+        frequents = storedFrequents.filter((frequentObject) => {
+          return (idList.findIndex(frequentObject.id) >= 0);
         });
         return this.storage.set(key, frequents);
+      })
+      .catch((error) => {
+        console.log('No frequent ? ', error);
       });
   }
 }
