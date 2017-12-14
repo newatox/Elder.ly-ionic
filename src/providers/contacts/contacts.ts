@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import Contact from '../../models/Contact';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../api/api';
-import {FavoriteProvider} from "../favorite/favorite";
+import { FavoriteProvider } from '../favorite/favorite';
 
 /*
   Generated class for the ContactsProvider provider.
