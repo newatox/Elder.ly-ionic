@@ -128,7 +128,6 @@ export class AuthProvider {
 
   invalidToken() {
     if (this.network.isOnline()) {
-      let password = '';
       const alert = this.alertCtrl.create({
         title: this.translate.instant('INVALID_TOKEN_TITLE'),
         subTitle: this.translate.instant('INVALID_TOKEN_SUBTITLE'),
