@@ -51,6 +51,23 @@ export class ContactsProvider {
           );
         });
 
+        const promises = [];
+        this.contacts.forEach((contact) => {
+          promises.push(new Promise((resolve, reject) => {
+            this.favProvider.isLocalFavorite(contact)
+              .then((isFav: boolean) => {
+                contact.isFavorite = isFav;
+                resolve();
+              })
+              .catch((error) => {
+                console.log(error);
+                reject(error);
+              });
+          }));
+        });
+        return Promise.all(promises);
+      })
+      .then(() => {
         // Set contacts locally
         console.log('SET LOCAL CONTACTS');
         return this.storage.set('contacts', [...this.contacts]);

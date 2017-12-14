@@ -32,7 +32,6 @@ import { FavoriteProvider } from '../../providers/favorite/favorite';
 export class DetailsContactPage {
   public contact: Contact;
   public favoriteButtonLabel: String = 'ADD_TO_FAVORITES';
-  public isFavorite: boolean;
 
   private optionsLabel = 'OPTIONS_LABEL';
   private modifyLabel = 'MODIFY_LABEL';
@@ -102,7 +101,7 @@ export class DetailsContactPage {
     this.favProvider.isLocalFavorite(this.contact)
       .then((isFav: boolean) => {
         console.log('ISFAVORITE', isFav);
-        this.isFavorite = isFav;
+        this.contact.isFavorite = isFav;
         if (isFav) {
           this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
         } else {
@@ -184,10 +183,10 @@ export class DetailsContactPage {
     this.favProvider.toggleLocalFavoriteStatus(this.contact)
       .then((isNewFavorite: boolean) => {
         if (isNewFavorite) {
-          this.isFavorite = true;
+          this.contact.isFavorite = true;
           this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
         } else {
-          this.isFavorite = false;
+          this.contact.isFavorite = false;
           this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
         }
       })
