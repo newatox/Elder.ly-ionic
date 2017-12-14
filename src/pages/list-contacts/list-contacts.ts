@@ -110,17 +110,29 @@ export class ListContactsPage {
   }
 
   displayFavorites() {
+    const promises = [];
     this.favorites = [];
     this.contacts.map((contact) => {
-      this.favProvider.isLocalFavorite(contact)
-        .then((isFav: boolean) => {
-          if (isFav) this.favorites.push(contact);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      promises.push(new Promise ((resolve, reject) => {
+        this.favProvider.isLocalFavorite(contact)
+          .then((isFav: boolean) => {
+            if (isFav) this.favorites.push(contact);
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }));
     });
-    this.displayedList = this.favorites;
+    Promise.all(promises)
+      .then(() => {
+        this.displayedList = this.favorites;
+        if (this.searchBarInput !== '')
+          this.searchLocalContacts(this.searchBarInput, this.favorites);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   displayFrequent() {
@@ -134,11 +146,13 @@ export class ListContactsPage {
             }
           });
         });
+        this.displayedList = this.frequents;
+        if (this.searchBarInput !== '')
+          this.searchLocalContacts(this.searchBarInput, this.frequents);
       })
       .catch((error) => {
         console.log(error);
       });
-    this.displayedList = this.frequents;
   }
 
   displayAllContacts() {
