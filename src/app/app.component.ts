@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, Events, MenuController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +20,6 @@ export class MyApp {
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
-    private screenOrientation: ScreenOrientation,
     public menuCtrl: MenuController,
     public alertCtrl: AlertController,
     public events: Events,
@@ -29,12 +27,6 @@ export class MyApp {
     public translate: TranslateService,
   ) {
     this.initializeApp();
-
-    // Lock app orientation
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT)
-      .catch((error) => {
-        console.log('Not a mobile device');
-      });
 
     // Catch events
     this.events.subscribe('auth:login', () => { this.setUIUserProfilInfos(); });
