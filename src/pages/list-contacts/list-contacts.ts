@@ -164,7 +164,6 @@ export class ListContactsPage {
     Promise.all(promises)
       .then(() => {
         this.displayedList = this.favorites;
-        this.checkFavorites(this.displayedList);
         if (this.searchBarInput !== '')
           this.searchLocalContacts(this.searchBarInput, this.favorites);
       })
@@ -187,7 +186,6 @@ export class ListContactsPage {
           });
         }
         this.displayedList = this.frequents;
-        this.checkFavorites(this.displayedList);
         if (this.searchBarInput !== '')
           this.searchLocalContacts(this.searchBarInput, this.frequents);
       })
@@ -222,18 +220,6 @@ export class ListContactsPage {
     if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
     else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
     else if (currentTab === this.tabFrq) this.searchLocalContacts(content, this.frequents);
-  }
-
-  checkFavorites(contacts: Contact[]) {
-    contacts.forEach((contact) => {
-      this.favProvider.isLocalFavorite(contact)
-        .then((isFav: boolean) => {
-          contact.isFavorite = isFav;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
   }
 
   searchLocalContacts(content: string, list: Contact[]) {
