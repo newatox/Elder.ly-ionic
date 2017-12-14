@@ -28,7 +28,7 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row margin-bottom="500px">
+    <ion-row>
       <ion-col class="contact-centered">
         <ion-label id="contact-name" color="black">
           {{contact?.firstName + ' ' + contact?.lastName}}
@@ -73,7 +73,8 @@
     </ion-row>
   </ion-grid>
   <div class="contact-centered">
-    <button ion-button outline round id="favoriteButton" (click)="favoriteButtonClicked()" color="myorange">
+    <button ion-button outline round icon-start id="favoriteButton" (click)="favoriteButtonClicked()" color="myorange">
+      <ion-icon name="star"></ion-icon>
       {{favoriteButtonLabel | translate}}
     </button>
   </div>
