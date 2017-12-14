@@ -23,6 +23,10 @@ page-list {
   min-height: 7rem;
 }
 
+p.contact-profile {
+  font-size: 1.2rem;
+}
+
 .zero-contacts {
   display: flex;
   flex-direction: row;
@@ -72,7 +76,6 @@ page-list {
     opacity: .30;
   }
 }
-
 
 ion-tabs {
   margin-bottom: 0;
