@@ -125,12 +125,19 @@ export class ListContactsPage {
   displayFrequent() {
     this.frequents = [];
     this.favProvider.getMostFrequentContacts()
-      .then((frequentContacts: string[]) => {
-        frequentContacts.forEach((id) => {
+      .then((frequentContacts: {id, frequency}[]) => {
+        frequentContacts.forEach((frequentContact) => {
           this.contacts.map((contact) => {
-            if (contact.wsId === id) this.frequents.push(contact);
+            console.log ('compare with: ', contact.wsId);
+            if (contact.wsId === frequentContact.id) {
+              this.frequents.push(contact);
+              console.log(contact);
+            }
           });
         });
+      })
+      .catch((error) => {
+        console.log(error);
       });
     this.displayedList = this.frequents;
   }
