@@ -28,6 +28,9 @@ export class MyApp {
   ) {
     this.initializeApp();
 
+    this.statusBar.backgroundColorByHexString('39304A');
+    this.statusBar.styleLightContent();
+
     // Catch events
     this.events.subscribe('auth:login', () => { this.setUIUserProfilInfos(); });
 
@@ -40,9 +43,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
 
     });
   }

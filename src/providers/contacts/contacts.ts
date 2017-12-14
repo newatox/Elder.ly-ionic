@@ -131,7 +131,7 @@ export class ContactsProvider {
           result['profile'],
           result['_id']);
         this.contacts.push(newContact);
-        this.storage.set('contacts', this.contacts); // Save localy
+        this.storage.set('contacts', this.contacts); // Save locally
         return newContact;
       });
   }
