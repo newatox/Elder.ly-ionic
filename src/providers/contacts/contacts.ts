@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import Contact from '../../models/Contact';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../api/api';
+import { FavoriteProvider } from '../favorite/favorite';
 import { AuthProvider } from '../auth/auth';
 
 /*
@@ -19,6 +20,7 @@ export class ContactsProvider {
   constructor(public http: HttpClient,
               public api: ApiProvider,
               public storage: Storage,
+              public favProvider: FavoriteProvider,
               public auth: AuthProvider) {
     console.log('Hello ContactsProvider Provider');
   }
@@ -85,6 +87,11 @@ export class ContactsProvider {
           });
         }
         console.log('RETURN LOCAL CONTACTS', this.contacts);
+
+        // Clear previous favorite/frequent contacts that do not exist anymore
+        const currentIds = this.contacts.map(contact => contact.wsId);
+        this.favProvider.clearFrequentAndFavoriteLocalData(currentIds);
+
         return [...this.contacts];
       });
   }
