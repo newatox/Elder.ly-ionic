@@ -152,6 +152,8 @@ export class FavoriteProvider {
           return this.storage.get('frequents' + user.phone);
         })
         .then((frequents) => {
+          if (frequents === null || frequents === undefined)
+            resolve(null);
           if (frequents.length <= 5) {
             resolve(frequents);
           } else {

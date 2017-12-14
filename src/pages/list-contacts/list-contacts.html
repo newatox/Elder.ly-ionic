@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content>
+
   <div *ngIf="favorites.length==0 && tabRef.getSelected()==tabFav" class="zero-favoris">
     <p class="text">{{'ADD_FAVORITE_CONTACT_MESSAGE' | translate}}</p>
     <div class="pseudo-fav">
@@ -24,20 +25,25 @@
       </button>
     </div>
   </div>
+
   <div *ngIf="contacts.length==0 && tabRef.getSelected()==tabAll" class="zero-contacts">
     <p class="text">{{'ADD_FIRST_CONTACT_MESSAGE' | translate}}</p>
     <img src="assets/imgs/arrow.png" class="arrow-image"/>
   </div>
+
   <div *ngIf="frequents.length==0 && tabRef.getSelected()==tabFrq" class="zero-frequent">
     <p class="text">{{'FREQUENT_CONTACT_MESSAGE' | translate}}</p>
   </div>
+
   <ion-list class="mylist">
     <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
         <ion-avatar item-start>
           <img src="{{contact.gravatar}}">
+          <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
         </ion-avatar>
         <h2>{{contact.firstName}} {{contact.lastName}}</h2>
-        <button ion-button round outline small item-right color="secondary" (click)="callContact(contact)">{{'CALL_ACTION' | translate}}</button>
+        <p class="contact-profile">{{contact.profile}}</p>
+        <button ion-button round outline small item-right color="secondary" (click)="callContact(contact.phone)">{{'CALL_ACTION' | translate}}</button>
     </ion-item>
   </ion-list>
 </ion-content>

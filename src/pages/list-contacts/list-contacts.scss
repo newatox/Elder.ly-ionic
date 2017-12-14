@@ -17,11 +17,25 @@ page-list {
       }
     }
   }
+
+  .contact-star-icon {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    width: 6% !important;
+    height: auto !important;
+  }
 }
 
 .card {
   min-height: 7rem;
 }
+
+p.contact-profile {
+  font-size: 1.2rem;
+}
+
+
 
 .zero-contacts {
   display: flex;
@@ -72,7 +86,6 @@ page-list {
     opacity: .30;
   }
 }
-
 
 ion-tabs {
   margin-bottom: 0;

@@ -33,7 +33,6 @@ export class DetailsContactPage {
   public contact: Contact;
   public favoriteButtonLabel: String = 'ADD_TO_FAVORITES';
   public isFavorite: boolean;
-  isLogged: boolean = false;
 
   private optionsLabel = 'OPTIONS_LABEL';
   private modifyLabel = 'MODIFY_LABEL';
@@ -97,26 +96,23 @@ export class DetailsContactPage {
       (translation) => {
         this.greetingString = translation;
       });
-
-    // Subscribe to the login event
-    this.events.subscribe('auth:login', () => { this.isLogged = true; });
   }
 
   ionViewDidLoad() {
-    if (this.isLogged) {
-      this.favProvider.isLocalFavorite(this.contact)
-        .then((isFav: boolean) => {
-          this.isFavorite = isFav;
-          if (isFav) {
-            this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
-          } else {
-            this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    this.favProvider.isLocalFavorite(this.contact)
+      .then((isFav: boolean) => {
+        console.log('ISFAVORITE', isFav);
+        this.isFavorite = isFav;
+        if (isFav) {
+          this.favoriteButtonLabel = 'REMOVE_FROM_FAVORITES';
+        } else {
+          this.favoriteButtonLabel = 'ADD_TO_FAVORITES';
+        }
+      })
+      .catch((error) => {
+        console.log('ISFAVORITE ERROR');
+        console.log(error);
+      });
   }
 
   present() {
