@@ -54,5 +54,7 @@
   "FREQUENT_CONTACT_MESSAGE": "Vos contacts les plus fréquemment ajoutés s'afficheront ici.",
   "LOGIN_OFFLINE_ERROR_MESSAGE": "Pas de connexion internet.",
   "LOGIN_ERROR": "Erreur de connexion",
-  "ADD_FAVORITE_CONTACT_MESSAGE": "Trouvez ce bouton sur un contact pour l'ajouter aux favoris."
+  "ADD_FAVORITE_CONTACT_MESSAGE": "Trouvez ce bouton sur un contact pour l'ajouter aux favoris.",
+  "INVALID_TOKEN_TITLE": "Reconnexion",
+  "INVALID_TOKEN_SUBTITLE": "Vous êtes resté inactif trop longtemps, veuillez vous reconnecter."
 }

@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
 import User from '../../models/User';
 import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+import { NetworkService } from '../../services/NetworkService';
 
 /*
   Generated class for the AuthProvider provider.
@@ -16,7 +19,13 @@ export class AuthProvider {
   private auth: User;
   private token: any;
 
-  constructor(public http: HttpClient, private api: ApiProvider, public storage: Storage) {
+  constructor(public http: HttpClient,
+              private api: ApiProvider,
+              public storage: Storage,
+              public alertCtrl: AlertController,
+              public translate: TranslateService,
+              public network: NetworkService,
+              ) {
     console.log('Hello AuthProvider Provider');
   }
 
@@ -26,7 +35,10 @@ export class AuthProvider {
         this.token = result['token'];
         return this.saveToken(result['token']);
       })
-      .then(() => { return this.token; });
+      .then(() => { return this.token; })
+      .catch((error) => {
+        console.log('LOGIN ERROR', error);
+      });
   }
 
   signup(user: {
@@ -66,7 +78,10 @@ export class AuthProvider {
       .then((result) => {
         return this.storage.set('user', result);
       })
-      .catch((error) => { console.log('ERROR', error); })
+      .catch((error) => {
+        console.log('ERROR', error);
+        this.invalidToken();
+      })
       .then(() => {
         return this.storage.get('user');
       })
@@ -87,7 +102,9 @@ export class AuthProvider {
       .then((profiles) => {
         return this.storage.set('profiles', profiles);
       })
-      .catch((error) => { console.log('API ERROR', error); })
+      .catch((error) => {
+        console.log('API ERROR', error);
+      })
       .then(() => {
         return this.storage.get('profiles');
       });
@@ -107,5 +124,55 @@ export class AuthProvider {
 
   private saveToken(token: String): Promise<any> {
     return this.storage.set('token', token);
+  }
+
+  invalidToken() {
+    if (this.network.isOnline()) {
+      const alert = this.alertCtrl.create({
+        title: this.translate.instant('INVALID_TOKEN_TITLE'),
+        subTitle: this.translate.instant('INVALID_TOKEN_SUBTITLE'),
+        enableBackdropDismiss: false,
+        inputs: [
+          {
+            name: 'password',
+            type: 'password',
+            placeholder: this.translate.instant('PASSWORD'),
+            min: 4,
+            max: 4,
+          },
+        ],
+        buttons: [
+          {
+            text: this.translate.instant('CANCEL_LABEL'),
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel pressed in Invalid token box');
+            },
+          },
+          {
+            text: this.translate.instant('OK_LABEL'),
+            handler: (data) => {
+              if (/^[0-9]{4,}$/.test(data.password)) {
+                console.log('Login from invalid token alert');
+                this.login(this.auth.phone, data.password)
+                  .then((data) => {
+                    console.log(data);
+                  })
+                  .catch((error) => {
+                    console.log(error.message);
+                    this.invalidToken();
+                  });
+              } else {
+                console.log('Invalid password from invalid token alert');
+                this.invalidToken();
+              }
+            },
+          },
+        ],
+      });
+      alert.present().then();
+    } else {
+      this.network.showMessage();
+    }
   }
 }

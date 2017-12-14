@@ -4,6 +4,7 @@ import Contact from '../../models/Contact';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../api/api';
 import { FavoriteProvider } from '../favorite/favorite';
+import { AuthProvider } from '../auth/auth';
 
 /*
   Generated class for the ContactsProvider provider.
@@ -20,7 +21,7 @@ export class ContactsProvider {
               public api: ApiProvider,
               public storage: Storage,
               public favProvider: FavoriteProvider,
-              ) {
+              public auth: AuthProvider) {
     console.log('Hello ContactsProvider Provider');
   }
 
@@ -58,6 +59,7 @@ export class ContactsProvider {
       .catch((error) => {
         // Get contact from API failed
         console.log('API ERROR', error.message);
+        this.auth.invalidToken();
       })
       .then(() => {
         // No matter what happened before get contacts from local storage
@@ -102,6 +104,10 @@ export class ContactsProvider {
         console.log('TOKEN', token) ;
         return this.api.createContact(contact, token).toPromise();
       })
+      .catch((error) => {
+        console.log('API ERROR', error.message);
+        this.auth.invalidToken();
+      })
       .then((result) => {
         const newContact = new Contact(
           result['phone'],
@@ -118,6 +124,10 @@ export class ContactsProvider {
 
   update(id, contact) {
     return this.storage.get('token')
+      .catch((error) => {
+        console.log('API ERROR', error.message);
+        this.auth.invalidToken();
+      })
       .then((token) => {
         console.log('TOKEN', token) ;
         return this.api.updateContact(id, contact, token).toPromise()
@@ -127,6 +137,10 @@ export class ContactsProvider {
 
   delete(id) {
     return this.storage.get('token')
+      .catch((error) => {
+        console.log('API ERROR', error.message);
+        this.auth.invalidToken();
+      })
       .then((token) => {
         console.log('TOKEN', token) ;
         return this.api.deleteContact(id, token).toPromise()
