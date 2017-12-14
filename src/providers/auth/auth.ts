@@ -81,7 +81,6 @@ export class AuthProvider {
       })
       .catch((error) => {
         console.log('ERROR', error);
-        this.invalidToken();
       })
       .then(() => {
         return this.storage.get('user');
