@@ -39,7 +39,7 @@
     <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
         <ion-avatar item-start>
           <img src="{{contact.gravatar}}">
-          <img class="contact-star-icon" src="assets/imgs/star-fill.png" />
+          <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
         </ion-avatar>
         <h2>{{contact.firstName}} {{contact.lastName}}</h2>
         <p class="contact-profile">{{contact.profile}}</p>

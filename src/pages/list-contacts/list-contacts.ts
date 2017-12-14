@@ -130,6 +130,7 @@ export class ListContactsPage {
     Promise.all(promises)
       .then(() => {
         this.displayedList = this.favorites;
+        this.checkFavorites(this.displayedList);
         if (this.searchBarInput !== '')
           this.searchLocalContacts(this.searchBarInput, this.favorites);
       })
@@ -142,14 +143,17 @@ export class ListContactsPage {
     this.frequents = [];
     this.favProvider.getMostFrequentContacts()
       .then((frequentContacts: {id, frequency}[]) => {
-        frequentContacts.forEach((frequentContact) => {
-          this.contacts.map((contact) => {
-            if (contact.wsId === frequentContact.id) {
-              this.frequents.push(contact);
-            }
+        if ((frequentContacts !== null) && (frequentContacts !== undefined)) {
+          frequentContacts.forEach((frequentContact) => {
+            this.contacts.map((contact) => {
+              if (contact.wsId === frequentContact.id) {
+                this.frequents.push(contact);
+              }
+            });
           });
-        });
+        }
         this.displayedList = this.frequents;
+        this.checkFavorites(this.displayedList);
         if (this.searchBarInput !== '')
           this.searchLocalContacts(this.searchBarInput, this.frequents);
       })
@@ -161,6 +165,7 @@ export class ListContactsPage {
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
     this.displayedList = this.contacts;
+    this.checkFavorites(this.displayedList);
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.contacts);
   }
@@ -183,6 +188,18 @@ export class ListContactsPage {
     if (currentTab === this.tabAll) this.searchLocalContacts(content, this.contacts);
     else if (currentTab === this.tabFav) this.searchLocalContacts(content, this.favorites);
     else if (currentTab === this.tabFrq) this.searchLocalContacts(content, this.frequents);
+  }
+
+  checkFavorites(contacts: Contact[]) {
+    contacts.forEach((contact) => {
+      this.favProvider.isLocalFavorite(contact)
+        .then((isFav: boolean) => {
+          contact.isFavorite = isFav;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
   }
 
   searchLocalContacts(content: string, list: Contact[]) {
