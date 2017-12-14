@@ -14,6 +14,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { ContactsProvider } from '../../providers/contacts/contacts';
+import { AuthProvider } from '../../providers/auth/auth';
 import { FavoriteProvider } from '../../providers/favorite/favorite';
 
 /**
@@ -53,9 +54,9 @@ export class DetailsContactPage {
               private sms: SMS,
               private emailComposer: EmailComposer,
               private delAlertCtrl: AlertController,
+              public auth: AuthProvider,
               public favProvider: FavoriteProvider,
-              public events: Events,
-  ) {
+              public events: Events) {
 
     // Get contact sent by list
     this.contact = navParams.get('contact');
@@ -174,6 +175,7 @@ export class DetailsContactPage {
               },
               (error) => {
                 console.log(error);
+                this.auth.invalidToken();
               });
           },
         },
