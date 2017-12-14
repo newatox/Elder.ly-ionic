@@ -93,6 +93,40 @@ export class ListContactsPage {
       });
   }
 
+  groupContacts(allContactsSorted) {
+    /**
+     * With all contacts, creates arrays of contacts, one per first letter.
+     * For each contact, we check whether we should go to next section.
+     * YES > New section represented by an array and a new letter, added to result.
+     * NO > Add contact to current section array.
+     */
+    const arrayGroupedContacts = [];
+    let currentLetterContacts = [];
+    if (allContactsSorted === null || allContactsSorted.length === 0) {
+      return allContactsSorted;
+    }
+    let currentLetter = '`'; // Normalization below removes this character,
+
+    allContactsSorted.forEach((sortedContact) => {
+      // For each contact, check if it is in current section
+      const valueFirstLetter = sortedContact.firstName.slice(0,1).toUpperCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      if (valueFirstLetter !== currentLetter.toUpperCase()) {
+        // Change letter and create new section, push it in arrayGroupedContacts
+        currentLetter = valueFirstLetter;
+        const newLetterSection = {
+          letter: currentLetter,
+          contacts: [],
+        };
+        currentLetterContacts = newLetterSection.contacts;
+        arrayGroupedContacts.push(newLetterSection);
+      }
+      // After checking being in right section, add contact to that section
+      currentLetterContacts.push(sortedContact);
+    });
+    return arrayGroupedContacts;
+  }
+
   callContact(contact: Contact) {
     event.stopPropagation();
     event.preventDefault();
@@ -164,7 +198,7 @@ export class ListContactsPage {
 
   displayAllContacts() {
     this.contacts.sort((a, b) => { return a.firstName.localeCompare(b.firstName); });
-    this.displayedList = this.contacts;
+    this.displayedList = this.groupContacts(this.contacts);
     this.checkFavorites(this.displayedList);
     if (this.searchBarInput !== '')
       this.searchLocalContacts(this.searchBarInput, this.contacts);

@@ -35,8 +35,10 @@
     <p class="text">{{'FREQUENT_CONTACT_MESSAGE' | translate}}</p>
   </div>
 
-  <ion-list class="mylist">
-    <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
+  <div *ngIf="tabRef.getSelected()===tabAll">
+    <ion-item-group *ngFor="let groupContacts of displayedList" class="mylist">
+      <ion-item-divider>{{groupContacts.letter}}</ion-item-divider>
+      <ion-item *ngFor="let contact of groupContacts.contacts" class="card" (click)="navigateToDetails(contact);false">
         <ion-avatar item-start>
           <img src="{{contact.gravatar}}">
           <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
@@ -44,17 +46,29 @@
         <h2>{{contact.firstName}} {{contact.lastName}}</h2>
         <p class="contact-profile">{{contact.profile}}</p>
         <button ion-button round outline small item-right color="secondary" (click)="callContact(contact.phone)">{{'CALL_ACTION' | translate}}</button>
+      </ion-item>
+    </ion-item-group>
+  </div>
+  <ion-list *ngIf="tabRef.getSelected()!==tabAll" class="mylist">
+    <ion-item class="card" *ngFor="let contact of displayedList" (click)="navigateToDetails(contact);false">
+      <ion-avatar item-start>
+        <img src="{{contact.gravatar}}">
+        <img *ngIf="contact.isFavorite" class="contact-star-icon" src="assets/imgs/star-fill.png" />
+      </ion-avatar>
+      <h2>{{contact.firstName}} {{contact.lastName}}</h2>
+      <p class="contact-profile">{{contact.profile}}</p>
+      <button ion-button round outline small item-right color="secondary" (click)="callContact(contact.phone)">{{'CALL_ACTION' | translate}}</button>
     </ion-item>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-  <ion-tabs #tabbar tabs-only selectedIndex="1" color="purple-dark">
-    <ion-tab #fav (ionSelect)="displayFavorites()" tabTitle={{favoriteContactsTabName}} tabIcon="star" [root]="root"></ion-tab>
-    <ion-tab #all (ionSelect)="displayAllContacts()" tabTitle={{allContactsTabName}} tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
-    <ion-tab #frq (ionSelect)="displayFrequent()" tabTitle={{frequentContactsTabName}} tabIcon="time" [root]="root"></ion-tab>
-  </ion-tabs>
+    <ion-tabs #tabbar tabs-only selectedIndex="1" color="purple-dark">
+      <ion-tab #fav (ionSelect)="displayFavorites()" tabTitle={{favoriteContactsTabName}} tabIcon="star" [root]="root"></ion-tab>
+      <ion-tab #all (ionSelect)="displayAllContacts()" tabTitle={{allContactsTabName}} tabIcon="people" [root]="root" tabBadgeStyle="dark"></ion-tab>
+      <ion-tab #frq (ionSelect)="displayFrequent()" tabTitle={{frequentContactsTabName}} tabIcon="time" [root]="root"></ion-tab>
+    </ion-tabs>
   </ion-toolbar>
 </ion-footer>
 
