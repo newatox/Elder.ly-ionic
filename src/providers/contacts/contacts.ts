@@ -50,7 +50,7 @@ export class ContactsProvider {
           );
         });
 
-        // Set contacts localy
+        // Set contacts locally
         console.log('SET LOCAL CONTACTS');
         return this.storage.set('contacts', [...this.contacts]);
       })

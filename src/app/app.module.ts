@@ -27,6 +27,7 @@ import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Network } from '@ionic-native/network';
 import { NetworkService } from '../services/NetworkService';
+import { FavoriteProvider } from '../providers/favorite/favorite';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { NetworkService } from '../services/NetworkService';
     EmailComposer,
     Network,
     NetworkService,
+    FavoriteProvider,
   ],
 })
 export class AppModule {}
