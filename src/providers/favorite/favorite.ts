@@ -192,9 +192,7 @@ export class FavoriteProvider {
           return;
         }
         let favorites;
-        favorites = storedFavorites.filter((favorite) => {
-          return (idList.findIndex(favorite) >= 0);
-        });
+        favorites = storedFavorites.filter(favorite => idList.indexOf(favorite) >= 0);
         return this.storage.set(key, favorites);
       })
       .catch((error) => {
@@ -216,9 +214,8 @@ export class FavoriteProvider {
         }
         console.log('Clearing frequents', storedFrequents);
         let frequents;
-        frequents = storedFrequents.filter((frequentObject) => {
-          return (idList.findIndex(frequentObject.id) >= 0);
-        });
+        frequents = storedFrequents.filter(
+          frequentObject => idList.indexOf(frequentObject.id) >= 0);
         return this.storage.set(key, frequents);
       })
       .catch((error) => {
