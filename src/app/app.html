@@ -43,9 +43,16 @@
 
     </ion-grid>
     <ion-footer no-border no-shadow class="menu-footer">
+      <p>
+        <button ion-button outline round block small color="primary" (click)="goToAbout()" class="about-button">
+        {{ 'ABOUT' | translate }}
+      </button>
+      </p>
+      <p>
         <button ion-button outline round block small color="secondary" (click)="userLogout()" class="logout-button">
           {{ 'MENU_LOGOUT' | translate }}
         </button>
+      </p>
     </ion-footer>
 
   </ion-content>

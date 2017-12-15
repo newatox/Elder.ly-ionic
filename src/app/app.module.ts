@@ -27,6 +27,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { Network } from '@ionic-native/network';
 import { NetworkService } from '../services/NetworkService';
 import { FavoriteProvider } from '../providers/favorite/favorite';
+import { AboutPage } from '../pages/about/about';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { FavoriteProvider } from '../providers/favorite/favorite';
     DetailsContactPage,
     AddEditContactPage,
     SignUpPage,
+    AboutPage,
     LoginPage,
     PhonePipe,
   ],
@@ -61,6 +63,7 @@ import { FavoriteProvider } from '../providers/favorite/favorite';
     DetailsContactPage,
     AddEditContactPage,
     SignUpPage,
+    AboutPage,
     LoginPage,
   ],
   providers: [

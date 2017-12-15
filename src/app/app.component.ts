@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { ListContactsPage } from '../pages/list-contacts/list-contacts';
 import { AuthProvider } from '../providers/auth/auth';
 import { TranslateService } from '@ngx-translate/core';
+import { AboutPage } from '../pages/about/about';
 import User from '../models/User';
 
 @Component({
@@ -53,6 +54,11 @@ export class MyApp {
     } else {
       this.platform.exitApp();
     }
+  }
+
+  goToAbout() {
+    this.menuCtrl.close();
+    this.nav.push(AboutPage).then();
   }
 
   userLogout() {
