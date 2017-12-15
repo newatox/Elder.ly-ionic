@@ -5,12 +5,11 @@
 Our final project in Cordova Ionic.
 
 ## Screenshots
-<!--
+<img src="./Screenshots/screenshot-login.png" alt="Elder.ly screenshot list" height="400" /> &nbsp;
 <img src="./Screenshots/screenshot-list.png" alt="Elder.ly screenshot list" height="400" /> &nbsp;
 <img src="./Screenshots/screenshot-details.png" alt="Elder.ly screenshot details" height="400" /> &nbsp;
 <img src="./Screenshots/screenshot-menu.png" alt="Elder.ly screenshot menu" height="400" />
--->
-Coming soon
+
 ## Features to come
 - Manage phone contacts (add, edit, delete)
 - Interact in-app (calls, texts, emails)
