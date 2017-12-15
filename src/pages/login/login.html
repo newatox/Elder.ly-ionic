@@ -12,15 +12,15 @@
     <ion-list no-lines>
 
       <ion-item>
-        <ion-label stacked>{{'PHONE_NUMBER' | translate}}</ion-label>
-        <ion-input type="tel" formControlName="phone" placeholder="{{'PHONE_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-label stacked>{{'PHONE_NUMBER_PLACEHOLDER' | translate}}</ion-label>
+        <ion-input type="tel" formControlName="phone"></ion-input>
         <ion-icon *ngIf="formSubmitted && loginForm.get('phone').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && loginForm.get('phone').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-label stacked>{{'PASSWORD' | translate}}</ion-label>
-        <ion-input type="number" style="-webkit-text-security:disc;" ng-pattern="/^[0-9]{4}$/" formControlName="password" placeholder="{{'PASSWORD_PLACEHOLDER' | translate}}"></ion-input>
+        <ion-label stacked>{{'PASSWORD_PLACEHOLDER' | translate}}</ion-label>
+        <ion-input type="number" style="-webkit-text-security:disc;" ng-pattern="/^[0-9]{4}$/" formControlName="password"></ion-input>
         <ion-icon *ngIf="formSubmitted && loginForm.get('password').invalid" name="warning" class="ng-invalid" item-end></ion-icon>
         <ion-icon *ngIf="formSubmitted && loginForm.get('password').valid" name="checkmark-circle" class="ng-valid" item-end></ion-icon>
       </ion-item>
